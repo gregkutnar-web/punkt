@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>PUNKT – osnutki logotipa</title>
+<meta name="description" content="Trije osnutki logotipa za PUNKT, Boscarol Group.">
+<style>__STYLE__</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>__DEFS__</defs></svg>
+<svg id="probe" width="0" height="0" style="position:absolute;visibility:hidden" aria-hidden="true">__PROBE__</svg>
+
+<nav id="nav" aria-label="Navigacija">
+  <span class="pill"></span>
+  <a href="#o1"><span class="l">Osnutek 1</span><span class="s">1</span></a>
+  <a href="#o2"><span class="l">Osnutek 2</span><span class="s">2</span></a>
+  <a href="#o3"><span class="l">Osnutek 3</span><span class="s">3</span></a>
+  <a href="#pm"><span class="l">Primerjava mockupov</span><span class="s">Mockupi</span></a>
+  <a href="#pl"><span class="l">Primerjava logotipov</span><span class="s">Logotipi</span></a>
+</nav>
+
+<main>
+<!-- hero: nevtralen, brez logotipov -->
+<section id="hero">
+  <div class="by">Boscarol Group</div>
+  <h1 aria-label="PUNKT"><span>P</span><span>U</span><span>N</span><span>K</span><span>T</span></h1>
+  <p>Osnutki logotipa</p>
+  <div class="bg"><div class="cue"></div></div>
+</section>
+
+<!-- osnutek 1 -->
+<section id="o1" class="osn t1">
+  <div class="scrub" style="--n:__N1__">
+    <div class="sticky">
+      <div class="tag"><b>Osnutek 1</b></div>
+      <svg class="stage" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+      <div class="film"></div>
+      <div class="ctl"><button class="play">Predvajaj</button><div class="bar"><i></i></div><span class="cnt">01 / __N1__</span></div>
+    </div>
+  </div>
+  <div class="final"><div class="tag"><b>Osnutek 1</b></div>
+    <div class="plate">__L1__</div>
+    <div class="seg"><button class="on" data-m="light">Svetlo</button><button data-m="dark">Temno</button></div></div>
+  <div class="mock" data-fx=".37" data-fy=".385"><div class="sticky"><div class="view"><img data-m="0" alt=""><div class="shade"></div></div><div class="tag"><b>Osnutek 1</b></div><div class="cap">Mockup</div></div></div>
+</section>
+
+<!-- osnutek 2 -->
+<section id="o2" class="osn t2">
+  <div class="scrub" style="--n:__N2__">
+    <div class="sticky">
+      <div class="tag"><b>Osnutek 2</b></div>
+      <svg class="stage" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+      <div class="film"></div>
+      <div class="ctl"><button class="play">Predvajaj</button><div class="bar"><i></i></div><span class="cnt">01 / __N2__</span></div>
+    </div>
+  </div>
+  <div class="final"><div class="tag"><b>Osnutek 2</b></div>
+    <div class="plate">__L2__</div>
+    <div class="seg"><button class="on" data-m="light">Svetlo</button><button data-m="dark">Temno</button></div></div>
+  <div class="mock" data-fx=".375" data-fy=".40"><div class="sticky"><div class="view"><img data-m="1" alt=""><div class="shade"></div></div><div class="tag"><b>Osnutek 2</b></div><div class="cap">Mockup</div></div></div>
+</section>
+
+<!-- osnutek 3: 2D animacija -->
+<section id="o3" class="osn t3">
+  <div class="s3"><div class="tag"><b>Osnutek 3</b></div>
+    <svg class="stage" id="stage3" viewBox="__VB3__" aria-hidden="true"><rect x="-9999" y="-9999" width="30000" height="30000" fill="#f2f2f2"/><g id="o3g">__O3__</g><circle id="o3r" r="0" fill="none" stroke="#00b1bc" stroke-width="3" opacity="0"/></svg>
+    <div class="ctl"><button class="play" id="o3play">Ponovi</button></div>
+  </div>
+  <div class="final"><div class="tag"><b>Osnutek 3</b></div>
+    <div class="plate">__L3__</div>
+    <div class="seg"><button class="on" data-m="light">Svetlo</button><button data-m="dark">Temno</button></div></div>
+  <div class="mock" data-fx=".395" data-fy=".40"><div class="sticky"><div class="view"><img data-m="2" alt=""><div class="shade"></div></div><div class="tag"><b>Osnutek 3</b></div><div class="cap">Mockup</div></div></div>
+</section>
+
+<!-- primerjava mockupov -->
+<section id="pm">
+  <div class="head">Primerjava mockupov</div>
+  <div class="acc" id="acc">
+    <div class="p"><img data-m="0" alt="" style="object-position:37% 50%"><span class="n">Osnutek 1</span></div>
+    <div class="p"><img data-m="1" alt="" style="object-position:37.5% 50%"><span class="n">Osnutek 2</span></div>
+    <div class="p"><img data-m="2" alt="" style="object-position:39.5% 50%"><span class="n">Osnutek 3</span></div>
+  </div>
+</section>
+
+<!-- primerjava logotipov -->
+<section id="pl">
+  <div class="head">Primerjava logotipov</div>
+  <div class="pctl">
+    <label>Velikost <input type="range" id="psize" min="6" max="100" value="100" aria-label="Velikost"></label>
+    <div class="seg" id="pbg"><button class="on" data-v="light">Svetlo</button><button data-v="dark">Temno</button></div>
+    <div class="seg" id="pcol"><button class="on" data-v="col">Barvno</button><button data-v="mono">Enobarvno</button></div>
+    <label>Megla <input type="range" id="pblur" min="0" max="14" value="0" step=".5" aria-label="Megla"></label>
+  </div>
+  <div class="lg" id="lg">
+    <div class="lc"><span class="k">1</span>__L1__</div>
+    <div class="lc"><span class="k">2</span>__L2__</div>
+    <div class="lc"><span class="k">3</span>__L3__</div>
+  </div>
+</section>
+</main>
+
+<script>
+var CFG=__CONFIG__, MOCK=__MOCK__;
+</script>
+<script>__STAGEJS__</script>
+<script>__SCENJS__</script>
+<script>__PAGEJS__</script>
+</body>
+</html>

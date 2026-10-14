@@ -1,63 +1,60 @@
 #!/usr/bin/env python3
-"""Zgradi samostojni index.html iz src/deck.html + assets/ (brez omrežja)."""
-import re, base64, pathlib, xml.etree.ElementTree as ET
-
+"""Zgradi samostojni index.html (landing) iz src/ + assets/ (brez omrežja).
+Vir artboardov: assets/boards.json (tools/extract.js), logotipi: assets/logo*.json (tools/extract_compare.js)."""
+import sys, json, base64, pathlib
 R = pathlib.Path(__file__).parent
-A = R / 'assets' / 'idea1'
-NS = 'http://www.w3.org/2000/svg'
-ET.register_namespace('', NS)
-COL = {'st0': '#ff6b4a', 'st1': '#087f8c', 'st2': '#c69c6d', 'st5': '#666666',
-       'st6': '#809f9c', 'st7': '#708180', 'st9': '#e6e6e6'}
-# vrstni red sličic v animaciji (indeksi sličic t00..t13); sličica 7 je premaknjena za dve naprej
-ORDER = [0, 1, 2, 3, 4, 5, 7, 8, 6, 9, 10, 11, 12, 13]
-# dejanski levi rob podlag (artboard) v izvirnem SVG; zadnje štiri niso na 550 px razmaku
-TILEX = [k * 550 for k in range(10)] + [5502.43, 6078.43, 6654.17, 7230.69]
+sys.path.insert(0, str(R / 'tools'))
+import parts
+
+A = R / 'assets'
+S = R / 'src'
+B = parts.BOARDS['boards']
 
 
-def inner(k):
-    """Sličica z razredi (barve prek CSS spremenljivk) za interakcijo, ikone, primerjavo."""
-    s = (A / f't{k:02d}.svg').read_text()
-    s = re.sub(r'<style>.*?</style>', '', s, flags=re.S)
-    s = re.sub(r'^<svg[^>]*>|</svg>$', '', s.strip())
-    s = re.sub(r' xmlns(:\w+)?="[^"]*"', '', s)
-    return re.sub(r'\s+/>', '/>', s)
+def bg_of(cls):
+    return parts.CF.get(cls, ('#f2f2f2', False))[0] or '#f2f2f2'
 
 
-def anim_src(k):
-    """Sličica razdeljena na dele z id (e<k>_<pot>) za animacijo; barva prek currentColor."""
-    root = ET.fromstring((A / f't{k:02d}.svg').read_text())
-    kids = [c for c in root if not c.tag.endswith('style')]
-
-    def walk(e, ident):
-        tag = e.tag.split('}')[1]
-        attrs = dict(e.attrib)
-        cls = attrs.pop('class', None)
-        if tag == 'g':
-            return f'<g id="{ident}">' + ''.join(walk(c, f'{ident}_{i}') for i, c in enumerate(e)) + '</g>'
-        a = ' '.join(f'{n}="{v}"' for n, v in attrs.items())
-        return f'<{tag} id="{ident}" {a} fill="currentColor" data-c="{COL.get(cls, "#708180")}"/>'
-
-    return ''.join(walk(c, f'e{k}_{i}') for i, c in enumerate(kids, start=1))
+def cfg_for(idea):
+    out = []
+    for bd in B[str(idea)]:
+        out.append({'x': bd['x'], 'y': bd['y'], 'w': bd['w'], 'h': bd['h'],
+                    'cx': bd['x'] + bd['w'] / 2, 'cy': bd['y'] + bd['h'] / 2, 'bg': bg_of(bd['cls'])})
+    return out
 
 
-def b64(name, mime):
-    return f'data:{mime};base64,' + base64.b64encode((A / name).read_bytes()).decode()
+def data_uri(path, mime):
+    return f'data:{mime};base64,' + base64.b64encode(path.read_bytes()).decode()
 
 
-tiles = ''.join(f'<g id="t{k:02d}">{inner(k)}</g>' for k in range(14))
-probe = ''.join(anim_src(k) for k in range(14))
-thumbs = ''.join(
-    f'<button class="th" data-k="{d}" aria-label="Sličica {d + 1}"><svg viewBox="{TILEX[k]} 21.98 504.05 502">'
-    f'<rect x="{TILEX[k]}" y="21.98" width="504.05" height="502" fill="#f2f2f2"/><use href="#t{k:02d}"/></svg></button>'
-    for d, k in enumerate(ORDER))
+def logo_svg(n):
+    d = json.loads((A / f'logo{n}.json').read_text())
+    x, y, w, h = d['bb']
+    pad = max(w, h) * .02
+    return f'<svg viewBox="{x - pad:.1f} {y - pad:.1f} {w + 2 * pad:.1f} {h + 2 * pad:.1f}" role="img" aria-label="Osnutek {n}">{d["html"]}</svg>'
 
-html = (R / 'src' / 'deck.html').read_text()
-html = html.replace('__ANIMJS__', (R / 'src' / 'anim.js').read_text())
-for key, val in {
-    '__TILES__': tiles, '__PROBE__': probe, '__THUMBS__': thumbs,
-    '__ORDER__': str(ORDER), '__TILEX__': str(TILEX),
-    '__IMG1__': b64('fasada1.jpg', 'image/jpeg'), '__IMG2__': b64('fasada2.jpg', 'image/jpeg'),
-}.items():
-    html = html.replace(key, val)
-(R / 'index.html').write_text(html)
-print('index.html', round(len(html) / 1024), 'KB')
+
+cfg = {str(i): {'boards': cfg_for(i)} for i in (1, 2, 3)}
+probe = ''.join(f'<g id="ab{i}_{b}">{parts.anim_board(i, b)}</g>' for i in (1, 2) for b in range(len(B[str(i)])))
+b3 = cfg['3']['boards'][0]
+vb3 = f'{b3["cx"] - 320:.1f} {b3["cy"] - 180:.1f} 640 360'
+o3 = parts.anim_board(3, 0)
+
+page = (S / 'landing.html').read_text()
+subs = {
+    '__STYLE__': parts.STYLE + (S / 'landing.css').read_text(),
+    '__DEFS__': (A / 'defs.html').read_text(),
+    '__PROBE__': probe,
+    '__O3__': o3, '__VB3__': vb3,
+    '__N1__': str(len(B['1'])), '__N2__': str(len(B['2'])),
+    '__L1__': logo_svg(1), '__L2__': logo_svg(2), '__L3__': logo_svg(3),
+    '__CONFIG__': json.dumps(cfg),
+    '__MOCK__': json.dumps([data_uri(A / f'mock{i}.jpg', 'image/jpeg') for i in (1, 2, 3)]),
+    '__STAGEJS__': (S / 'stage.js').read_text(),
+    '__SCENJS__': (S / 'scen.js').read_text(),
+    '__PAGEJS__': (S / 'page.js').read_text(),
+}
+for k, v in subs.items():
+    page = page.replace(k, v)
+(R / 'index.html').write_text(page)
+print('index.html', round(len(page) / 1024), 'KB')
