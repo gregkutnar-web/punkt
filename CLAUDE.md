@@ -41,3 +41,6 @@ Hero → Osnutek 1…N → Primerjava mockupov → Primerjava logotipov.
 - Playwright posnetki 1440×900 in 390×844 vsakega razdelka; scroll-scrub na več položajih; vsak artboard primerjaj s PDF-jem.
 - Test navigacije in vseh kontrol; brez napak v konzoli; brez vodoravnega drsenja.
 - Commit + push na določeno vejo; datoteko pošlji z `SendUserFile` (`render`; `attach`, če uporabnik reče »daj html«).
+
+## Izbrani logotip (ena sama izbira, brez primerjave osnutkov)
+Ko stranka izbere en logotip, ista oblika v skrajšani različici (primer: `pravi-punkt.html`, `build_pravi.py`): nevtralen hero → **Ideja** (scroll-scrub animacija ikone, ki razloži pomen znaka) → **Logotip** (oblike) → **Ikona** (z drsnikom velikosti) → **Različice** (preklop ozadij). Brez mockupov, če jih stranka izrecno ne želi. Vir: PDF z vektorji → `tools/extract_pdf.py` (pdftocairo) → `assets/pravi.json`; animacije z `src/timeline.js` + `src/pravi_scen.js`.
