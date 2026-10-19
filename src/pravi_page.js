@@ -16,52 +16,20 @@
   }
   links.forEach(function (a) {
     a.addEventListener('click', function (e) {
-      e.preventDefault(); stopPlay();
+      e.preventDefault();
       window.scrollTo({ top: $(a.getAttribute('href')).getBoundingClientRect().top + scrollY, behavior: reduce ? 'auto' : 'smooth' });
     });
   });
   addEventListener('resize', movePill);
 
-  /* ---------- scroll-scrub prizori ---------- */
-  function prog(el) { var t = el.offsetHeight - innerHeight; return t <= 0 ? 0 : cl(-el.getBoundingClientRect().top / t) }
-  var playing = null;
-  function stopPlay() { if (playing) { playing.stop(); playing = null } }
-  ['wheel', 'touchstart', 'keydown'].forEach(function (ev) { addEventListener(ev, stopPlay, { passive: true }) });
-  var binders = [];
+  /* ---------- nastanek: časovna animacija ---------- */
+  function stopPlay() { }
+  var cine = CinePlayer.create($('#nastanek'), Cine.build($('#nastanek .stage')));
+  window.__cine = cine;
 
-  function bindScene(id, make) {
-    var sec = $('#' + id), scrub = $('.scrub', sec), svg = $('.stage', sec), sc = make(svg), tl = sc.tl;
-    var chips = $('.chips', sec), capEl = $('.cap span', sec), bar = $('.bar i', sec), btn = $('.play', sec), capNow = '';
-    function topY() { return scrub.getBoundingClientRect().top + scrollY }
-    function total() { return scrub.offsetHeight - innerHeight }
-    function go(t) { stopPlay(); window.scrollTo({ top: topY() + t * total(), behavior: reduce ? 'auto' : 'smooth' }) }
-    var cbs = sc.steps.map(function (s) { var b = document.createElement('button'); b.textContent = s.label; b.onclick = function () { go(s.t) }; chips.appendChild(b); return b });
-    function update() {
-      var p = prog(scrub); tl.render(p);
-      var act = 0; sc.steps.forEach(function (s, i) { if (p >= s.t - .02) act = i }); cbs.forEach(function (b, i) { b.classList.toggle('on', i === act) });
-      var c = sc.caps[0][1]; sc.caps.forEach(function (x) { if (p >= x[0]) c = x[1] });
-      if (c !== capNow) { capNow = c; capEl.classList.add('sw'); setTimeout(function () { capEl.textContent = c; capEl.classList.remove('sw') }, reduce ? 0 : 160) }
-      bar.style.width = (p * 100) + '%';
-    }
-    btn.addEventListener('click', function () {
-      if (playing && playing.btn === btn) { stopPlay(); return }
-      stopPlay();
-      var t0 = topY(), tot = total(), from = scrollY;
-      if (from >= t0 + tot - 6 || from < t0 - 4) from = t0;
-      var dur = 22000 * (1 - (from - t0) / tot), tt0 = performance.now(), alive = true, raf = 0;
-      if (from !== scrollY) window.scrollTo(0, from);
-      btn.textContent = 'Pavza';
-      playing = { btn: btn, stop: function () { alive = false; cancelAnimationFrame(raf); btn.textContent = 'Predvajaj' } };
-      (function f(now) {
-        if (!alive) return;
-        var p = Math.min(1, (now - tt0) / dur); window.scrollTo(0, from + (t0 + tot - from) * p);
-        if (p < 1) raf = requestAnimationFrame(f); else stopPlay();
-      })(tt0);
-    });
-    binders.push({ el: scrub, update: update }); update();
-  }
-  bindScene('ideja', PraviScen.idea);
-  bindScene('logotip', PraviScen.logo);
+  /* ---------- logotip: končno / s poudarkom ---------- */
+  var p1 = $('#plate1'), hb = $$('#hseg button');
+  hb.forEach(function (b) { b.addEventListener('click', function () { hb.forEach(function (x) { x.classList.remove('on') }); b.classList.add('on'); p1.dataset.h = b.dataset.h }) });
 
   /* ---------- ikona ---------- */
   var icons = $('#icons'), isz = $('#isize'), ipx = $('#ipx');
@@ -74,7 +42,7 @@
 
   /* ---------- scroll zanka ---------- */
   var ticking = false;
-  function frame() { ticking = false; spy(); binders.forEach(function (b) { var r = b.el.getBoundingClientRect(); if (r.bottom > -200 && r.top < innerHeight + 200) b.update() }) }
+  function frame() { ticking = false; spy() }
   function req() { if (!ticking) { ticking = true; requestAnimationFrame(frame) } }
   addEventListener('scroll', req, { passive: true }); addEventListener('resize', req);
   frame();

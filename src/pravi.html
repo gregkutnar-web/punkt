@@ -11,7 +11,7 @@
 
 <nav id="nav" aria-label="Navigacija">
   <span class="pill"></span>
-  <a href="#ideja"><span class="l">Ideja</span><span class="s">Ideja</span></a>
+  <a href="#nastanek"><span class="l">Nastanek</span><span class="s">Nastanek</span></a>
   <a href="#logotip"><span class="l">Logotip</span><span class="s">Logotip</span></a>
   <a href="#ikona"><span class="l">Ikona</span><span class="s">Ikona</span></a>
   <a href="#razlicice"><span class="l">Različice</span><span class="s">Različice</span></a>
@@ -26,33 +26,25 @@
   <div class="bg"><div class="cue"></div></div>
 </section>
 
-<!-- ideja: animacija ikone -->
-<section id="ideja" class="osn tp1">
-  <div class="scrub" style="--n:8">
-    <div class="sticky">
-      <div class="tag"><b>Ideja</b></div>
-      <div class="stagewrap">
-        <svg class="stage" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="1600" height="900" fill="#fff"/><g class="cam">__IDEA__</g></svg>
-        <div class="cap"><span></span></div>
-      </div>
-      <div class="chips"></div>
-      <div class="ctl"><button class="play">Predvajaj</button><div class="bar"><i></i></div></div>
+<!-- nastanek: samodejna animacija -->
+<section id="nastanek" class="osn tp1">
+  <div class="cinesec">
+    <div class="tag"><b>Nastanek</b></div>
+    <div class="stagewrap">
+      <svg class="stage cine" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs></defs><rect id="c_bg" width="1600" height="900" fill="currentColor" style="color:#fff"/><g class="cam">__CINE__</g></svg>
+      <div class="cap"><span></span></div>
     </div>
+    <div class="player"><button class="play" aria-label="Predvajaj/pavza">Pavza</button><div class="seek" role="slider" aria-label="Potek"><i></i><b></b></div><span class="tm">0:00</span><button class="spd" aria-label="Hitrost">1×</button></div>
+    <div class="chips"></div>
   </div>
 </section>
 
-<!-- logotip: oblike -->
+<!-- logotip -->
 <section id="logotip" class="osn tp2">
-  <div class="scrub" style="--n:6">
-    <div class="sticky">
-      <div class="tag"><b>Logotip</b></div>
-      <div class="stagewrap">
-        <svg class="stage" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="1600" height="900" fill="#fff"/><g class="cam">__LOGO__</g></svg>
-        <div class="cap"><span></span></div>
-      </div>
-      <div class="chips"></div>
-      <div class="ctl"><button class="play">Predvajaj</button><div class="bar"><i></i></div></div>
-    </div>
+  <div class="isec">
+    <div class="tag"><b>Logotip</b></div>
+    <div class="plate2" id="plate1" data-m="light" data-h="0"><div class="disc"><div class="lk">__LKH__</div></div></div>
+    <div class="seg" id="hseg"><button class="on" data-h="0">Končno</button><button data-h="1">S poudarkom</button></div>
   </div>
 </section>
 

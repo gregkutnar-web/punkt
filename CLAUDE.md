@@ -43,4 +43,7 @@ Hero → Osnutek 1…N → Primerjava mockupov → Primerjava logotipov.
 - Commit + push na določeno vejo; datoteko pošlji z `SendUserFile` (`render`; `attach`, če uporabnik reče »daj html«).
 
 ## Izbrani logotip (ena sama izbira, brez primerjave osnutkov)
-Ko stranka izbere en logotip, ista oblika v skrajšani različici (primer: `pravi-punkt.html`, `build_pravi.py`): nevtralen hero → **Ideja** (scroll-scrub animacija ikone, ki razloži pomen znaka) → **Logotip** (oblike) → **Ikona** (z drsnikom velikosti) → **Različice** (preklop ozadij). Brez mockupov, če jih stranka izrecno ne želi. Vir: PDF z vektorji → `tools/extract_pdf.py` (pdftocairo) → `assets/pravi.json`; animacije z `src/timeline.js` + `src/pravi_scen.js`.
+Ko stranka izbere en logotip, ista oblika v skrajšani različici (primer: `pravi-punkt.html`, `build_pravi.py`): nevtralen hero → **Nastanek** (samodejna časovna animacija ~70 s z igralnikom: Play/Pavza, drsnik s premikanjem, poglavja kot oznake, 1×/2×, presledek; samodejni začetek ob vidnosti) → **Logotip** (preklop S poudarkom) → **Ikona** (drsnik velikosti) → **Različice** (preklop ozadij). Brez mockupov, če jih stranka izrecno ne želi.
+- Nastanek zajame vse risbe PDF-ja kot zgodbo: ideja (voziček, pika pade, U = košarica), logotip, ikona, barvne različice.
+- **Sivo iz PDF-ja je samo del animacije** (ghost/onion-skin, #d9d9d9); logotip in končna stanja nikoli ne vsebujejo sive (samo črna, bela, turkizna).
+- Vir: PDF z vektorji → `tools/extract_pdf.py` (pdftocairo) → `assets/pravi.json`; animacija: `src/timeline.js` + `src/cine_scen.js` (scenarij) + `src/cine.js` (igralnik).
