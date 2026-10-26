@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 630.66 366">
+  <!-- Generator: Adobe Illustrator 30.6.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 109)  -->
+  <defs>
+    <style>
+      .st0 {
+        filter: url(#drop-shadow-2);
+      }
+
+      .st1 {
+        fill: #fff;
+      }
+
+      .st2 {
+        filter: url(#drop-shadow-1);
+      }
+
+      .st3 {
+        fill: #00868f;
+      }
+    </style>
+    <filter id="drop-shadow-1" x="-60.34" y="0" width="366" height="366" filterUnits="userSpaceOnUse">
+      <feOffset dx="-15" dy="15"/>
+      <feGaussianBlur result="blur" stdDeviation="15"/>
+      <feFlood flood-color="#000" flood-opacity=".15"/>
+      <feComposite in2="blur" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="drop-shadow-2" x="264.66" y="0" width="366" height="366" filterUnits="userSpaceOnUse">
+      <feOffset dx="-15" dy="15"/>
+      <feGaussianBlur result="blur1" stdDeviation="15"/>
+      <feFlood flood-color="#000" flood-opacity=".15"/>
+      <feComposite in2="blur1" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g class="st2">
+    <rect class="st3" y="30.45" width="275.05" height="275.05" rx="66.49" ry="66.49"/>
+    <g>
+      <path class="st1" d="M82.95,235.35c-11.28,0-19.77-3.01-25.22-8.93-5.17-5.62-7.8-14.01-7.83-24.96l12.73-99.96v-.16c0-.63.1-.73.73-.73h24.94c.26,0,.4.04.44.06,0,0,.07.16.08.53l-12.73,97.75v.16c0,9.44,4.46,13.84,14.04,13.84h94.78c9.58,0,14.04-4.4,14.04-13.84v-.16l-12.68-97.75c.02-.5.14-.58.73-.58h24.74c.63,0,.73.1.73.73v.16l12.68,99.96c-.02,9.98-2.23,17.86-6.55,23.41-4.5,5.77-11.46,9.19-20.71,10.16-2.14.22-3.98.33-5.79.33h-109.14Z"/>
+      <path class="st1" d="M137.53,179.45c-12.51,0-22.68-10.17-22.68-22.68s10.17-22.68,22.68-22.68,22.68,10.17,22.68,22.68-10.17,22.68-22.68,22.68Z"/>
+    </g>
+  </g>
+  <g class="st0">
+    <rect class="st1" x="325.02" y="30.45" width="275.05" height="275.05" rx="66.49" ry="66.49"/>
+  </g>
+  <g>
+    <path class="st3" d="M407.97,235.35c-11.28,0-19.77-3.01-25.22-8.93-5.17-5.62-7.8-14.01-7.83-24.96l12.73-99.96v-.16c0-.63.1-.73.73-.73h24.94c.26,0,.4.04.44.06,0,0,.07.16.08.53l-12.73,97.75v.16c0,9.44,4.46,13.84,14.04,13.84h94.78c9.58,0,14.04-4.4,14.04-13.84v-.16l-12.68-97.75c.02-.5.14-.58.73-.58h24.74c.63,0,.73.1.73.73v.16l12.68,99.96c-.02,9.98-2.23,17.86-6.55,23.41-4.5,5.77-11.46,9.19-20.71,10.16-2.14.22-3.98.33-5.79.33h-109.14Z"/>
+    <path class="st3" d="M462.54,179.45c-12.51,0-22.68-10.17-22.68-22.68s10.17-22.68,22.68-22.68,22.68,10.17,22.68,22.68-10.17,22.68-22.68,22.68Z"/>
+  </g>
+</svg>
