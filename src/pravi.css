@@ -26,8 +26,14 @@
 .ic figcaption{font-size:clamp(11px,calc(var(--sz) * .1),24px);font-weight:600;color:var(--mute);white-space:nowrap}
 .app{width:var(--sz);height:var(--sz);border-radius:22.5%;display:flex;align-items:center;justify-content:center;transition:transform .35s var(--ease)}
 .app svg{width:100%;height:100%;display:block;overflow:visible}
-.app.a1{background:var(--teal);box-shadow:0 calc(var(--sz) * .07) calc(var(--sz) * .16) rgba(0,0,0,.22)}
-.app.a2{background:#fff;box-shadow:0 calc(var(--sz) * .07) calc(var(--sz) * .16) rgba(0,0,0,.18)}
+.app{position:relative;overflow:hidden}
+.app::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,0) 45%,rgba(0,0,0,.10));box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),inset 0 calc(var(--sz) * .012) calc(var(--sz) * .02) rgba(255,255,255,.35)}
+.app.a1{background:var(--teal);box-shadow:0 calc(var(--sz) * .05) calc(var(--sz) * .12) rgba(0,0,0,.28)}
+.app.a2{background:linear-gradient(180deg,#fff,#eef1f2);box-shadow:0 calc(var(--sz) * .05) calc(var(--sz) * .12) rgba(0,0,0,.25)}
+.app.a2::after{background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,255,255,0) 45%,rgba(0,0,0,.05))}
+#ikona .isec{background:radial-gradient(circle at 20% 25%,#c9a58c,transparent 55%),radial-gradient(circle at 80% 70%,#8fb0a8,transparent 55%),linear-gradient(160deg,#a9785f,#7f8f78);border-radius:0}
+#ikona .ic figcaption{color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.35)}
+#ikona .szl,#ikona .szl output,#ikona .tag,#ikona .tag b{color:#fff}
 .app:hover{transform:translateY(-6px) scale(1.03)}
 .app .dt{transform-box:fill-box;transform-origin:50% 100%}
 .app:hover .dt{animation:hop .7s var(--ease)}
