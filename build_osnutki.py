@@ -171,13 +171,13 @@ def footer():
 
 
 # ---- Vsebina ---------------------------------------------------------------
-def body(bar, secs, top, bot, head_h, head_fn):
+def body(bar, secs, top, bot, head_h, head_fn, pmax=34.0):
     n_items = sum(len(s["items"]) for s in secs)
     n_heads = sum(1 for s in secs if s["title"])
     n_gaps = sum(1 for s in secs for it in s["items"] if it["gap"])
     sec_gap, item_gap = 18.0, 12.0
     fixed = head_h * n_heads + sec_gap * (len(secs) - 1) + item_gap * n_gaps
-    pitch = max(18.0, min(34.0, (bot - top - fixed) / n_items))
+    pitch = max(18.0, min(pmax, (bot - top - fixed) / n_items))
     ns, ds = (9.6, 7.0) if pitch < 24 else (10.5, 7.8)
     y, out = top, []
     for si, s in enumerate(secs):
