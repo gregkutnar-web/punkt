@@ -18,6 +18,8 @@ GAP = round(20 * MM, 2)
 M = 34.0
 
 
+NAME_PT = 10.0  # velikost imena in cene (ista vrstica)
+
 OFFER = [  # ime, cena (kot na letaku)
     ("Pizza", f"9,90{NBSP}€"),
     ("Hot dog", f"4,50{NBSP}€"),
@@ -94,15 +96,15 @@ def page_b(od, kv):
     lg, lh = odiseja(od, W - M - 96, 30 + (kh - 96 * od[2] / od[1]) / 2, 96)
     p.append(lg)
     p.append(f'<line x1="{M}" y1="84" x2="{W - M}" y2="84" stroke="{TEAL}" stroke-opacity="0.5" stroke-width="0.7"/>')
-    gap, fw, fh = 14.0, (W - 2 * M - 14.0) / 2, 92.0
+    gap, fw, fh = 14.0, (W - 2 * M - 14.0) / 2, 108.0
     pics, txt = [], []
     for i, (name, price) in enumerate(OFFER):
         r, c = divmod(i, 2)
-        x, y = M + c * (fw + gap), 104 + r * 148
+        x, y = M + c * (fw + gap), 104 + r * 144
         pics.append(frame(x, y, fw, fh, name))
         accent = GREEN if "popusta" in price else TEAL
-        txt.append(text(x, y + fh + 20, name, 12.5, 600, WHITE))
-        txt.append(text(x, y + fh + 38, price, 13, 700, accent))
+        txt.append(text(x, y + fh + 18, name, NAME_PT, 600, WHITE))
+        txt.append(text(x + fw, y + fh + 18, price, NAME_PT, 700, accent, anchor="end"))
     p.append('<g id="slike">' + "".join(pics) + "</g>")
     p.append('<g id="ponudba">' + "".join(txt) + "</g>")
     p.append(f'<g id="podnozje"><line x1="{M}" y1="{H - 52}" x2="{W - M}" y2="{H - 52}" stroke="{WHITE}" stroke-opacity="0.28" stroke-width="0.5"/>'
