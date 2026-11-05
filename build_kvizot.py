@@ -17,6 +17,8 @@ W, H = round(148 * MM, 2), round(210 * MM, 2)  # 419.53 x 595.28 pt
 GAP = round(20 * MM, 2)
 M = 34.0
 
+ALERGENI = "Alergeni so navedeni v tabeli pri šanku."
+
 OFFER = [  # ime, cena (kot na letaku)
     ("Pizza", f"9,90{NBSP}€"),
     ("Hot dog", f"4,50{NBSP}€"),
@@ -104,6 +106,8 @@ def page_b(od, kv):
         txt.append(text(x, y + fh + 38, price, 13, 700, accent))
     p.append('<g id="slike">' + "".join(pics) + "</g>")
     p.append('<g id="ponudba">' + "".join(txt) + "</g>")
+    p.append(f'<g id="podnozje"><line x1="{M}" y1="{H - 46}" x2="{W - M}" y2="{H - 46}" stroke="{WHITE}" stroke-opacity="0.28" stroke-width="0.5"/>'
+             + text(M, H - 30, ALERGENI, 6.8, 400, WHITE, op=0.7, gid="alergeni") + "</g>")
     return "".join(p)
 
 
