@@ -1,16 +1,13 @@
 #!/usr/bin/env python3
 """Letak DON KVIZOT ponudba, A5 pokonci (148 × 210 mm), 2 strani, pravi koti.
 
-Uporaba: python3 build_kvizot.py <Logo_odiseja.svg> <don_kvizot_svetel.png> [izhod.svg]
+Uporaba: python3 build_kvizot.py <Logo_odiseja.svg> <assets/don_kvizot_logo.json> [izhod.svg]
 """
-import base64
-import io
+import json
 import re
 import sys
 from pathlib import Path
 from xml.etree import ElementTree as ET
-
-from PIL import Image
 
 import build_letaki as bl
 from build_letaki import NAVY, NBSP, TEAL, WHITE, GREEN, text
@@ -47,13 +44,9 @@ def load_odiseja(path):
 
 
 def load_kvizot(path):
-    im = Image.open(path).convert("RGBA")
-    im = im.crop(im.getbbox())
-    w, h = im.size
-    im.thumbnail((1100, 1100), Image.LANCZOS)
-    buf = io.BytesIO()
-    im.save(buf, "PNG", optimize=True)
-    return "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode(), w / h
+    """Vektorski logotip (assets/don_kvizot_logo.json, izdelan z tools/trace_logo.py)."""
+    d = json.loads(Path(path).read_text(encoding="utf8"))
+    return d["d"], d["w"], d["h"]
 
 
 def odiseja(od, x, y, width):
@@ -63,9 +56,10 @@ def odiseja(od, x, y, width):
 
 
 def kvizot(kv, x, y, width):
-    uri, ar = kv
-    return (f'<image id="logotip_don_kvizot" x="{x:.2f}" y="{y:.2f}" width="{width:.2f}" height="{width / ar:.2f}" '
-            f'preserveAspectRatio="xMidYMid meet" xlink:href="{uri}"/>'), width / ar
+    d, w, h = kv
+    s = width / w
+    return (f'<path id="logotip_don_kvizot" transform="translate({x:.2f} {y:.2f}) scale({s:.5f})" d="{d}" '
+            f'fill="#fafafa" fill-rule="evenodd"/>'), h * s
 
 
 def frame(x, y, w, h, name):
@@ -125,6 +119,7 @@ def build(od, kv):
 
 
 def main():
+    bl.AI_FONTS = True
     od = load_odiseja(sys.argv[1])
     kv = load_kvizot(sys.argv[2])
     out = Path(sys.argv[3] if len(sys.argv) > 3 else "letaki/don_kvizot_a5.svg")

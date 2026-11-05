@@ -268,13 +268,17 @@ def esc(s):
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
+AI_FONTS = False  # True: samo PostScript ime pisave (kot izvoz iz Illustratorja), brez seznama in font-weight
+
+
 def text(x, y, s, size, weight=400, fill=WHITE, anchor="start", op=None, ls=None, gid=None):
     fam, w = FONT[weight]
     a = f' text-anchor="{anchor}"' if anchor != "start" else ""
     o = f' fill-opacity="{op}"' if op is not None else ""
     l = f' letter-spacing="{ls}"' if ls is not None else ""
     i = f' id="{gid}"' if gid else ""
-    return (f'<text{i} x="{x:.2f}" y="{y:.2f}" font-family="{fam}, Archivo, sans-serif" font-weight="{w}" '
+    font = f'font-family="{fam}"' if AI_FONTS else f'font-family="{fam}, Archivo, sans-serif" font-weight="{w}"'
+    return (f'<text{i} x="{x:.2f}" y="{y:.2f}" {font} '
             f'font-size="{size}" fill="{fill}"{o}{a}{l}>{esc(s)}</text>')
 
 
