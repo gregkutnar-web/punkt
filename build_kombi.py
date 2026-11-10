@@ -42,18 +42,15 @@ nav .m{display:none}
 @media(max-width:700px){section.s{padding:5vh 14px 14vh}.stage{border-radius:18px}.duo{grid-template-columns:1fr}nav .d{display:none}nav .m{display:inline}nav a{padding:10px 14px}.t{flex-direction:column;gap:4px}.zoom{padding:9px 14px;font-size:13px}}
 @media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation:none!important}.stage{opacity:1;transform:none}}
 </style></head><body>
-<header class="hero" id="hero"><h1><span>Radio</span>Odiseja</h1><p>Poslikava kombija · izbrana osnutka</p><i>Drsi navzdol</i></header>
+<header class="hero" id="hero"><h1><span>Radio</span>Odiseja</h1><p>Poslikava kombija</p><i>Drsi navzdol</i></header>
 
-<section class="s" id="bok"><div class="t"><b>Bok vozila</b><em>Osnutek stran 2</em></div>
-<div class="stage" style="--ox:96%;--oy:36%;--zs:2"><img src="@3" alt="Bok kombija s poslikavo"><button class="zoom">Približaj napis</button></div></section>
+<section class="s" id="bok"><div class="t"><b>Bok vozila</b><em>Osnutek 1</em></div>
+<div class="stage" style="--ox:96%;--oy:36%;--zs:2"><img src="@2" alt="Bok kombija s poslikavo"><button class="zoom">Približaj napis</button></div></section>
 
-<section class="s" id="zadaj"><div class="t"><b>Zadnja vrata</b><em>Osnutek zadaj 2</em></div>
-<div class="stage" style="--ox:56%;--oy:34%;--zs:2.8"><img src="@4" alt="Zadek kombija s poslikavo"><button class="zoom">Približaj napis</button></div></section>
+<section class="s" id="zadaj"><div class="t"><b>Zadnja vrata</b><em>Osnutek 2</em></div>
+<div class="stage" style="--ox:62%;--oy:34%;--zs:2.6"><img src="@1" alt="Zadek kombija s poslikavo"><button class="zoom">Približaj napis</button></div></section>
 
-<section class="s" id="skupaj"><div class="t"><b>Skupaj</b><em>Bok in zadek</em></div>
-<div class="duo"><figure class="stage"><img src="@3" alt="Bok"><figcaption>Stran 2</figcaption></figure><figure class="stage"><img src="@4" alt="Zadek"><figcaption>Zadaj 2</figcaption></figure></div></section>
-
-<nav id="nav"><a href="#bok"><span class="d">Bok</span><span class="m">Bok</span></a><a href="#zadaj"><span class="d">Zadnja vrata</span><span class="m">Zadaj</span></a><a href="#skupaj"><span class="d">Skupaj</span><span class="m">Skupaj</span></a></nav>
+<nav id="nav"><a href="#bok"><span class="d">Bok</span><span class="m">Bok</span></a><a href="#zadaj"><span class="d">Zadnja vrata</span><span class="m">Zadaj</span></a></nav>
 <script>
 const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
@@ -64,6 +61,6 @@ links.forEach(a=>a.onclick=e=>{e.preventDefault();document.querySelector(a.hash)
 function spy(){const y=innerHeight*.5;let c=-1;secs.forEach((s,i)=>{const r=s.getBoundingClientRect();if(r.top<y&&r.bottom>y)c=i});links.forEach((a,i)=>a.classList.toggle('on',i===c))}
 addEventListener('scroll',spy,{passive:true});spy();
 </script></body></html>'''
-for k, n in (('@3', 3), ('@4', 4)):
+for k, n in (('@1', 1), ('@2', 2)):
     HTML = HTML.replace(f'"{k}"', f'"{b64(n)}"')
 open('kombi-odiseja.html', 'w', encoding='utf-8').write(HTML)
