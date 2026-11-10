@@ -35,13 +35,18 @@
   </g>
 </g>
 
+<g id="nagrade-znacka" filter="url(#sence)">
+  <rect x="82" y="195" width="62" height="12.5" rx="6.25" fill="url(#gumb)"/>
+  <text x="113" y="203.1" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-weight="800" font-size="4.9" letter-spacing=".45" fill="#1a1208">BOGATE NAGRADE</text>
+</g>
+
 <g id="besedilo">
   <text id="naslov" x="22" y="223" font-family="Archivo, 'Archivo ExtraBold', Arial, sans-serif" font-weight="800" font-size="15.4" fill="#ffffff">Postani zvezda Odiseje</text>
   <text id="podnaslov" x="22" y="235" font-family="'Archivo Light', Archivo, Arial, sans-serif" font-weight="300" font-size="11.5" fill="#ffffff">in nastopi na velikem odru</text>
   <text id="uvod" font-family="'Archivo Light', Archivo, Arial, sans-serif" font-weight="300" font-size="4.3" fill="#cfe3e6">
     <tspan x="22" y="247.5">Imaš glas, talent ali nastop, ki ga mora videti občinstvo?</tspan>
     <tspan x="22" y="253.5">Prijavi se na Zvezdo Odiseje in pokaži, kaj znaš –</tspan>
-    <tspan x="22" y="259.5">na pravem velikem odru.</tspan>
+    <tspan x="22" y="259.5">na pravem velikem odru in osvoji <tspan font-family="Archivo, Arial, sans-serif" font-weight="800" fill="#e9c98e">bogate nagrade</tspan>.</tspan>
   </text>
 </g>
 
