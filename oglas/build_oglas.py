@@ -1,13 +1,18 @@
 import base64,sys
 S=sys.argv[1]  # scratchpad with bg.jpg, star_gold.png
 b64=lambda p:base64.b64encode(open(p,'rb').read()).decode()
-bg=b64(f'{S}/bg.jpg'); star=b64(f'{S}/star_gold.png')
+bg=b64(f'{S}/bg.jpg')
+import qrcode
+URL='https://odiseja-production.up.railway.app/zvezda/#zo-prijava'
+q=qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_Q,border=0,box_size=1); q.add_data(URL); q.make(fit=True)
+M=q.get_matrix(); N=len(M); QS=34; ms=QS/N; qx,qy=167,243
+qpath=''.join(f'M{qx+x*ms:.3f} {qy+y*ms:.3f}h{ms:.3f}v{ms:.3f}h-{ms:.3f}z' for y in range(N) for x in range(N) if M[y][x])
 W,H=226,306   # mm: 220x300 + 3 mm porezave na vsaki strani
 svg=f'''<?xml version="1.0" encoding="UTF-8"?>
 <!-- Zvezda Odiseje oglas 220x300 mm + 3 mm porezave (skupaj 226x306 mm). Enota viewBox = 1 mm. Besedilo je živo (Archivo 800/300/700, serif). -->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{W}mm" height="{H}mm" viewBox="0 0 {W} {H}">
 <defs>
-  <clipPath id="oder"><path d="M0 0H{W}V186Q113 256 0 186Z"/></clipPath>
+  <clipPath id="oder"><path d="M0 0H{W}V172Q113 238 0 172Z"/></clipPath>
   <linearGradient id="gumb" x1="0" y1="0" x2="1" y2="1">
     <stop offset="0" stop-color="#e3c89b"/><stop offset=".5" stop-color="#b89560"/><stop offset="1" stop-color="#8d6c41"/>
   </linearGradient>
@@ -23,9 +28,9 @@ svg=f'''<?xml version="1.0" encoding="UTF-8"?>
 <g id="ozadje">
   <rect id="temna-podlaga" width="{W}" height="{H}" fill="#091c21"/>
   <g clip-path="url(#oder)">
-    <image id="oder-render" x="0" y="0" width="{W}" height="222" preserveAspectRatio="xMidYMid slice" xlink:href="data:image/jpeg;base64,{bg}"/>
+    <image id="oder-render" x="0" y="0" width="{W}" height="205" preserveAspectRatio="xMidYMin slice" xlink:href="data:image/jpeg;base64,{bg}"/>
   </g>
-  <path id="rob-loka" d="M0 186Q113 256 226 186" fill="none" stroke="url(#rob)" stroke-width=".5"/>
+  <path id="rob-loka" d="M0 172Q113 238 226 172" fill="none" stroke="url(#rob)" stroke-width=".5"/>
 </g>
 
 <g id="logotip-odiseja-ZAMENJAJ">
@@ -41,20 +46,33 @@ svg=f'''<?xml version="1.0" encoding="UTF-8"?>
 </g>
 
 <g id="besedilo">
-  <text id="naslov" x="22" y="246" font-family="Archivo, 'Archivo ExtraBold', Arial, sans-serif" font-weight="800" font-size="15.4" fill="#ffffff">Postani zvezda Odiseje</text>
-  <text id="podnaslov" x="22" y="262.5" font-family="'Archivo Light', Archivo, Arial, sans-serif" font-weight="300" font-size="12" fill="#ffffff">in nastopi na velikem odru</text>
+  <text id="naslov" x="22" y="223" font-family="Archivo, 'Archivo ExtraBold', Arial, sans-serif" font-weight="800" font-size="15.4" fill="#ffffff">Postani zvezda Odiseje</text>
+  <text id="podnaslov" x="22" y="235" font-family="'Archivo Light', Archivo, Arial, sans-serif" font-weight="300" font-size="11.5" fill="#ffffff">in nastopi na velikem odru</text>
+  <text id="uvod" font-family="'Archivo Light', Archivo, Arial, sans-serif" font-weight="300" font-size="4.3" fill="#cfe3e6">
+    <tspan x="22" y="247.5">Imaš glas, talent ali nastop, ki ga mora videti občinstvo?</tspan>
+    <tspan x="22" y="253.5">Prijavi se na Zvezdo Odiseje in pokaži, kaj znaš –</tspan>
+    <tspan x="22" y="259.5">na pravem velikem odru.</tspan>
+  </text>
+</g>
+
+<g id="koraki" font-family="Archivo, Arial, sans-serif" font-weight="700" font-size="3.9" fill="#ffffff">
+  <g fill="url(#gumb)"><circle cx="24.4" cy="270.4" r="2.8"/><circle cx="66.4" cy="270.4" r="2.8"/><circle cx="108.4" cy="270.4" r="2.8"/></g>
+  <g font-size="3.6" fill="#1a1208" text-anchor="middle"><text x="24.4" y="271.7">1</text><text x="66.4" y="271.7">2</text><text x="108.4" y="271.7">3</text></g>
+  <text x="29.5" y="271.7">Prijavi se</text>
+  <text x="71.5" y="271.7">Pokaži talent</text>
+  <text x="113.5" y="271.7">Nastopi na odru</text>
 </g>
 
 <a id="gumb-prijava" xlink:href="https://odiseja-production.up.railway.app/zvezda/#zo-prijava">
-  <rect x="22" y="274" width="54" height="14.5" rx="2.4" fill="url(#gumb)" filter="url(#sence)"/>
-  <text x="32.5" y="283.4" font-family="Archivo, Arial, sans-serif" font-weight="700" font-size="5.6" fill="#1a1208">Prijavi se</text>
-  <path d="M58.5 281.3h8.2M63.8 277.9l3.6 3.4-3.6 3.4" fill="none" stroke="#1a1208" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="22" y="279" width="54" height="14" rx="2.4" fill="url(#gumb)" filter="url(#sence)"/>
+  <text x="32.5" y="287.9" font-family="Archivo, Arial, sans-serif" font-weight="700" font-size="5.6" fill="#1a1208">Prijavi se</text>
+  <path d="M58.5 285.8h8.2M63.8 282.4l3.6 3.4-3.6 3.4" fill="none" stroke="#1a1208" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
 </a>
 
-<g id="logotip-zvezda-odiseje">
-  <image id="zvezda-ikona" x="181" y="262" width="24" height="15.9" xlink:href="data:image/png;base64,{star}"/>
-  <text id="zvezda-napis" x="193" y="288" text-anchor="middle" font-family="'Times New Roman', Georgia, serif" font-weight="400" font-size="7.4" letter-spacing=".25" fill="url(#zlato)">ZVEZDA</text>
-  <text id="odiseje-napis" x="193" y="292.3" text-anchor="middle" font-family="'Times New Roman', Georgia, serif" font-weight="700" font-size="3.1" letter-spacing=".5" fill="url(#zlato)">ODISEJE</text>
+<g id="qr-prijava">
+  <rect x="164" y="240" width="40" height="40" rx="2.2" fill="#ffffff"/>
+  <path d="{qpath}" fill="#091c21"/>
+  <text x="184" y="285.5" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-weight="700" font-size="3.3" fill="#ffffff">Skeniraj in se prijavi</text>
 </g>
 
 <!-- Vodila: izklopljena. Vklopi (display) za kontrolo. Rez = 3 mm znotraj, varno območje = 10 mm znotraj reza. -->
