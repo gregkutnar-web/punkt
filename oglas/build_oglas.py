@@ -5,7 +5,7 @@ bg=b64(f'{S}/bg.jpg')
 import qrcode
 URL='https://odiseja-production.up.railway.app/zvezda/#zo-prijava'
 q=qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_Q,border=0,box_size=1); q.add_data(URL); q.make(fit=True)
-M=q.get_matrix(); N=len(M); QS=34; ms=QS/N; qx,qy=167,243
+M=q.get_matrix(); N=len(M); QS=33; ms=QS/N; qx,qy=166.5,244.5
 qpath=''.join(f'M{qx+x*ms:.3f} {qy+y*ms:.3f}h{ms:.3f}v{ms:.3f}h-{ms:.3f}z' for y in range(N) for x in range(N) if M[y][x])
 W,H=226,306   # mm: 220x300 + 3 mm porezave na vsaki strani
 svg=f'''<?xml version="1.0" encoding="UTF-8"?>
@@ -53,7 +53,7 @@ svg=f'''<?xml version="1.0" encoding="UTF-8"?>
 <g id="besedilo">
   <text id="naslov" x="22" y="223" font-family="Archivo, 'Archivo ExtraBold', Arial, sans-serif" font-weight="800" font-size="15.4" fill="#ffffff">Postani zvezda Odiseje</text>
   <text id="podnaslov" x="22" y="235" font-family="'Archivo Light', Archivo, Arial, sans-serif" font-weight="300" font-size="11.5" fill="#ffffff">in nastopi na velikem odru</text>
-  <text id="uvod" font-family="'Archivo Light', Archivo, Arial, sans-serif" font-weight="300" font-size="4.3" fill="#cfe3e6">
+  <text id="uvod" font-family="Archivo, Arial, sans-serif" font-weight="400" font-size="4.4" fill="#e3eff1">
     <tspan x="22" y="247.5">Imaš glas, talent ali nastop, ki ga mora videti občinstvo?</tspan>
     <tspan x="22" y="253.5">Prijavi se na Zvezdo Odiseje in pokaži, kaj znaš –</tspan>
     <tspan x="22" y="259.5">na pravem velikem odru in osvoji <tspan font-family="Archivo, Arial, sans-serif" font-weight="800" fill="#e9c98e">bogate nagrade</tspan>.</tspan>
@@ -75,9 +75,9 @@ svg=f'''<?xml version="1.0" encoding="UTF-8"?>
 </a>
 
 <g id="qr-prijava">
-  <rect x="164" y="240" width="40" height="40" rx="2.2" fill="#ffffff"/>
+  <rect x="162" y="240.5" width="42" height="42" rx="2.2" fill="#ffffff"/>
   <path d="{qpath}" fill="#091c21"/>
-  <text x="184" y="285.5" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-weight="700" font-size="3.3" fill="#ffffff">Skeniraj in se prijavi</text>
+  <text x="183" y="288" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-weight="700" font-size="3.4" fill="#ffffff">Skeniraj in se prijavi</text>
 </g>
 
 <!-- Vodila: izklopljena. Vklopi (display) za kontrolo. Rez = 3 mm znotraj, varno območje = 10 mm znotraj reza. -->
