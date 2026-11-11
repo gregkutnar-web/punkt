@@ -10,68 +10,64 @@ b = io.BytesIO(); im.resize((1600, round(im.height * 1600 / im.width))).save(b, 
 PHOTO = 'data:image/jpeg;base64,' + base64.b64encode(b.getvalue()).decode()
 W, H = im.size  # 1774x887
 
-def cab():  # majhen logotip na vratih kabine
-    d, w = lockup(282, 496, .30, claim=False, site=False)
-    d1, w1 = text('Poiščite nas na ', 282, 470, 8, 'Inter-Bold.otf', .01, 1.0, INK)
-    d2, _ = text('DAB-u', 282 + w1, 470, 8, 'Inter-Black.otf', .01, 1.0, TEAL)
-    return f'<g class="a" style="--i:0">{d1}{d2}</g>' + d
+PILLARS = ['Kino · Oder · Koncerti', 'Otroci · Hrana & pijača · Terasa']
+
+def brand(x, y, s, fill=TEAL, ink=INK, anchor='start', sub=True, pill=True):
+    """Napis ODISEJA + BTC City Ljubljana + stebri; (x,y) = osnovna črta napisa."""
+    d, w = text('ODISEJA', x, y, 40 * s, 'Inter-Black.otf', .10, 1.22, fill, anchor=anchor)
+    o = f'<g class="a" style="--i:0">{d}</g>'
+    if sub:
+        d2, _ = text('BTC City Ljubljana', x, y + 44 * s, 19 * s, 'Inter-Bold.otf', .02, 1.0, ink, anchor=anchor)
+        o += f'<g class="a" style="--i:1">{d2}</g>'
+    if pill:
+        for k, ln in enumerate(PILLARS):
+            d3, _ = text(ln, x, y + (84 + 22 * k) * s, 15 * s, 'Inter-Bold.otf', .03, 1.0, ink, anchor=anchor)
+            o += f'<g class="a" style="--i:{2 + k}">{d3}</g>'
+    return o
+
+def cab():  # majhen napis na vratih kabine
+    return brand(282, 498, .32, sub=False, pill=False).replace('--i:0', '--i:0') + \
+        f'<g class="a" style="--i:1">{text("BTC City Ljubljana", 282, 514, 6.5, "Inter-Bold.otf", .02, 1.0, INK)[0]}</g>'
 
 def wrap(inner):
     return f'<svg viewBox="0 0 {W} {H}" class="ov" xmlns="http://www.w3.org/2000/svg"><g style="mix-blend-mode:multiply">{inner}</g></svg>'
 
-# ---------- Osnutek 1: pot (od pike do žarkov) ----------
+# ---------- Osnutek 1: pot (od pike do sonca) ----------
 def o1():
     s = ''
-    # pot: krogci, ki se proti zadku spremenijo v play-trikotnike
-    n, pts = 15, []
+    n = 15
     for i in range(n):
         t = i / (n - 1)
-        x = 300 + t * 830
-        y = 575 - t * 215 + math.sin(t * 6.3) * 26
-        pts.append((x, y, t))
-    for i, (x, y, t) in enumerate(pts):
-        r = 7 + t * 26
-        if t < .38:
-            s += f'<circle class="a" style="--i:{i}" cx="{x:.0f}" cy="{y:.0f}" r="{r:.1f}" fill="{TEAL}"/>'
-        else:
-            k = r * 2.1 / 430
-            s += f'<g class="a" style="--i:{i}">{glyph(x - 170*k, y - 260*k, k, TEAL, slots=False)}</g>'
-    # končni sij
-    gx, gy, gk = 1180, 170, .78
-    s += f'<g class="a" style="--i:16">{glyph(gx, gy, gk, TEAL)}</g>'
-    cx, cy = gx + 395 * gk, gy + 265 * gk
-    s += rays(cx, cy, [(-80, 150, 215, 30), (-52, 170, 250, 34), (-24, 160, 240, 34), (4, 150, 225, 34), (32, 160, 240, 34), (60, 170, 235, 30)], TEAL, 32)
-    d, w = lockup(628, 250, .68, icon_right=False)
-    return wrap(s + d + cab())
+        x = 330 + t * 740
+        y = 600 - t * 200 + math.sin(t * 6.3) * 26
+        s += f'<circle class="a" style="--i:{i}" cx="{x:.0f}" cy="{y:.0f}" r="{6 + t * 30:.1f}" fill="{TEAL}"/>'
+    cx, cy = 1370, 380
+    s += f'<circle class="a" style="--i:16" cx="{cx}" cy="{cy}" r="120" fill="{TEAL}"/>'
+    s += rays(cx, cy, [(a, 165, 245 if k % 2 == 0 else 215, 32) for k, a in enumerate(range(-100, 260, 30)) if not (65 < a < 115)], TEAL, 32)
+    return wrap(s + brand(628, 250, 1.05) + cab())
 
-# ---------- Osnutek 2: valovi (oddajanje) ----------
+# ---------- Osnutek 2: valovi ----------
 def o2():
-    cx, cy = 1520, 470
+    cx, cy = 1480, 470
     s = '<svg x="598" y="118" width="1060" height="512" viewBox="598 118 1060 512" overflow="hidden">'
     for i, r in enumerate(range(150, 490, 68)):
         col = TEAL if i % 2 == 0 else TEAL2
-        circ = 2 * math.pi * r
-        seg = 54 + i * 6; gap = 30 + i * 3
-        wdt = 22 + i * 1.5
-        s += (f'<circle class="a" style="--i:{i}" cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{col}" stroke-width="{wdt:.1f}" '
-              f'stroke-dasharray="{seg} {gap}" stroke-dashoffset="{i*37}" opacity="{max(.4, 1 - i*.08):.2f}"/>')
+        s += (f'<circle class="a" style="--i:{i}" cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{col}" stroke-width="{22 + i * 1.5:.1f}" '
+              f'stroke-dasharray="{54 + i * 6} {30 + i * 3}" stroke-dashoffset="{i * 37}" opacity="{max(.4, 1 - i * .08):.2f}"/>')
     s += '</svg>'
-    s += f'<g class="a" style="--i:0">{glyph(cx - 105, cy - 150, .42, DARK)}</g>'
-    d, w = lockup(628, 250, .72, icon_right=False)
-    d3, _ = text('Poslušaj. Odkrij.', 630, 420, 30, 'Inter-Black.otf', .02, 1.1, TEAL)
-    return wrap(s + d + f'<g class="a" style="--i:3">{d3}</g>' + cab())
+    s += f'<circle class="a" style="--i:0" cx="{cx}" cy="{cy}" r="95" fill="{DARK}"/>'
+    d, _ = text('Odkrij.', 630, 440, 46, 'Inter-Black.otf', .02, 1.1, TEAL)
+    return wrap(s + brand(628, 250, 1.05) + f'<g class="a" style="--i:4">{d}</g>' + cab())
 
-# ---------- Osnutek 3: prag (portal) ----------
+# ---------- Osnutek 3: prag ----------
 def o3():
     x0, y0, x1, y1 = 1092, 120, 1652, 626
     s = f'<rect class="a" style="--i:0" x="{x0}" y="{y0}" width="{x1-x0}" height="{y1-y0}" rx="44" fill="{DARK}"/>'
-    # svetloba iz portala čez drsna vrata
     fan = [(180 - 54, 50, 170, 22), (180 - 36, 50, 250, 24), (180 - 18, 50, 310, 24), (180, 50, 380, 26), (180 + 18, 50, 310, 24), (180 + 36, 50, 250, 24), (180 + 54, 50, 170, 22)]
     s += rays(1072, 372, fan, TEAL2, 24)
-    s += f'<g class="a" style="--i:2">{glyph(1235, 140, .56, "#fff").replace(chr(34)+"#fff"+chr(34)+" transform", chr(34)+DARK+chr(34)+" transform")}</g>'
-    d, w = text('RADIO ODISEJA', 1372, 520, 30, 'Inter-Black.otf', .10, 1.22, '#fff', anchor='middle')
-    d2, _ = text('Poiščite nas na DAB-u', 1372, 566, 19, 'Inter-Bold.otf', .01, 1.0, '#fff', anchor='middle')
-    s += f'<g class="a" style="--i:3">{d}</g><g class="a" style="--i:4">{d2}</g>'
+    ax, ay, aw, ah = 1292, 160, 160, 240  # loku podobna vrata (prag), izrezana
+    s += f'<path class="a" style="--i:2" d="M{ax},{ay+ah} V{ay+aw/2} A{aw/2},{aw/2} 0 0 1 {ax+aw},{ay+aw/2} V{ay+ah} Z" fill="#fff"/>'
+    s += f'<g class="a" style="--i:3">{brand(1372, 462, .85, "#fff", "#fff", "middle")}</g>'
     return wrap(s + cab())
 
 SVGS = [o1(), o2(), o3()]
