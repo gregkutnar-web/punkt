@@ -49,8 +49,8 @@ nav .m{display:none}
 <section class="s" id="bok"><div class="t"><b>Bok vozila</b><div class="tabs"><button class="on">Osnutek 1</button><button class="">Osnutek 2</button><button class="">Osnutek 3</button><button class="">Osnutek 4</button></div></div>
 <div class="stage" style="--ar:2"><img class="on" src="@12" alt="Osnutek 1" style="--ox:96%;--oy:36%;--zs:2"><img class="" src="@14" alt="Osnutek 2" style="--ox:96%;--oy:36%;--zs:2"><img class="" src="@13" alt="Osnutek 3" style="--ox:60%;--oy:33%;--zs:2"><img class="" src="@15" alt="Osnutek 4" style="--ox:85%;--oy:40%;--zs:1.5"><button class="zoom">Približaj napis</button></div></section>
 
-<section class="s" id="zadaj"><div class="t"><b>Zadnja vrata</b><div class="tabs"><button class="on">Osnutek 5</button><button class="">Osnutek 7</button><button class="">Osnutek 6</button></div></div>
-<div class="stage" style="--ar:1.77"><img class="on" src="@17" alt="Osnutek 5" style="--ox:47%;--oy:36%;--zs:2.8"><img class="" src="@19" alt="Osnutek 7" style="--ox:51%;--oy:31%;--zs:2.4"><img class="" src="@18" alt="Osnutek 6" style="--ox:70%;--oy:33%;--zs:3"><button class="zoom">Približaj napis</button></div></section>
+<section class="s" id="zadaj"><div class="t"><b>Zadnja vrata</b><div class="tabs"><button class="on">Osnutek 1</button><button class="">Osnutek 2</button><button class="">Osnutek 3</button></div></div>
+<div class="stage" style="--ar:1.77"><img class="on" src="@17" alt="Osnutek 1" style="--ox:47%;--oy:36%;--zs:2.8"><img class="" src="@19" alt="Osnutek 2" style="--ox:51%;--oy:31%;--zs:2.4"><img class="" src="@18" alt="Osnutek 3" style="--ox:70%;--oy:33%;--zs:3"><button class="zoom">Približaj napis</button></div></section>
 
 <nav id="nav"><a href="#bok"><span class="d">Bok</span><span class="m">Bok</span></a><a href="#zadaj"><span class="d">Zadnja vrata</span><span class="m">Zadaj</span></a></nav>
 <script>
