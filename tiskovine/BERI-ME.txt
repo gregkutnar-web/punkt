@@ -1,0 +1,16 @@
+POSLOVNE TISKOVINE · PRAVI PUNKT · RAZLIČICA 3
+
+1. Dopisni-list-Pravi-Punkt.docx
+   Word predloga za dopisni list A4. Glava, noga in velika ikona v ozadju so v glavi in nogi dokumenta,
+   zato se ponovijo na vsaki strani. Pisavi Montserrat in Inter sta vdelani v dokument. Če ju Word ne uporabi,
+   namesti pisave iz mape "pisave".
+   Besedilo, naslovnik in podatki so primeri (lorem ipsum, ničle). Podatke podjetja spremeni v glavi in nogi
+   (dvoklik na glavo ali nogo).
+
+2. Pisemska-ovojnica-DL-za-tisk.pdf  (2 strani: sprednja in zadnja stran)
+3. Zahvalni-karton-za-tisk.pdf        (2 strani: sprednja in zadnja stran)
+   Končna velikost 220 x 110 mm, odrez 3 mm na vsaki strani, znaki za obrez v robu strani (stran 240 x 130 mm).
+   Barve so v RGB (turkizna #00868F, črna, bela). Pred tiskom jih tiskarna pretvori v CMYK ali uskladi s
+   Pantone odtenkom. Pisave so vdelane. Črte zavihka kuverte niso natisnjene (so samo vodilo za tiskarno).
+
+4. pisave/  Montserrat (Regular, Bold), Inter (Regular, Medium, Bold). Licenca SIL Open Font License 1.1.
