@@ -50,7 +50,7 @@ nav .m{display:none}
 <div class="stage" style="--ar:2" data-z="Približaj napis|60%|40%|2;Približaj vrečko|90%|55%|2.1;Celotno vozilo"><img class="on" src="@23" alt="Bok vozila"><button class="zoom">Približaj napis</button></div></section>
 
 <section class="s" id="zadaj"><div class="t"><b>Zadnja vrata</b></div>
-<div class="stage" style="--ar:1" data-z="Približaj napis|55%|45%|1.7;Celotno vozilo"><img class="on" src="@22" alt="Zadnja vrata"><button class="zoom">Približaj napis</button></div></section>
+<div class="stage" style="--ar:1" data-z="Približaj napis|55%|45%|1.7;Celotno vozilo"><img class="on" src="@24" alt="Zadnja vrata"><button class="zoom">Približaj napis</button></div></section>
 
 <nav id="nav"><a href="#bok"><span class="d">Bok</span><span class="m">Bok</span></a><a href="#zadaj"><span class="d">Zadnja vrata</span><span class="m">Zadaj</span></a></nav>
 <script>
@@ -64,6 +64,6 @@ links.forEach(a=>a.onclick=e=>{e.preventDefault();document.querySelector(a.hash)
 function spy(){const y=innerHeight*.5;let c=-1;secs.forEach((s,i)=>{const r=s.getBoundingClientRect();if(r.top<y&&r.bottom>y)c=i});links.forEach((a,i)=>a.classList.toggle('on',i===c))}
 addEventListener('scroll',spy,{passive:true});spy();
 </script></body></html>'''
-for n in (22, 23):
+for n in (23, 24):
     HTML = HTML.replace(f'"@{n}"', f'"{b64(n)}"')
 open('kombi-odiseja-izbor.html', 'w', encoding='utf-8').write(HTML)
