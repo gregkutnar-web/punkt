@@ -25,9 +25,9 @@ T = {
         'min_h_l': 'Vodoravno', 'min_v_l': 'Navpično', 'scale_l': 'Povečava',
         'ok': 'Dovolj velik', 'small': 'Premajhen',
         'colors_h': 'Barve',
-        'colors_p': 'Logotip je turkizen, črn ali bel. Drugih barv ne uporabljamo.',
+        'colors_p': 'Logotip je turkizen, črn ali bel. Turkizna ima digitalno in tiskano vrednost. Drugih barv ne uporabljamo.',
         'copy': 'Kopiraj', 'copied': 'Kopirano',
-        'n_t': 'Turkizna', 'n_k': 'Črna', 'n_w': 'Bela',
+        'digital': 'Digitalno', 'print': 'Tisk', 'n_t': 'Turkizna', 'n_k': 'Črna', 'n_w': 'Bela',
         'matrix_h': 'Barva logotipa na ozadju',
         'm_ok': 'Dovoljeno', 'm_no': 'Ni dovoljeno',
         'dont_h': 'Prepovedano',
@@ -49,13 +49,13 @@ T = {
         'pdf_title': 'Odiseja – pravila uporabe logotipa',
         'readme': ('ODISEJA – MEDIJSKI PAKET\n\n'
                    'logo/vodoravno, navpicno, znak: SVG (vektor), PNG (prosojno ozadje), PDF.\n'
-                   'Barve: turkizna #00868F, crna #000000, bela #FFFFFF.\n'
+                   'Barve: turkizna digitalno #00B1BC (SVG, PNG), turkizna tisk #00868F (PDF), crna #000000, bela #FFFFFF.\n'
                    'Pravila uporabe: pravila-uporabe.pdf\n\nPOZOR: Znak samostojno uporabljamo le kot okrasni element.\n\n'
                    'Dovoljenje za uporabo: besedilo in kontakt bosta dodana.\n'),
         'folder': {'h': 'vodoravno', 'v': 'navpicno', 's': 'znak'},
         'colname': {'t': 'turkizna', 'k': 'crna', 'w': 'bela'},
         'rules_pdf': 'pravila-uporabe.pdf', 'colors_txt': 'barve.txt',
-        'colors_txt_body': 'Turkizna  HEX #00868F  RGB 0 134 143\nČrna      HEX #000000  RGB 0 0 0\nBela      HEX #FFFFFF  RGB 255 255 255\n',
+        'colors_txt_body': 'Turkizna (digitalno)  HEX #00B1BC  RGB 0 177 188  CMYK 75 5 28 0\nTurkizna (tisk)       HEX #00868F  RGB 0 134 143\nČrna      HEX #000000  RGB 0 0 0\nBela      HEX #FFFFFF  RGB 255 255 255\n',
         'zip': 'odiseja-medijski-paket.zip',
         'out': 'press-sl.html',
     },
@@ -82,9 +82,9 @@ T = {
         'min_h_l': 'Horizontal', 'min_v_l': 'Vertical', 'scale_l': 'Scale',
         'ok': 'Large enough', 'small': 'Too small',
         'colors_h': 'Colours',
-        'colors_p': 'The logo is turquoise, black or white. No other colours are used.',
+        'colors_p': 'The logo is turquoise, black or white. Turquoise has a digital and a print value. No other colours are used.',
         'copy': 'Copy', 'copied': 'Copied',
-        'n_t': 'Turquoise', 'n_k': 'Black', 'n_w': 'White',
+        'digital': 'Digital', 'print': 'Print', 'n_t': 'Turquoise', 'n_k': 'Black', 'n_w': 'White',
         'matrix_h': 'Logo colour on background',
         'm_ok': 'Allowed', 'm_no': 'Not allowed',
         'dont_h': 'Don’ts',
@@ -106,13 +106,13 @@ T = {
         'pdf_title': 'Odiseja – logo usage rules',
         'readme': ('ODISEJA – PRESS KIT\n\n'
                    'logo/horizontal, vertical, symbol: SVG (vector), PNG (transparent background), PDF.\n'
-                   'Colours: turquoise #00868F, black #000000, white #FFFFFF.\n'
+                   'Colours: turquoise digital #00B1BC (SVG, PNG), turquoise print #00868F (PDF), black #000000, white #FFFFFF.\n'
                    'Usage rules: usage-rules.pdf\n\nNOTE: Use the symbol alone only as a decorative element.\n\n'
                    'Permission to use: wording and contact will be added.\n'),
         'folder': {'h': 'horizontal', 'v': 'vertical', 's': 'symbol'},
         'colname': {'t': 'turquoise', 'k': 'black', 'w': 'white'},
         'rules_pdf': 'usage-rules.pdf', 'colors_txt': 'colours.txt',
-        'colors_txt_body': 'Turquoise  HEX #00868F  RGB 0 134 143\nBlack      HEX #000000  RGB 0 0 0\nWhite      HEX #FFFFFF  RGB 255 255 255\n',
+        'colors_txt_body': 'Turquoise (digital)  HEX #00B1BC  RGB 0 177 188  CMYK 75 5 28 0\nTurquoise (print)    HEX #00868F  RGB 0 134 143\nBlack      HEX #000000  RGB 0 0 0\nWhite      HEX #FFFFFF  RGB 255 255 255\n',
         'zip': 'odiseja-press-kit.zip',
         'out': 'press-en.html',
     },

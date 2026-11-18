@@ -23,9 +23,9 @@ h3{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
 .btn.big:hover{filter:brightness(1.12);background:var(--teal);color:#fff}
 
 /* ploščica z logotipom */
-.pl3{--pbg:#fff;--pc:#00868f;position:relative;width:min(94vw,calc(62vh * 16 / 9));aspect-ratio:16/9;border-radius:26px;background:var(--pbg);box-shadow:0 30px 80px rgba(0,0,0,.14),0 0 0 1px var(--line);display:flex;align-items:center;justify-content:center;transition:background .5s;color:var(--pc)}
-.pl3[data-bg=k]{--pbg:#000}.pl3[data-bg=t]{--pbg:#00868f}
-.pl3[data-c=t]{--pc:#00868f}.pl3[data-c=k]{--pc:#000}.pl3[data-c=w]{--pc:#fff}
+.pl3{--pbg:#fff;--pc:#00b1bc;position:relative;width:min(94vw,calc(62vh * 16 / 9));aspect-ratio:16/9;border-radius:26px;background:var(--pbg);box-shadow:0 30px 80px rgba(0,0,0,.14),0 0 0 1px var(--line);display:flex;align-items:center;justify-content:center;transition:background .5s;color:var(--pc)}
+.pl3[data-bg=k]{--pbg:#000}.pl3[data-bg=t]{--pbg:#00b1bc}
+.pl3[data-c=t]{--pc:#00b1bc}.pl3[data-c=k]{--pc:#000}.pl3[data-c=w]{--pc:#fff}
 .lgw{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
 .lgx{position:absolute;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.94);transition:opacity .45s var(--ease),transform .6s var(--ease);pointer-events:none}
 .lgx svg{display:block;width:100%;height:auto;transition:color .5s}
@@ -109,3 +109,11 @@ h3{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
 #pravila .two svg.cv{max-height:270px}
 #pravila .szdemo{flex:1;min-height:200px}
 @media (max-width:900px){#pravila .card{min-height:0}#pravila .two svg{max-height:none;width:100%}#pravila .two svg.cv{width:auto;max-height:260px}}
+
+/* turkizna: digital + print */
+.swc.dual{padding:0;background:none;gap:0;border-radius:26px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.14)}
+.swc.dual button{position:relative;flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;text-align:left;padding:18px 22px;background:var(--c);color:var(--t);transition:filter .25s}
+.swc.dual button:hover{filter:brightness(1.07)}
+.swc.dual em{font-style:normal;font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;opacity:.85}
+.swc.dual b{font-size:18px}.swc.dual span{font-size:13px;letter-spacing:.04em}
+.swc.dual i{position:absolute;right:18px;top:16px;font-style:normal;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.75}

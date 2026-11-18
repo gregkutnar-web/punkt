@@ -25,7 +25,7 @@
   addEventListener('scroll', req, { passive: true }); addEventListener('resize', req); spy();
 
   /* ---------- logotip: usmeritev, ozadje, barva ---------- */
-  var HEX = { t: '#00868f', k: '#000000', w: '#ffffff' };
+  var HEX = { t: '#00b1bc', k: '#000000', w: '#ffffff' };
   var VALID = { w: ['t', 'k'], k: ['t', 'w'], t: ['w'] };
   var plate = $('#plate'), seg = { o: $$('#oseg button'), bg: $$('#bseg button'), c: $$('#cseg button') };
   function sync() {
@@ -86,7 +86,7 @@
   rng.addEventListener('input', size); addEventListener('resize', function () { limit(); size() }); limit(); size();
 
   /* ---------- kopiranje barv ---------- */
-  $$('.swc').forEach(function (b) {
+  $$('.swc:not(.dual), .swc.dual button').forEach(function (b) {
     b.addEventListener('click', function () {
       var t = b.dataset.hex, i = $('i', b);
       function done() { i.textContent = D.copied; setTimeout(function () { i.textContent = D.copy }, 1400) }

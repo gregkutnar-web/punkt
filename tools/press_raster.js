@@ -24,10 +24,11 @@ const fs = require('fs');
       await p.setContent(html(w, h));
       await p.screenshot({ path: out, omitBackground: true, clip: { x: 0, y: 0, width: w, height: h } });
     }
+    const psvg = j.pdfsvg ? fs.readFileSync(j.pdfsvg, 'utf8') : svg;
     // PDF: vektorsko, velikost strani = logotip (pt)
     const wpt = 400, hpt = Math.floor(400 * h0 / w0) - 1;  // px (= 300 pt)
     await p.setViewportSize({ width: 800, height: 600 });
-    await p.setContent(`<!doctype html><html><head><style>@page{size:${wpt}px ${hpt}px;margin:0}html,body{margin:0;overflow:hidden}svg{display:block}</style></head><body>${svg.replace(/width="\d+" height="\d+"/, `width="${wpt}" height="${hpt}"`)}</body></html>`);
+    await p.setContent(`<!doctype html><html><head><style>@page{size:${wpt}px ${hpt}px;margin:0}html,body{margin:0;overflow:hidden}svg{display:block}</style></head><body>${psvg.replace(/width="\d+" height="\d+"/, `width="${wpt}" height="${hpt}"`)}</body></html>`);
     await p.pdf({ path: j.pdf, width: wpt + 'px', height: hpt + 'px', printBackground: true });
   }
   await b.close();
