@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="{{lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>{{title}}</title>
+<meta name="description" content="{{desc}}">
+<style>__STYLE__</style>
+</head>
+<body data-ok="{{ok}}" data-small="{{small}}" data-copied="{{copied}}" data-copy="{{copy}}" data-zip="{{zip}}">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>__DEFS__</defs></svg>
+
+<nav id="nav" aria-label="Navigation">
+  <span class="pill"></span>
+  <a href="#logotip"><span class="l">{{nav_logo}}</span><span class="s">{{nav_s_logo}}</span></a>
+  <a href="#pravila"><span class="l">{{nav_rules}}</span><span class="s">{{nav_s_rules}}</span></a>
+  <a href="#barve"><span class="l">{{nav_colors}}</span><span class="s">{{nav_s_colors}}</span></a>
+  <a href="#prepovedano"><span class="l">{{nav_dont}}</span><span class="s">{{nav_s_dont}}</span></a>
+  <a href="#prenos"><span class="l">{{nav_dl}}</span><span class="s">{{nav_s_dl}}</span></a>
+</nav>
+
+<main>
+<section id="hero">
+  <h1 aria-label="Odiseja"><span>O</span><span>D</span><span>I</span><span>S</span><span>E</span><span>J</span><span>A</span></h1>
+  <p>{{hero_p}}</p>
+  <div class="bg"><div class="cue"></div></div>
+</section>
+
+<section id="logotip" class="osn tp2">
+  <div class="isec">
+    <div class="tag"><b>{{logo_h}}</b></div>
+    <div class="pl3" id="plate" data-o="h" data-bg="w" data-c="t">
+      <div class="lgw"><div class="lgx" data-o="h">__LG_H__</div><div class="lgx" data-o="v">__LG_V__</div><div class="lgx" data-o="s">__LG_S__</div></div>
+    </div>
+    <div class="ctls">
+      <div class="seg" id="oseg"><button class="on" data-o="h">{{o_h}}</button><button data-o="v">{{o_v}}</button><button data-o="s">{{o_s}}</button></div>
+      <div class="seg" id="bseg" aria-label="{{bg_label}}"><button class="on" data-bg="w">{{bg_w}}</button><button data-bg="k">{{bg_k}}</button><button data-bg="t">{{bg_t}}</button></div>
+      <div class="seg" id="cseg" aria-label="{{col_label}}"><button class="on" data-c="t">{{c_t}}</button><button data-c="k">{{c_k}}</button><button data-c="w">{{c_w}}</button></div>
+    </div>
+    <div class="ctls"><button class="btn" id="dlsvg">{{dl_svg}}</button><button class="btn" id="dlpng">{{dl_png}}</button></div>
+    <p class="note">{{logo_note}}</p>
+  </div>
+</section>
+
+<section id="pravila" class="osn tp1">
+  <div class="isec wide">
+    <div class="tag"><b>{{rules_h}}</b></div>
+    <div class="cols">
+      <div class="card">
+        <h2>{{clear_h}}</h2>
+        <div class="two">__CLEAR_H__ __CLEAR_V__</div>
+        <p>{{clear_p}}</p>
+      </div>
+      <div class="card">
+        <h2>{{min_h}}</h2>
+        <div class="szdemo">
+          <figure><div class="sbox" id="sh">__LG_H__</div><figcaption>{{min_h_l}} · 40 mm <em id="sh_s"></em></figcaption></figure>
+          <figure><div class="sbox" id="sv">__LG_V__</div><figcaption>{{min_v_l}} · 23 mm <em id="sv_s"></em></figcaption></figure>
+        </div>
+        <label class="szl">{{width_l}} <input type="range" id="msz" min="40" max="220" value="220" aria-label="{{width_l}}"><output id="mpx"></output></label>
+        <p>{{min_p}}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="barve" class="osn tp3">
+  <div class="isec">
+    <div class="tag"><b>{{colors_h}}</b></div>
+    <p class="lead">{{colors_p}}</p>
+    <div class="sw">
+      <button class="swc" style="--c:#00868f;--t:#fff" data-hex="#00868F"><b>{{n_t}}</b><span>#00868F</span><span>RGB 0 134 143</span><i>{{copy}}</i></button>
+      <button class="swc" style="--c:#000;--t:#fff" data-hex="#000000"><b>{{n_k}}</b><span>#000000</span><span>RGB 0 0 0</span><i>{{copy}}</i></button>
+      <button class="swc" style="--c:#fff;--t:#000" data-hex="#FFFFFF"><b>{{n_w}}</b><span>#FFFFFF</span><span>RGB 255 255 255</span><i>{{copy}}</i></button>
+    </div>
+    <h3>{{matrix_h}}</h3>
+    <div class="mx">__MATRIX__</div>
+  </div>
+</section>
+
+<section id="prepovedano" class="osn tp1">
+  <div class="isec wide">
+    <div class="tag"><b>{{dont_h}}</b></div>
+    <p class="lead">{{dont_p}}</p>
+    <div class="bans">__BANS__</div>
+  </div>
+</section>
+
+<section id="prenos" class="osn tp4">
+  <div class="isec">
+    <div class="tag"><b>{{dl_h}}</b></div>
+    <p class="lead">{{dl_p}}</p>
+    <ul class="dlist">__DLIST__</ul>
+    <a class="btn big" id="zip" href="{{zip}}" download>{{dl_btn}}</a>
+    <div class="perm"><b>{{perm_h}}</b><p>{{perm}}</p></div>
+  </div>
+</section>
+</main>
+
+<script>__JS__</script>
+</body>
+</html>
