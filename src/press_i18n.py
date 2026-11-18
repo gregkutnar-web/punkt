@@ -15,7 +15,8 @@ T = {
         'bg_w': 'Belo', 'bg_k': 'Črno', 'bg_t': 'Turkizno',
         'c_t': 'Turkizna', 'c_k': 'Črna', 'c_w': 'Bela',
         'dl_svg': 'Prenesi SVG', 'dl_png': 'Prenesi PNG',
-        'logo_note': 'Vodoravni logotip je osnovni. Navpični uporabljamo, ko vodoravni ne gre v prostor. Znak samostojno le kot okrasni element.',
+        'logo_note': 'Vodoravni logotip je osnovni. Navpični uporabljamo, ko vodoravni ne gre v prostor.',
+        'symbol_warn': 'Znak samostojno uporabljamo le kot okrasni element.',
         'rules_h': 'Pravila',
         'clear_h': 'Varni prostor',
         'clear_p': 'Okrog logotipa ostane prazen prostor, enak višini črke O (x), na vseh straneh. Merimo ga od napisa (levo, zgoraj, spodaj) in od znaka (desno).',
@@ -49,7 +50,7 @@ T = {
         'readme': ('ODISEJA – MEDIJSKI PAKET\n\n'
                    'logo/vodoravno, navpicno, znak: SVG (vektor), PNG (prosojno ozadje), PDF.\n'
                    'Barve: turkizna #00868F, crna #000000, bela #FFFFFF.\n'
-                   'Pravila uporabe: pravila-uporabe.pdf\n\n'
+                   'Pravila uporabe: pravila-uporabe.pdf\n\nPOZOR: Znak samostojno uporabljamo le kot okrasni element.\n\n'
                    'Dovoljenje za uporabo: besedilo in kontakt bosta dodana.\n'),
         'folder': {'h': 'vodoravno', 'v': 'navpicno', 's': 'znak'},
         'colname': {'t': 'turkizna', 'k': 'crna', 'w': 'bela'},
@@ -71,7 +72,8 @@ T = {
         'bg_w': 'White', 'bg_k': 'Black', 'bg_t': 'Turquoise',
         'c_t': 'Turquoise', 'c_k': 'Black', 'c_w': 'White',
         'dl_svg': 'Download SVG', 'dl_png': 'Download PNG',
-        'logo_note': 'The horizontal logo is the primary one. Use the vertical logo when the horizontal does not fit. Use the symbol alone only as a decorative element.',
+        'logo_note': 'The horizontal logo is the primary one. Use the vertical logo when the horizontal does not fit.',
+        'symbol_warn': 'Use the symbol alone only as a decorative element.',
         'rules_h': 'Rules',
         'clear_h': 'Clear space',
         'clear_p': 'Keep empty space around the logo equal to the height of the letter O (x) on every side. Measure it from the wordmark (left, top, bottom) and from the symbol (right).',
@@ -105,7 +107,7 @@ T = {
         'readme': ('ODISEJA – PRESS KIT\n\n'
                    'logo/horizontal, vertical, symbol: SVG (vector), PNG (transparent background), PDF.\n'
                    'Colours: turquoise #00868F, black #000000, white #FFFFFF.\n'
-                   'Usage rules: usage-rules.pdf\n\n'
+                   'Usage rules: usage-rules.pdf\n\nNOTE: Use the symbol alone only as a decorative element.\n\n'
                    'Permission to use: wording and contact will be added.\n'),
         'folder': {'h': 'horizontal', 'v': 'vertical', 's': 'symbol'},
         'colname': {'t': 'turquoise', 'k': 'black', 'w': 'white'},

@@ -70,30 +70,43 @@ def svg(o, col='currentColor', cls='olg', w=None, extra=''):
 
 
 def clear_svg(o):
-    """Varni prostor po CGP (str. 4): x = višina črke O; polje = napis (levo, zgoraj, spodaj) in znak (desno) + x na vseh straneh."""
+    """Varni prostor po dokumentu Varne_cone_odiseja_logo.ai: x = višina črke O.
+    Vodoravno: polje = napis (levo, zgoraj, spodaj) + znak (desno), povsod + x.
+    Navpično: polje = celoten logotip + x. Ploščice (črka O) in vodila kot v dokumentu."""
     x, y, vw, vh = VIEW[o]
+    m = CAP
+    ow = OB[2] - OB[0]
     if o == 'h':
         rx0, ry0, rx1, ry1 = LB[0], LB[1], SB[2], LB[3]
+        wy0, wy1 = ry0, ry1                 # napis
+        gx = (rx0, rx1)
+        gy = (ry0, ry1)
+        tl = [(rx0 + ow / 2, ry0 - m / 2, 0), (rx0 + ow / 2, ry1 + m / 2, 0),
+              (rx0 - m / 2, ry0 + ow / 2, 90), (rx1 + m / 2, ry0 + m * .1 + ow / 2, 90)]
     else:
         rx0, ry0, rx1, ry1 = x, y, x + vw, y + vh
-    m = CAP
+        wy0, wy1 = TY0, TY0 + CAP
+        gx = (LB[0], LB[2])
+        gy = (y, wy0, wy1)   # vrh znaka, zgornji in spodnji rob napisa
+        tl = [(TXC, ry0 - m / 2, 0), (LB[0] + ow / 2, ry1 + m / 2, 0),
+              (rx0 - m / 2, (wy0 + wy1) / 2, 90), (rx1 + m / 2, (wy0 + wy1) / 2, 90)]
     X0, Y0, X1, Y1 = rx0 - m, ry0 - m, rx1 + m, ry1 + m
-    ccx, ccy = (rx0 + rx1) / 2, (ry0 + ry1) / 2
+    k = m / 31.0
 
     def tile(cx, cy, rot):
         return (f'<g transform="translate({cx:.2f} {cy:.2f}) rotate({rot}) translate({-OCX:.2f} {-OCY:.2f})">'
-                f'<path d="{LET[0]}" fill="#cdeefb" stroke="#cdeefb" stroke-width="{m * .22:.2f}" stroke-linejoin="round"/></g>')
-    tiles = (tile(rx0 + m / 2, ry0 - m / 2, 0) + tile(rx0 + m / 2, ry1 + m / 2, 0)
-             + tile(rx0 - m / 2, ccy, 90) + tile(rx1 + m / 2, ccy, 90))
-    w = m * .05
-    g = (f'<g stroke="#4fc3ee" stroke-width="{w:.2f}" stroke-dasharray="{m * .3:.2f} {m * .2:.2f}" fill="none">'
-         + ''.join(f'<path d="M{X0 - m * .4:.2f} {yy:.2f}H{X1 + m * .4:.2f}"/>' for yy in (Y0, ry0, ry1, Y1))
-         + ''.join(f'<path d="M{xx:.2f} {Y0 - m * .4:.2f}V{Y1 + m * .4:.2f}"/>' for xx in (X0, rx0, rx1, X1)) + '</g>')
-    pad = m * .6
+                f'<path d="{LET[0]}" fill="#c6e9fa"/></g>')
+    tiles = ''.join(tile(*t) for t in tl)
+    ys = sorted({Y0, ry0, Y1, ry1} | set(gy))
+    xs = sorted({X0, rx0, rx1, X1} | set(gx))
+    g = (f'<g stroke="#00adee" stroke-width="{.19 * k:.3f}" stroke-dasharray="{3 * k:.2f} {2.2 * k:.2f}" fill="none">'
+         + ''.join(f'<path d="M{X0 - m * .5:.2f} {yy:.2f}H{X1 + m * .5:.2f}"/>' for yy in ys)
+         + ''.join(f'<path d="M{xx:.2f} {Y0 - m * .5:.2f}V{Y1 + m * .5:.2f}"/>' for xx in xs) + '</g>')
+    pad = m * .7
     cls = 'cv' if o == 'v' else ''
     return (f'<svg class="{cls}" viewBox="{X0 - pad:.2f} {Y0 - pad:.2f} {X1 - X0 + 2 * pad:.2f} {Y1 - Y0 + 2 * pad:.2f}" xmlns="http://www.w3.org/2000/svg" role="img">'
-            f'{g}{tiles}<rect x="{X0:.2f}" y="{Y0:.2f}" width="{X1 - X0:.2f}" height="{Y1 - Y0:.2f}" fill="none" stroke="#e5007d" stroke-width="{m * .06:.2f}"/>'
-            f'<g style="color:#7c7c7c">{body(o)}</g></svg>')
+            f'{g}{tiles}<rect x="{X0:.2f}" y="{Y0:.2f}" width="{X1 - X0:.2f}" height="{Y1 - Y0:.2f}" fill="none" stroke="#eb008b" stroke-width="{.55 * k:.3f}"/>'
+            f'<g style="color:#808285">{body(o)}</g></svg>')
 
 
 # --- defs za »use« (prepovedane uporabe, matrika) ---
@@ -186,11 +199,11 @@ def print_html(t):
            '.mxc svg{width:60%}.mxc u{position:absolute;right:2mm;bottom:1mm;text-decoration:none;font-weight:800}.mxc.ok u{color:#00868f}.mxc.on-t.ok u{color:#fff}.mxc.no svg{opacity:.18}.mxc.no u{color:#d33a2c}'
            '.bans{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm}.ban{border:.3mm solid #ddd;border-radius:3mm;overflow:hidden}.ban .v{position:relative;height:36mm;display:flex;align-items:center;justify-content:center;color:#000}'
            '.ban svg.lgm{width:100%;height:100%}.ban svg.x{position:absolute;right:2mm;top:2mm;width:7mm;height:7mm}.ban .c{padding:2.5mm 3mm;font-size:9pt;font-weight:600;border-top:.3mm solid #ddd}'
-           '.szl{font-size:10pt;margin-top:3mm}')
+           '.szl{font-size:10pt;margin-top:3mm}.warn{margin-top:5mm;max-width:150mm;padding:3mm 5mm;border:.6mm solid #d98a00;background:#fff4dc;border-radius:3mm;font-weight:700;font-size:11pt;color:#6b4300}')
     sw = ''.join(f'<div class="sc" style="background:{HEX[c]};color:{"#000" if c == "w" else "#fff"}"><b>{t["n_" + c]}</b>{HEX[c].upper()}<br>RGB {r}</div>' for c, r in (('t', '0 134 143'), ('k', '0 0 0'), ('w', '255 255 255')))
     return (f'<!doctype html><html lang="{t["lang"]}"><head><meta charset="utf-8"><title>{t["pdf_title"]}</title><style>{css}</style></head><body>'
             f'<svg width="0" height="0" style="position:absolute"><defs>{DEFS}</defs></svg>'
-            f'<div class="pg"><h1>ODISEJA</h1><h2>{t["logo_h"]}</h2><div class="g3">{logos}</div><p>{t["logo_note"]}</p></div>'
+            f'<div class="pg"><h1>ODISEJA</h1><h2>{t["logo_h"]}</h2><div class="g3">{logos}</div><p>{t["logo_note"]}</p><div class="warn">&#9888; {t["symbol_warn"]}</div></div>'
             f'<div class="pg"><h2>{t["clear_h"]}</h2><div class="two">{clear_svg("h")}{clear_svg("v")}</div><p>{t["clear_p"]}</p>'
             f'<h2 style="margin-top:10mm">{t["min_h"]}</h2><p style="margin-top:0">{t["min_p"]}</p></div>'
             f'<div class="pg"><h2>{t["colors_h"]}</h2><div class="sw">{sw}</div><p>{t["colors_p"]}</p><h2 style="margin-top:8mm">{t["matrix_h"]}</h2><div class="mx">{matrix(t)}</div></div>'

@@ -94,3 +94,10 @@ h3{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
   .seg button{padding:8px 13px}
 }
 @media (max-width:520px){.bans{gap:10px}.ban .c{padding:10px 12px 14px;font-size:12px}}
+
+/* opozorilo: znak samostojno */
+.warn{display:none;align-items:center;gap:14px;max-width:min(640px,92vw);padding:16px 22px;border-radius:18px;border:2px solid #e08a00;background:#fff3d6;color:#5f3b00;font-size:15px;line-height:1.4}
+.warn .wi{font-size:26px;line-height:1;color:#e08a00;flex:none}
+.warn b{font-weight:800}
+#plate[data-o=s]~#symwarn,.isec.sym #symwarn{display:flex;animation:rise .5s var(--ease)}
+.pl3-unused{content:attr(data-warn);position:absolute;left:50%;bottom:14px;transform:translateX(-50%);max-width:92%;padding:8px 14px;border-radius:999px;background:#fff3d6;border:1.5px solid #e08a00;color:#5f3b00;font-size:12px;font-weight:800;text-align:center;line-height:1.3}
