@@ -29,7 +29,8 @@
 <section id="logotip" class="osn tp2">
   <div class="isec">
     <div class="tag"><b>{{logo_h}}</b></div>
-    <div class="pl3" id="plate" data-o="h" data-bg="w" data-c="t">
+    <div class="seg big" id="pseg" aria-label="{{p_label}}"><button class="on" data-p="d">{{p_d}}</button><button data-p="p">{{p_p}}</button></div>
+    <div class="pl3" id="plate" data-p="d" data-o="h" data-bg="w" data-c="t">
       <div class="lgw"><div class="lgx" data-o="h">__LG_H__</div><div class="lgx" data-o="v">__LG_V__</div><div class="lgx" data-o="s">__LG_S__</div></div>
     </div>
     <div class="warn" id="symwarn" role="alert"><span class="wi">&#9888;</span><b>{{symbol_warn}}</b></div>
@@ -39,6 +40,7 @@
       <div class="seg" id="cseg" aria-label="{{col_label}}"><button class="on" data-c="t">{{c_t}}</button><button data-c="k">{{c_k}}</button><button data-c="w">{{c_w}}</button></div>
     </div>
     <div class="ctls"><button class="btn" id="dlsvg">{{dl_svg}}</button><button class="btn" id="dlpng">{{dl_png}}</button></div>
+    <p class="note" id="pnote" data-d="{{p_note_d}}" data-p="{{p_note_p}}">{{p_note_d}}</p>
     <p class="note">{{logo_note}}</p>
   </div>
 </section>

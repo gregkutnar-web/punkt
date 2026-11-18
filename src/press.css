@@ -117,3 +117,9 @@ h3{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
 .swc.dual em{font-style:normal;font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;opacity:.85}
 .swc.dual b{font-size:18px}.swc.dual span{font-size:13px;letter-spacing:.04em}
 .swc.dual i{position:absolute;right:18px;top:16px;font-style:normal;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+
+/* namen: digitalno / tisk */
+.pl3[data-p=p][data-c=t]{--pc:#00868f}.pl3[data-p=p][data-bg=t]{--pbg:#00868f}
+.seg.big button{padding:12px 26px;font-size:14px}
+#pnote{font-weight:600;color:var(--ink)}
+@media (max-width:520px){.seg.big{flex-wrap:nowrap}.seg.big button{padding:10px 11px;font-size:12px;white-space:nowrap}}
