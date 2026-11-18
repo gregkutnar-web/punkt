@@ -168,7 +168,11 @@ def page(t):
     h = (S / 'press.html').read_text()
     import base64
     bg = base64.b64encode((R / 'assets' / 'cgp-background.svg').read_bytes()).decode()
-    style = (S / 'landing.css').read_text() + (S / 'press.css').read_text() + '#hero{background:url(data:image/svg+xml;base64,' + bg + ') center/cover no-repeat,#071d22}#hero p{color:rgba(255,255,255,.82)}#hero .cue{background:linear-gradient(#fff,transparent)}'
+    style = (S / 'landing.css').read_text() + (S / 'press.css').read_text() + '#hero,#prenos{background:url(data:image/svg+xml;base64,' + bg + ') center/cover no-repeat,#071d22}#hero p{color:rgba(255,255,255,.82)}#hero .cue{background:linear-gradient(#fff,transparent)}' + (
+             '#prenos{--ink:#fff;--bg:#071d22;--mute:rgba(255,255,255,.86);--line:rgba(255,255,255,.4)}'
+             '#prenos .dlist li{color:#fff;background:rgba(7,29,34,.28);border-color:rgba(255,255,255,.45)}'
+             '#prenos .btn.big{background:#fff;border-color:#fff;color:#071d22}#prenos .btn.big:hover{background:#fff;color:#071d22;filter:brightness(.94)}'
+             '#prenos .perm{border:1px dashed rgba(255,255,255,.55);background:rgba(7,29,34,.22)}#prenos .perm b,#prenos .perm p{color:#fff}')
     rep = {'__HERO_LOGO__': svg('h'), '__STYLE__': style, '__JS__': (S / 'press.js').read_text(), '__DEFS__': DEFS,
            '__LG_H__': svg('h'), '__LG_V__': svg('v'), '__LG_S__': svg('s'),
            '__CLEAR_H__': clear_svg('h'), '__CLEAR_V__': clear_svg('v'),
