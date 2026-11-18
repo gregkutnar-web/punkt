@@ -67,7 +67,7 @@
   var PXMM = 96 / 25.4, rng = $('#msz'), mpx = $('#mpx'), demo = $('#szdemo');
   function limit() {
     var avail = demo.parentNode.clientWidth - 18, kmax = Math.floor(avail / (63 * PXMM) * 10) / 10;
-    rng.max = Math.max(1, Math.min(3, kmax));
+    rng.max = Math.max(1, Math.min(5, kmax));
     if (+rng.value > +rng.max) rng.value = rng.max;
   }
   function size() {
