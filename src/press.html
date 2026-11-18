@@ -21,7 +21,7 @@
 
 <main>
 <section id="hero">
-  <h1 aria-label="Odiseja"><span>O</span><span>D</span><span>I</span><span>S</span><span>E</span><span>J</span><span>A</span></h1>
+  <h1 aria-label="Odiseja">__HERO_LOGO__</h1>
   <p>{{hero_p}}</p>
   <div class="bg"><div class="cue"></div></div>
 </section>
@@ -53,11 +53,11 @@
       </div>
       <div class="card">
         <h2>{{min_h}}</h2>
-        <div class="szdemo">
-          <figure><div class="sbox" id="sh">__LG_H__</div><figcaption>{{min_h_l}} · 40 mm <em id="sh_s"></em></figcaption></figure>
-          <figure><div class="sbox" id="sv">__LG_V__</div><figcaption>{{min_v_l}} · 23 mm <em id="sv_s"></em></figcaption></figure>
+        <div class="szdemo" id="szdemo">
+          <figure><div class="sbox" id="sh">__LG_H__</div><div class="dm" id="dh"><span></span></div><figcaption>{{min_h_l}} <em id="sh_s"></em></figcaption></figure>
+          <figure><div class="sbox" id="sv">__LG_V__</div><div class="dm" id="dv"><span></span></div><figcaption>{{min_v_l}} <em id="sv_s"></em></figcaption></figure>
         </div>
-        <label class="szl">{{width_l}} <input type="range" id="msz" min="40" max="220" value="220" aria-label="{{width_l}}"><output id="mpx"></output></label>
+        <label class="szl">{{scale_l}} <input type="range" id="msz" min="0.5" max="3" step="0.1" value="1" aria-label="{{scale_l}}"><output id="mpx"></output></label>
         <p>{{min_p}}</p>
       </div>
     </div>

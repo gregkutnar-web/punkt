@@ -45,10 +45,14 @@ MV = M * KS
 paths = lambda ds, col='currentColor': ''.join(f'<path d="{d}" fill="{col}"/>' for d in ds)
 VSUN = f'translate({TXC - KS * CX:.3f} {sun_up - KS * CY:.3f}) scale({KS})'
 VTXT = f'translate(0 {TY0 - LB[1]:.3f})'
+VX0 = min(LB[0], TXC + KS * (SB[0] - CX))
+VX1 = max(LB[2], TXC + KS * (SB[2] - CX))
 VIEW = {'h': (AB[0], AB[1], AB[2] - AB[0], AB[3] - AB[1]),
         's': (SB[0], SB[1], SB[2] - SB[0], SB[3] - SB[1]),
-        'v': (LB[0], 0, TXW, VH)}
-CLEAR = {'h': M, 'v': MV, 's': M}
+        'v': (VX0, 0, VX1 - VX0, VH)}
+CAP = LB[3] - LB[1]                                    # višina črke O = varni prostor x (CGP, str. 4)
+OB = bbox(LET[:1])
+OCX, OCY = (OB[0] + OB[2]) / 2, (OB[1] + OB[3]) / 2
 
 
 def body(o, col='currentColor'):
@@ -59,25 +63,37 @@ def body(o, col='currentColor'):
     return f'<g transform="{VSUN}">{paths(SUN, col)}</g><g transform="{VTXT}">{paths(LET, col)}</g>'
 
 
-def svg(o, col='currentColor', cls='lg', w=None, extra=''):
+def svg(o, col='currentColor', cls='olg', w=None, extra=''):
     x, y, vw, vh = VIEW[o]
     wh = f' width="{w}" height="{round(w * vh / vw)}"' if w else ''
-    return f'<svg class="{cls}" viewBox="{x:.2f} {y:.2f} {vw:.2f} {vh:.2f}"{wh} xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Odiseja"{extra}>{body(o, col)}</svg>'
+    return f'<svg class="{cls}" viewBox="{x:.2f} {y:.2f} {vw:.2f} {vh:.2f}"{wh} xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Odiseja" style="aspect-ratio:{vw:.2f}/{vh:.2f}"{extra}>{body(o, col)}</svg>'
 
 
-def clear_svg(o, label_x=True):
+def clear_svg(o):
+    """Varni prostor po CGP (str. 4): x = višina črke O; polje = napis (levo, zgoraj, spodaj) in znak (desno) + x na vseh straneh."""
     x, y, vw, vh = VIEW[o]
-    m = CLEAR[o]
-    pad = m * 1.6
-    X0, Y0, X1, Y1 = x - m, y - m, x + vw + m, y + vh + m
-    band = (f'M{X0:.2f} {Y0:.2f}H{X1:.2f}V{Y1:.2f}H{X0:.2f}Z M{x:.2f} {y:.2f}V{y + vh:.2f}H{x + vw:.2f}V{y:.2f}Z')
-    dim = (f'<g stroke="#00868f" stroke-width="{m * .12:.2f}" fill="none"><path d="M{X0 + m * .3:.2f} {Y0:.2f}V{y:.2f}M{X0 + m * .1:.2f} {Y0:.2f}H{X0 + m * .5:.2f}M{X0 + m * .1:.2f} {y:.2f}H{X0 + m * .5:.2f}"/></g>'
-           f'<text x="{X0 + m * .62:.2f}" y="{y - m * .16:.2f}" font-size="{m * .95:.2f}" font-weight="700" fill="#00868f" font-family="Helvetica Neue,Arial,sans-serif">x</text>')
+    if o == 'h':
+        rx0, ry0, rx1, ry1 = LB[0], LB[1], SB[2], LB[3]
+    else:
+        rx0, ry0, rx1, ry1 = x, y, x + vw, y + vh
+    m = CAP
+    X0, Y0, X1, Y1 = rx0 - m, ry0 - m, rx1 + m, ry1 + m
+    ccx, ccy = (rx0 + rx1) / 2, (ry0 + ry1) / 2
+
+    def tile(cx, cy, rot):
+        return (f'<g transform="translate({cx:.2f} {cy:.2f}) rotate({rot}) translate({-OCX:.2f} {-OCY:.2f})">'
+                f'<path d="{LET[0]}" fill="#cdeefb" stroke="#cdeefb" stroke-width="{m * .22:.2f}" stroke-linejoin="round"/></g>')
+    tiles = (tile(rx0 + m / 2, ry0 - m / 2, 0) + tile(rx0 + m / 2, ry1 + m / 2, 0)
+             + tile(rx0 - m / 2, ccy, 90) + tile(rx1 + m / 2, ccy, 90))
+    w = m * .05
+    g = (f'<g stroke="#4fc3ee" stroke-width="{w:.2f}" stroke-dasharray="{m * .3:.2f} {m * .2:.2f}" fill="none">'
+         + ''.join(f'<path d="M{X0 - m * .4:.2f} {yy:.2f}H{X1 + m * .4:.2f}"/>' for yy in (Y0, ry0, ry1, Y1))
+         + ''.join(f'<path d="M{xx:.2f} {Y0 - m * .4:.2f}V{Y1 + m * .4:.2f}"/>' for xx in (X0, rx0, rx1, X1)) + '</g>')
+    pad = m * .6
     cls = 'cv' if o == 'v' else ''
-    return (f'<svg class="{cls}" viewBox="{X0 - pad * .2:.2f} {Y0 - pad * .2:.2f} {X1 - X0 + pad * .4:.2f} {Y1 - Y0 + pad * .4:.2f}" xmlns="http://www.w3.org/2000/svg" role="img">'
-            f'<path d="{band}" fill="#00868f" fill-opacity=".16" fill-rule="evenodd"/>'
-            f'<rect x="{X0:.2f}" y="{Y0:.2f}" width="{X1 - X0:.2f}" height="{Y1 - Y0:.2f}" fill="none" stroke="#00868f" stroke-width="{m * .07:.2f}" stroke-dasharray="{m * .35:.2f} {m * .25:.2f}"/>'
-            f'<g transform="" style="color:#000">{body(o)}</g>{dim}</svg>')
+    return (f'<svg class="{cls}" viewBox="{X0 - pad:.2f} {Y0 - pad:.2f} {X1 - X0 + 2 * pad:.2f} {Y1 - Y0 + 2 * pad:.2f}" xmlns="http://www.w3.org/2000/svg" role="img">'
+            f'{g}{tiles}<rect x="{X0:.2f}" y="{Y0:.2f}" width="{X1 - X0:.2f}" height="{Y1 - Y0:.2f}" fill="none" stroke="#e5007d" stroke-width="{m * .06:.2f}"/>'
+            f'<g style="color:#7c7c7c">{body(o)}</g></svg>')
 
 
 # --- defs za »use« (prepovedane uporabe, matrika) ---
@@ -138,7 +154,7 @@ def matrix(t):
 def page(t):
     h = (S / 'press.html').read_text()
     style = (S / 'landing.css').read_text() + (S / 'press.css').read_text()
-    rep = {'__STYLE__': style, '__JS__': (S / 'press.js').read_text(), '__DEFS__': DEFS,
+    rep = {'__HERO_LOGO__': svg('h'), '__STYLE__': style, '__JS__': (S / 'press.js').read_text(), '__DEFS__': DEFS,
            '__LG_H__': svg('h'), '__LG_V__': svg('v'), '__LG_S__': svg('s'),
            '__CLEAR_H__': clear_svg('h'), '__CLEAR_V__': clear_svg('v'),
            '__MATRIX__': matrix(t), '__BANS__': bans(t),

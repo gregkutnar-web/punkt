@@ -63,18 +63,27 @@
     img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s.text);
   });
 
-  /* ---------- najmanjša velikost ---------- */
-  var PXMM = 96 / 25.4, rng = $('#msz'), mpx = $('#mpx');
+  /* ---------- najmanjša velikost (pravi mm) ---------- */
+  var PXMM = 96 / 25.4, rng = $('#msz'), mpx = $('#mpx'), demo = $('#szdemo');
+  function limit() {
+    var avail = demo.parentNode.clientWidth - 18, kmax = Math.floor(avail / (63 * PXMM) * 10) / 10;
+    rng.max = Math.max(1, Math.min(3, kmax));
+    if (+rng.value > +rng.max) rng.value = rng.max;
+  }
   function size() {
-    var v = +rng.value;
-    $('#sh').style.width = v + 'px'; $('#sv').style.width = v + 'px';
-    mpx.textContent = v + ' px · ' + (v / PXMM).toFixed(0) + ' mm';
-    [['sh_s', 40], ['sv_s', 23]].forEach(function (m) {
-      var ok = v / PXMM >= m[1], e = $('#' + m[0]);
-      e.textContent = ok ? '✓ ' + D.ok : '✕ ' + D.small; e.className = ok ? 'ok' : 'bad';
+    var k = +rng.value; demo.style.setProperty('--k', k);
+    [['sh', 40], ['sv', 23]].forEach(function (m) {
+      var s = $('#' + m[0] + ' svg'), vb = s.getAttribute('viewBox').split(' ').map(Number), w = k * m[1] * PXMM;
+      s.style.width = w + 'px'; s.style.height = (w * vb[3] / vb[2]) + 'px'; $('#d' + m[0].charAt(1)).style.width = w + 'px';
+    });
+    mpx.textContent = k.toFixed(1) + '×';
+    [['sh', 40], ['sv', 23]].forEach(function (m) {
+      var mm = Math.round(k * m[1]), ok = k >= 1, e = $('#' + m[0] + '_s');
+      e.textContent = (ok ? '✓ ' : '✕ ') + mm + ' mm · ' + (ok ? D.ok : D.small); e.className = ok ? 'ok' : 'bad';
+      $('#d' + m[0].charAt(1) + ' span').textContent = mm + ' mm';
     });
   }
-  rng.addEventListener('input', size); size();
+  rng.addEventListener('input', size); addEventListener('resize', function () { limit(); size() }); limit(); size();
 
   /* ---------- kopiranje barv ---------- */
   $$('.swc').forEach(function (b) {

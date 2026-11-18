@@ -41,7 +41,7 @@ for fill, d in paths():
     if not m or any(abs(float(a) - b) > .3 for a, b in zip(m.groups(), INK)):
         continue
     x0, y0, x1, y1 = bbox(d)
-    if 460 < y0 and y1 < 510 and x1 < 450 and x1 - x0 < 300:   # spodnji levi logotip (črn, brez pripisa)
+    if 460 < y0 and y1 < 515 and x1 < 450 and x1 - x0 < 300:   # spodnji levi logotip (črn, brez pripisa)
         sel.append((x0, y0, x1, y1, d))
 print(len(sel), 'poti')
 letters = [s for s in sel if s[2] < 365]     # črke ODISEJA
