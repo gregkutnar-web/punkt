@@ -32,7 +32,7 @@ TERMS = {
             'terms_note': 'Za prenos gradiv je potrebno sprejeti pogoje uporabe.',
             'perm_short': 'Pred prenosom je treba sprejeti pogoje uporabe blagovne znamke.',
             'terms_file': 'pogoji-uporabe.txt',
-            'pdf_perm': 'Vsa gradiva, ki vključujejo logotip ali druge elemente blagovne znamke Odiseja, morajo biti pred objavo ali distribucijo predložena v predhodno potrditev Denisu Kjostarovu (Marketing Odiseje).',
+            'pdf_perm': 'Vsa gradiva, ki vključujejo logotip ali druge elemente blagovne znamke Odiseja, morajo biti pred objavo ali distribucijo predložena v predhodno potrditev Denisu Kjostarovu (Vodja Marketinga).',
         },
     },
     'en': {
@@ -65,7 +65,7 @@ TERMS = {
             'terms_note': 'You must accept the terms of use to download the materials.',
             'perm_short': 'The brand terms of use must be accepted before downloading.',
             'terms_file': 'terms-of-use.txt',
-            'pdf_perm': 'All materials featuring the Odiseja logo or other brand elements must be submitted to Denis Kjostarov (Marketing Odiseje) for prior approval before publication or distribution.',
+            'pdf_perm': 'All materials featuring the Odiseja logo or other brand elements must be submitted to Denis Kjostarov (Head of Marketing) for prior approval before publication or distribution.',
         },
     },
 }
