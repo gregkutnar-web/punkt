@@ -52,8 +52,8 @@
   }
   function save(blob, name) { var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(a.href) }, 4000) }
   function fname(ext) { return 'odiseja-' + plate.dataset.o + '-' + plate.dataset.c + '.' + ext }
-  $('#dlsvg').addEventListener('click', function () { save(new Blob([svgText().text], { type: 'image/svg+xml' }), fname('svg')) });
-  $('#dlpng').addEventListener('click', function () {
+  $('#dlsvg').addEventListener('click', function () { gate(function () { save(new Blob([svgText().text], { type: 'image/svg+xml' }), fname('svg')) }) });
+  $('#dlpng').addEventListener('click', function () { gate(function () {
     var s = svgText(), img = new Image(), k = 2;
     img.onload = function () {
       var c = document.createElement('canvas'); c.width = s.w * k; c.height = s.h * k;
@@ -61,6 +61,33 @@
       c.toBlob(function (b) { save(b, fname('png')) }, 'image/png');
     };
     img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s.text);
+  }) });
+
+
+  /* ---------- pogoji uporabe: pred vsakim prenosom ---------- */
+  var tm = $('#tmodal'), chk = $('#tchk'), tok = $('#tok'), pending = null, accepted = false, lastFocus = null;
+  function openT(fn) {
+    pending = fn || null; lastFocus = document.activeElement; chk.checked = false; tok.disabled = true;
+    $('#tbody').scrollTop = 0; tm.hidden = false; document.body.style.overflow = 'hidden'; $('#tbody').focus();
+  }
+  function closeT() { tm.hidden = true; document.body.style.overflow = ''; pending = null; if (lastFocus && lastFocus.focus) lastFocus.focus() }
+  function gate(fn) { if (accepted) fn(); else openT(fn) }
+  chk.addEventListener('change', function () { tok.disabled = !chk.checked });
+  tok.addEventListener('click', function () { if (!chk.checked) return; accepted = true; var f = pending; tm.hidden = true; document.body.style.overflow = ''; pending = null; if (f) f(); });
+  $('#tcancel').addEventListener('click', closeT); $('#tclose').addEventListener('click', closeT);
+  tm.addEventListener('click', function (e) { if (e.target === tm) closeT() });
+  addEventListener('keydown', function (e) {
+    if (tm.hidden) return;
+    if (e.key === 'Escape') closeT();
+    if (e.key === 'Tab') {   // fokus ostane v oknu
+      var f = [].slice.call(tm.querySelectorAll('button:not([disabled]),input,[tabindex="0"]')), i = f.indexOf(document.activeElement);
+      if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus() } else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus() }
+    }
+  });
+  $('#openterms').addEventListener('click', function () { openT(null) });
+  $('#zip').addEventListener('click', function (e) {
+    e.preventDefault();
+    gate(function () { var a = document.createElement('a'); a.href = $('#zip').dataset.file; a.download = ''; document.body.appendChild(a); a.click(); a.remove() });
   });
 
   /* ---------- najmanjša velikost (pravi mm, ravnilo) ---------- */

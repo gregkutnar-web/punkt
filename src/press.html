@@ -99,12 +99,23 @@
     <div class="tag"><b>{{dl_h}}</b></div>
     <p class="lead">{{dl_p}}</p>
     <ul class="dlist">__DLIST__</ul>
-    <a class="btn big" id="zip" href="{{zip}}" download>{{dl_btn}}</a>
-    <div class="perm"><b>{{perm_h}}</b><p>{{perm}}</p></div>
+    <a class="btn big" id="zip" href="#prenos" data-file="{{zip}}" role="button">{{dl_btn}}</a>
+    <div class="perm"><b>{{perm_h}}</b><p>{{perm}}</p><button class="btn" id="openterms" type="button">{{terms_open}}</button></div>
   </div>
 </section>
 </main>
 
+
+<div class="mdl" id="tmodal" role="dialog" aria-modal="true" aria-labelledby="tmt" hidden>
+  <div class="mdl-card">
+    <div class="mdl-h"><b id="tmt">{{terms_head}}</b><button class="mdl-x" id="tclose" type="button" aria-label="{{terms_close}}">&times;</button></div>
+    <div class="mdl-b" id="tbody" tabindex="0">__TERMS_BODY__</div>
+    <div class="mdl-f">
+      <label class="chk"><input type="checkbox" id="tchk"><span>{{terms_accept}}</span></label>
+      <div class="mdl-btn"><button class="btn" id="tcancel" type="button">{{terms_cancel}}</button><button class="btn big" id="tok" type="button" disabled>{{terms_ok}}</button></div>
+    </div>
+  </div>
+</div>
 <script>__JS__</script>
 </body>
 </html>

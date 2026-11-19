@@ -6,6 +6,12 @@ import json, pathlib, re, shutil, subprocess, sys, tempfile, zipfile
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent / 'src'))
 from press_i18n import T  # noqa: E402
+from press_terms import TERMS, terms_html, terms_txt  # noqa: E402
+
+for _lg in T:
+    T[_lg].update(TERMS[_lg]['ui'])
+    T[_lg]['perm_h'] = TERMS[_lg]['ui']['terms_head']
+    T[_lg]['perm'] = TERMS[_lg]['ui']['perm_short']
 
 R = pathlib.Path(__file__).parent
 S = R / 'src'
@@ -174,7 +180,7 @@ def page(t):
              '#prenos .dlist li{color:#fff;background:rgba(7,29,34,.28);border-color:rgba(255,255,255,.45)}'
              '#prenos .btn.big{background:#fff;border-color:#fff;color:#071d22}#prenos .btn.big:hover{background:#fff;color:#071d22;filter:brightness(.94)}'
              '#prenos .perm{border:1px dashed rgba(255,255,255,.55);background:rgba(7,29,34,.22)}#prenos .perm b,#prenos .perm p{color:#fff}')
-    rep = {'__HERO_LOGO__': svg('h'), '__STYLE__': style, '__JS__': (S / 'press.js').read_text(), '__DEFS__': DEFS,
+    rep = {'__TERMS_BODY__': terms_html(t['lang'], 'tm'), '__HERO_LOGO__': svg('h'), '__STYLE__': style, '__JS__': (S / 'press.js').read_text(), '__DEFS__': DEFS,
            '__LG_H__': svg('h'), '__LG_V__': svg('v'), '__LG_S__': svg('s'),
            '__CLEAR_H__': clear_svg('h'), '__CLEAR_V__': clear_svg('v'),
            '__MATRIX__': matrix(t), '__BANS__': bans(t),
@@ -227,14 +233,16 @@ def print_html(t):
            '.bans{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm}.ban{border:.3mm solid #dfe3e3;border-radius:4mm;overflow:hidden}.ban .v{position:relative;height:38mm;display:flex;align-items:center;justify-content:center;color:#000}'
            '.ban svg.lgm{width:100%;height:100%}.ban svg.x{position:absolute;right:2mm;top:2mm;width:7mm;height:7mm}.ban .c{padding:2.5mm 3mm;font-size:9pt;font-weight:600;border-top:.3mm solid #dfe3e3}'
            '.warn{margin-top:6mm;max-width:170mm;padding:3.5mm 6mm;border:.6mm solid #e08a00;background:#fff3d6;border-radius:4mm;font-weight:800;font-size:11pt;color:#5f3b00}'
+           '.tmp{column-count:2;column-gap:12mm;font-size:8.6pt;line-height:1.42;color:#2d3536}.tmp .tm-t{font-size:12pt;letter-spacing:.06em;margin:0 0 1mm;column-span:all}.tmp .tm-s{column-span:all;margin:0 0 4mm;max-width:none;font-size:9.5pt;color:#4f7478}'
+           '.tmp h4{font-size:9.4pt;margin:0 0 1mm;padding-top:3.2mm;color:#101415;break-after:avoid}.tmp p{font-size:8.6pt;line-height:1.42;margin:0 0 1.2mm;max-width:none}.tmp ul{margin:0 0 1.2mm 4mm}.tmp li{margin-bottom:.8mm}.tmp .ct{margin-top:1.5mm}.tmp a{color:#00727a;text-decoration:none}'
            '.end{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}'
            '.end .logo svg{display:block;width:120mm;height:auto;color:#f2f2f0}'
            '.end .pm{margin-top:16mm;padding:6mm 12mm;border:.35mm dashed rgba(255,255,255,.6);border-radius:5mm;background:rgba(7,29,34,.25);max-width:150mm}'
-           '.end .pm b{display:block;font-size:10pt;letter-spacing:.22em;text-transform:uppercase;margin-bottom:2mm}.end .pm p{color:#fff;margin:0 auto;font-size:11pt}')
+           '.end .pm b{display:block;font-size:10pt;letter-spacing:.22em;text-transform:uppercase;margin-bottom:2mm}.end .pm p{color:#fff;margin:0 auto;font-size:11pt}.end .ct{margin-top:3mm!important;font-size:10.5pt}')
     cells = [(t['n_t'], '#00b1bc', '0 177 188', 'CMYK 75 / 5 / 28 / 0', '#fff'),
              (t['n_k'], '#000000', '0 0 0', '', '#fff'), (t['n_w'], '#ffffff', '255 255 255', '', '#000')]
     sw = ''.join(f'<div class="sc" style="background:{h};color:{fg}"><b>{n}</b>{h.upper()}<br>RGB {r}' + (f'<br>{cm}' if cm else '') + '</div>' for n, h, r, cm, fg in cells)
-    N = 6
+    N = 7
     hd = lambda title: f'<div class="hd">{svg("h")}<span>{title}</span></div>'
     ft = lambda n: f'<div class="ft"><span>ODISEJA · {t["hero_p"]}</span><span>{n} / {N}</span></div>'
     vbh = VIEW['h']; vbv = VIEW['v']
@@ -248,7 +256,8 @@ def print_html(t):
             f'<div><h2>{t["min_h"]}</h2><div class="card"><div class="mm">{mh}{mv}</div></div><p>{t["min_p"]}</p></div></div></div>{ft(3)}</div>'
             f'<div class="pg">{hd(t["colors_h"])}<div class="body"><h2>{t["colors_h"]}</h2><div class="sw">{sw}</div><p>{t["colors_p"]}</p><h3>{t["matrix_h"]}</h3><div class="mx">{matrix(t)}</div></div>{ft(4)}</div>'
             f'<div class="pg">{hd(t["dont_h"])}<div class="body"><h2>{t["dont_h"]}</h2><p style="margin:0 0 6mm">{t["dont_p"]}</p><div class="bans">{bans(t)}</div></div>{ft(5)}</div>'
-            f'<div class="pg gr end"><div class="logo">{svg("h")}</div><div class="pm"><b>{t["perm_h"]}</b><p>{t["perm"]}</p></div></div>'
+            f'<div class="pg">{hd(t["terms_head"])}<div class="body"><div class="tmp">{terms_html(t["lang"], "tm")}</div></div>{ft(6)}</div>'
+            f'<div class="pg gr end"><div class="logo">{svg("h")}</div><div class="pm"><b>{t["perm_h"]}</b><p>{t["perm"]}</p><p class="ct">{TERMS[t["lang"]]["sections"][3]["contact"][0]} · {TERMS[t["lang"]]["sections"][3]["contact"][1]}<br>{TERMS[t["lang"]]["sections"][3]["contact"][2]}</p></div></div>'
             f'</body></html>')
 
 
@@ -273,7 +282,8 @@ def main():
                 (d / 'svg' / f'{base}.svg').write_text(colored_svg(o, c))
                 jobs.append({'svg': str(d / 'svg' / f'{base}.svg'), 'png': [str(d / 'png' / f'{base}-1200px.png'), str(d / 'png' / f'{base}-3600px.png')], 'pdf': str(d / 'pdf' / f'{base}.pdf')})
         (root / t['colors_txt']).write_text(t['colors_txt_body'])
-        (root / ('README.txt')).write_text(t['readme'])
+        (root / ('README.txt')).write_text(t['readme'] + '\n' + t['terms_file'] + '\n')
+        (root / t['terms_file']).write_text(terms_txt(lg))
         ph = work / f'print-{lg}.html'
         ph.write_text(print_html(t))
         jobs.append({'html': str(ph), 'pdf': str(root / t['rules_pdf'])})

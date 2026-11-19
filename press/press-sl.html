@@ -255,6 +255,30 @@ h3{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
 .dm{position:relative;height:9px;flex:none;border-left:1px solid #e5007d;border-right:1px solid #e5007d}
 .dm::before{content:"";position:absolute;left:0;right:0;top:4px;border-top:1px solid #e5007d}
 .dm span{position:absolute;left:50%;top:-1px;transform:translateX(-50%);background:#fff;padding:0 5px;font-size:11px;font-weight:700;color:#e5007d;line-height:11px;white-space:nowrap}
+
+/* pogoji uporabe: popup */
+.perm .btn{margin-top:14px}
+.mdl{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(4,20,24,.68);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.mdl[hidden]{display:none}
+.mdl-card{width:min(760px,100%);max-height:min(88vh,820px);display:flex;flex-direction:column;border-radius:26px;background:#fff;color:#101415;box-shadow:0 40px 120px rgba(0,0,0,.45);overflow:hidden;animation:rise .45s var(--ease)}
+.mdl-h{display:flex;justify-content:space-between;align-items:center;padding:20px 26px;border-bottom:1px solid rgba(0,0,0,.1);font-size:13px;letter-spacing:.22em;text-transform:uppercase}
+.mdl-x{font-size:28px;line-height:1;color:#7b8483;width:36px;height:36px;border-radius:50%}.mdl-x:hover{background:#f2f2f2;color:#101415}
+.mdl-b{padding:22px 26px;overflow:auto;font-size:14px;line-height:1.6;color:#2d3536;-webkit-overflow-scrolling:touch}
+.mdl-b .tm-t{font-size:18px;letter-spacing:.04em;color:#101415;margin-bottom:4px}
+.mdl-b .tm-s{color:#4f7478;margin-bottom:12px}
+.mdl-b h4{font-size:15px;margin:20px 0 6px;color:#101415}
+.mdl-b p{margin:0 0 8px}.mdl-b ul{margin:0 0 8px 20px}.mdl-b li{margin-bottom:5px}
+.mdl-b .ct{margin-top:10px;padding:12px 16px;border-radius:14px;background:#e3f7f9}.mdl-b a{color:#00727a}
+.mdl-f{padding:16px 26px 20px;border-top:1px solid rgba(0,0,0,.1);display:flex;flex-direction:column;gap:14px;background:#f7f9f9}
+.chk{display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.45;cursor:pointer}
+.chk input{width:22px;height:22px;flex:none;margin-top:1px;accent-color:#00b1bc;cursor:pointer}
+.mdl-btn{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.mdl .btn{color:#101415;background:#fff;border:1px solid rgba(0,0,0,.18)}
+.mdl .btn:hover{background:#101415;color:#fff}
+.mdl .btn.big{padding:13px 28px;font-size:14px;background:#00b1bc;border-color:#00b1bc;color:#fff}
+.mdl .btn.big:hover{filter:brightness(1.08);background:#00b1bc;color:#fff}
+.mdl .btn.big:disabled{background:#c9d3d4;border-color:#c9d3d4;color:#fff;cursor:not-allowed;filter:none}
+@media (max-width:520px){.mdl{padding:0;align-items:flex-end}.mdl-card{max-height:92vh;border-radius:22px 22px 0 0}.mdl-btn .btn{flex:1}}
 #hero,#prenos{background:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgMTAwNC44OSAxMDAzLjg2Ij4KICA8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMzAuNi4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogMi4xLjQgQnVpbGQgMTA5KSAgLS0+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5zdDAgewogICAgICAgIGZpbGw6IHVybCgjbGluZWFyLWdyYWRpZW50KTsKICAgICAgfQogICAgPC9zdHlsZT4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0ibGluZWFyLWdyYWRpZW50IiB4MT0iMjI4LjU0IiB5MT0iMTE5Ny4yOCIgeDI9Ijc3Ni4yNSIgeTI9Ii0xOTMuMTYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIuMTQiIHN0b3AtY29sb3I9IiMwMGIxYmMiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuMjUiIHN0b3AtY29sb3I9IiMwMTkxOWIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuNDIiIHN0b3AtY29sb3I9IiMwMzY4NzAiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuNTgiIHN0b3AtY29sb3I9IiMwNDQ3NGUiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuNzQiIHN0b3AtY29sb3I9IiMwNjMwMzUiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuODgiIHN0b3AtY29sb3I9IiMwNjIxMjciLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDcxZDIyIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCBjbGFzcz0ic3QwIiB3aWR0aD0iMTAwNC44OSIgaGVpZ2h0PSIxMDAzLjg2Ii8+Cjwvc3ZnPg==) center/cover no-repeat,#071d22}#hero p{color:rgba(255,255,255,.82)}#hero .cue{background:linear-gradient(#fff,transparent)}#prenos{--ink:#fff;--bg:#071d22;--mute:rgba(255,255,255,.86);--line:rgba(255,255,255,.4)}#prenos .dlist li{color:#fff;background:rgba(7,29,34,.28);border-color:rgba(255,255,255,.45)}#prenos .btn.big{background:#fff;border-color:#fff;color:#071d22}#prenos .btn.big:hover{background:#fff;color:#071d22;filter:brightness(.94)}#prenos .perm{border:1px dashed rgba(255,255,255,.55);background:rgba(7,29,34,.22)}#prenos .perm b,#prenos .perm p{color:#fff}</style>
 </head>
 <body data-ok="Dovolj velik" data-small="Premajhen" data-minabbr="min." data-copied="Kopirano" data-copy="Kopiraj" data-zip="odiseja-medijski-paket.zip">
@@ -349,12 +373,23 @@ h3{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
     <div class="tag"><b>Prenos</b></div>
     <p class="lead">Celoten paket: logotipi v SVG, PNG in PDF (turkizni, črni, beli), barve in pravila uporabe.</p>
     <ul class="dlist"><li>Vodoravni logotip</li><li>Navpični logotip</li><li>Znak</li><li>SVG, PNG, PDF</li><li>Barve in pravila uporabe (PDF)</li></ul>
-    <a class="btn big" id="zip" href="odiseja-medijski-paket.zip" download>Prenesi paket (ZIP)</a>
-    <div class="perm"><b>Dovoljenje za uporabo</b><p>Besedilo dovoljenja in kontakt bosta dodana.</p></div>
+    <a class="btn big" id="zip" href="#prenos" data-file="odiseja-medijski-paket.zip" role="button">Prenesi paket (ZIP)</a>
+    <div class="perm"><b>Pogoji uporabe</b><p>Pred prenosom je treba sprejeti pogoje uporabe blagovne znamke.</p><button class="btn" id="openterms" type="button">Preberi pogoje uporabe</button></div>
   </div>
 </section>
 </main>
 
+
+<div class="mdl" id="tmodal" role="dialog" aria-modal="true" aria-labelledby="tmt" hidden>
+  <div class="mdl-card">
+    <div class="mdl-h"><b id="tmt">Pogoji uporabe</b><button class="mdl-x" id="tclose" type="button" aria-label="Zapri">&times;</button></div>
+    <div class="mdl-b" id="tbody" tabindex="0"><h3 class="tm-t">UPORABA BLAGOVNE ZNAMKE ODISEJA</h3><p class="tm-s">Logotip, grafični elementi in celostna grafična podoba (CGP)</p><h4>1. Dovoljenje za uporabo</h4><p>Odiseja omogoča svojim partnerjem, sodelavcem in drugim pooblaščenim uporabnikom uporabo uradnega logotipa, grafičnih elementov in drugih gradiv celostne grafične podobe (CGP) za namene promocije, komunikacije in predstavitve skupnih aktivnosti, dogodkov, projektov ali sodelovanj, povezanih z blagovno znamko Odiseja.</p><h4>2. Smernice uporabe</h4><p>Pri uporabi elementov blagovne znamke je treba dosledno upoštevati priložena navodila in smernice celostne grafične podobe.</p><ul><li>Logotip in grafični elementi se uporabljajo v skladu z uradnimi grafičnimi predlogami.</li><li>Spreminjanje, popačenje, prebarvanje ali drugačno samovoljno prilagajanje logotipa ni dovoljeno.</li><li>Zagotoviti je treba ustrezno velikost, berljivost, razmerja in zaščitni prostor logotipa.</li><li>Uporaba blagovnih elementov ne sme škodovati ugledu, prepoznavnosti ali identiteti blagovne znamke Odiseja.</li><li>Vsaka uporaba zunaj predvidenih smernic oziroma večje odstopanje od njih zahteva predhodno pisno odobritev.</li></ul><h4>3. Lastništvo in pravice</h4><p>Vsi logotipi, grafični elementi in drugi materiali celostne grafične podobe Odiseja so zaščiteni z ustreznimi pravicami intelektualne lastnine. Njihovo lastništvo ostaja pri zakonitih imetnikih.</p><p>Prenos ali uporaba gradiv ne pomeni prenosa lastništva ali drugih pravic intelektualne lastnine.</p><h4>4. Potrjevanje uporabe</h4><p>Za vprašanja, povezana z uporabo blagovne znamke, odobritvijo grafičnih rešitev ali morebitnimi odstopanji od smernic celostne grafične podobe, se obrnite na:</p><p class="ct"><b>Denis Kjostarov</b><br>Vodja Marketinga<br><a href="mailto:denis.kjostarov@odiseja.si">denis.kjostarov@odiseja.si</a></p><h4>5. Veljavnost in odgovornost</h4><p>Odiseja si pridržuje pravico do spremembe smernic uporabe ter do zahtevka za popravek ali odstranitev gradiv, ki niso skladna z opredeljenimi pravili uporabe blagovne znamke.</p><p>Z uporabo in prenosom gradiv uporabnik potrjuje, da je seznanjen s pogoji in smernicami uporabe ter se zavezuje k njihovemu spoštovanju.</p></div>
+    <div class="mdl-f">
+      <label class="chk"><input type="checkbox" id="tchk"><span>Prebral/a sem pogoje in smernice uporabe ter se zavezujem k njihovemu spoštovanju.</span></label>
+      <div class="mdl-btn"><button class="btn" id="tcancel" type="button">Prekliči</button><button class="btn big" id="tok" type="button" disabled>Sprejmem in prenesem</button></div>
+    </div>
+  </div>
+</div>
 <script>(function () {
   'use strict';
   var $ = function (s, r) { return (r || document).querySelector(s) }, $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)) };
@@ -409,8 +444,8 @@ h3{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
   }
   function save(blob, name) { var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(a.href) }, 4000) }
   function fname(ext) { return 'odiseja-' + plate.dataset.o + '-' + plate.dataset.c + '.' + ext }
-  $('#dlsvg').addEventListener('click', function () { save(new Blob([svgText().text], { type: 'image/svg+xml' }), fname('svg')) });
-  $('#dlpng').addEventListener('click', function () {
+  $('#dlsvg').addEventListener('click', function () { gate(function () { save(new Blob([svgText().text], { type: 'image/svg+xml' }), fname('svg')) }) });
+  $('#dlpng').addEventListener('click', function () { gate(function () {
     var s = svgText(), img = new Image(), k = 2;
     img.onload = function () {
       var c = document.createElement('canvas'); c.width = s.w * k; c.height = s.h * k;
@@ -418,6 +453,33 @@ h3{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
       c.toBlob(function (b) { save(b, fname('png')) }, 'image/png');
     };
     img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s.text);
+  }) });
+
+
+  /* ---------- pogoji uporabe: pred vsakim prenosom ---------- */
+  var tm = $('#tmodal'), chk = $('#tchk'), tok = $('#tok'), pending = null, accepted = false, lastFocus = null;
+  function openT(fn) {
+    pending = fn || null; lastFocus = document.activeElement; chk.checked = false; tok.disabled = true;
+    $('#tbody').scrollTop = 0; tm.hidden = false; document.body.style.overflow = 'hidden'; $('#tbody').focus();
+  }
+  function closeT() { tm.hidden = true; document.body.style.overflow = ''; pending = null; if (lastFocus && lastFocus.focus) lastFocus.focus() }
+  function gate(fn) { if (accepted) fn(); else openT(fn) }
+  chk.addEventListener('change', function () { tok.disabled = !chk.checked });
+  tok.addEventListener('click', function () { if (!chk.checked) return; accepted = true; var f = pending; tm.hidden = true; document.body.style.overflow = ''; pending = null; if (f) f(); });
+  $('#tcancel').addEventListener('click', closeT); $('#tclose').addEventListener('click', closeT);
+  tm.addEventListener('click', function (e) { if (e.target === tm) closeT() });
+  addEventListener('keydown', function (e) {
+    if (tm.hidden) return;
+    if (e.key === 'Escape') closeT();
+    if (e.key === 'Tab') {   // fokus ostane v oknu
+      var f = [].slice.call(tm.querySelectorAll('button:not([disabled]),input,[tabindex="0"]')), i = f.indexOf(document.activeElement);
+      if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus() } else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus() }
+    }
+  });
+  $('#openterms').addEventListener('click', function () { openT(null) });
+  $('#zip').addEventListener('click', function (e) {
+    e.preventDefault();
+    gate(function () { var a = document.createElement('a'); a.href = $('#zip').dataset.file; a.download = ''; document.body.appendChild(a); a.click(); a.remove() });
   });
 
   /* ---------- najmanjša velikost (pravi mm, ravnilo) ---------- */
