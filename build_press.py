@@ -257,7 +257,7 @@ def print_html(t):
             f'<div class="pg">{hd(t["colors_h"])}<div class="body"><h2>{t["colors_h"]}</h2><div class="sw">{sw}</div><p>{t["colors_p"]}</p><h3>{t["matrix_h"]}</h3><div class="mx">{matrix(t)}</div></div>{ft(4)}</div>'
             f'<div class="pg">{hd(t["dont_h"])}<div class="body"><h2>{t["dont_h"]}</h2><p style="margin:0 0 6mm">{t["dont_p"]}</p><div class="bans">{bans(t)}</div></div>{ft(5)}</div>'
             f'<div class="pg">{hd(t["terms_head"])}<div class="body"><div class="tmp">{terms_html(t["lang"], "tm")}</div></div>{ft(6)}</div>'
-            f'<div class="pg gr end"><div class="logo">{svg("h")}</div><div class="pm"><b>{t["perm_h"]}</b><p>{t["perm"]}</p><p class="ct">{TERMS[t["lang"]]["sections"][3]["contact"][0]} · {TERMS[t["lang"]]["sections"][3]["contact"][1]}<br>{TERMS[t["lang"]]["sections"][3]["contact"][2]}</p></div></div>'
+            f'<div class="pg gr end"><div class="logo">{svg("h")}</div><div class="pm"><b>{t["perm_h"]}</b><p>{t["pdf_perm"]}</p><p class="ct">{TERMS[t["lang"]]["sections"][3]["contact"][0]} · {TERMS[t["lang"]]["sections"][3]["contact"][1]}<br>{TERMS[t["lang"]]["sections"][3]["contact"][2]}</p></div></div>'
             f'</body></html>')
 
 

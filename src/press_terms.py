@@ -32,6 +32,7 @@ TERMS = {
             'terms_note': 'Za prenos gradiv je potrebno sprejeti pogoje uporabe.',
             'perm_short': 'Pred prenosom je treba sprejeti pogoje uporabe blagovne znamke.',
             'terms_file': 'pogoji-uporabe.txt',
+            'pdf_perm': 'Vsa gradiva in njihovo uporabo je treba potrditi pri Denisu Kjostarovu.',
         },
     },
     'en': {
@@ -64,6 +65,7 @@ TERMS = {
             'terms_note': 'You must accept the terms of use to download the materials.',
             'perm_short': 'The brand terms of use must be accepted before downloading.',
             'terms_file': 'terms-of-use.txt',
+            'pdf_perm': 'All materials and their use must be approved by Denis Kjostarov.',
         },
     },
 }
