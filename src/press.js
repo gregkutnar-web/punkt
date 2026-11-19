@@ -63,27 +63,44 @@
     img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s.text);
   });
 
-  /* ---------- najmanjša velikost (pravi mm) ---------- */
-  var PXMM = 96 / 25.4, rng = $('#msz'), mpx = $('#mpx'), demo = $('#szdemo');
-  function limit() {
-    var avail = demo.parentNode.clientWidth - 18, kmax = Math.floor(avail / (63 * PXMM) * 10) / 10;
-    rng.max = Math.max(1, Math.min(5, kmax));
+  /* ---------- najmanjša velikost (pravi mm, ravnilo) ---------- */
+  var PXMM = 96 / 25.4, MIN = { h: 40, v: 23 }, mode = 'h';
+  var rng = $('#msz'), mpx = $('#mpx'), stage = $('#mstage'), mbox = $('#mbox'), chip = $('#mchip'), mark = $('#mmark'), dimEl = $('#mdim'), dimTx = $('#mdim span'), lastVal = {};
+  function vbRatio() { var vb = $('.m' + mode + ' svg', mbox).getAttribute('viewBox').split(' ').map(Number); return vb[3] / vb[2] }
+  function setRange(keep) {
+    var maxMm = Math.floor((stage.clientWidth - 48) / PXMM), cap = mode === 'h' ? 100 : 60;
+    rng.min = 10; rng.max = Math.max(MIN[mode] + 5, Math.min(cap, maxMm));
+    if (!keep) rng.value = MIN[mode];
     if (+rng.value > +rng.max) rng.value = rng.max;
+    var pos = (MIN[mode] - rng.min) / (rng.max - rng.min) * 100;
+    rng.style.setProperty('--mp', pos + '%');
+    var thumb = 13, tw = rng.clientWidth || 1;
+    mark.style.left = (thumb + (tw - 2 * thumb) * pos / 100) + 'px';
   }
   function size() {
-    var k = +rng.value; demo.style.setProperty('--k', k);
-    [['sh', 40], ['sv', 23]].forEach(function (m) {
-      var s = $('#' + m[0] + ' svg'), vb = s.getAttribute('viewBox').split(' ').map(Number), w = k * m[1] * PXMM;
-      s.style.width = w + 'px'; s.style.height = (w * vb[3] / vb[2]) + 'px'; $('#d' + m[0].charAt(1)).style.width = w + 'px';
-    });
-    mpx.textContent = k.toFixed(1) + '×';
-    [['sh', 40], ['sv', 23]].forEach(function (m) {
-      var mm = Math.round(k * m[1]), ok = k >= 1, e = $('#' + m[0] + '_s');
-      e.textContent = (ok ? '✓ ' : '✕ ') + mm + ' mm · ' + (ok ? D.ok : D.small); e.className = ok ? 'ok' : 'bad';
-      $('#d' + m[0].charAt(1) + ' span').textContent = mm + ' mm';
-    });
+    var v = +rng.value, ok = v >= MIN[mode], w = v * PXMM;
+    stage.dataset.m = mode; stage.dataset.ok = ok ? '1' : '0';
+    mbox.style.width = w + 'px';
+    dimEl.style.width = w + 'px'; dimTx.textContent = v + ' mm';
+    mpx.textContent = v + ' mm';
+    chip.textContent = ok ? '✓ ' + v + ' mm · ' + D.ok : '✕ ' + v + ' mm · ' + D.small + ' (' + D.minabbr + ' ' + MIN[mode] + ' mm)';
+    rng.setAttribute('aria-valuetext', mpx.textContent + (ok ? ', ' + D.ok : ', ' + D.small));
   }
-  rng.addEventListener('input', size); addEventListener('resize', function () { limit(); size() }); limit(); size();
+  $$('#mseg button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      lastVal[mode] = +rng.value; mode = b.dataset.m;
+      $$('#mseg button').forEach(function (x) { x.classList.toggle('on', x === b) });
+      setRange(false); if (lastVal[mode]) rng.value = Math.min(lastVal[mode], rng.max); size();
+    });
+  });
+  function toMin() { rng.value = MIN[mode]; size() }
+  $('#mreset').addEventListener('click', toMin); mark.addEventListener('click', toMin);
+  rng.addEventListener('input', function () {
+    var v = +rng.value; if (Math.abs(v - MIN[mode]) <= 1) rng.value = MIN[mode];   // magnetno ob minimumu
+    size();
+  });
+  addEventListener('resize', function () { setRange(true); size() });
+  setRange(false); size();
 
   /* ---------- kopiranje barv ---------- */
   $$('.swc').forEach(function (b) {

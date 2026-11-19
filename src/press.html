@@ -7,7 +7,7 @@
 <meta name="description" content="{{desc}}">
 <style>__STYLE__</style>
 </head>
-<body data-ok="{{ok}}" data-small="{{small}}" data-copied="{{copied}}" data-copy="{{copy}}" data-zip="{{zip}}">
+<body data-ok="{{ok}}" data-small="{{small}}" data-minabbr="{{min_abbr}}" data-copied="{{copied}}" data-copy="{{copy}}" data-zip="{{zip}}">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>__DEFS__</defs></svg>
 
 <nav id="nav" aria-label="Navigation">
@@ -54,12 +54,19 @@
       </div>
       <div class="card">
         <h2>{{min_h}}</h2>
-        <div class="szdemo" id="szdemo">
-          <figure><div class="sbox" id="sh">__LG_H__</div><div class="dm" id="dh"><span></span></div><figcaption>{{min_h_l}} <em id="sh_s"></em></figcaption></figure>
-          <figure><div class="sbox" id="sv">__LG_V__</div><div class="dm" id="dv"><span></span></div><figcaption>{{min_v_l}} <em id="sv_s"></em></figcaption></figure>
+        <div class="seg" id="mseg"><button class="on" data-m="h">{{min_h_l}} · 40 mm</button><button data-m="v">{{min_v_l}} · 23 mm</button></div>
+        <div class="mstage" id="mstage" data-m="h" data-ok="1">
+          <div class="mlogo" id="mlogo"><div class="mbox" id="mbox"><div class="mh">__LG_H__</div><div class="mv">__LG_V__</div></div><div class="dm" id="mdim"><span></span></div></div>
+          <div class="mchip" id="mchip"></div>
         </div>
-        <label class="szl">{{scale_l}} <input type="range" id="msz" min="0.5" max="5" step="0.1" value="1" aria-label="{{scale_l}}"><output id="mpx"></output></label>
+        <div class="mctl">
+          <span class="ml">{{width_l}}</span>
+          <div class="mtrack"><input type="range" id="msz" min="10" max="100" step="1" value="40" aria-label="{{width_l}}"><button class="mmark" id="mmark" aria-label="{{to_min}}"><u>{{min_abbr}}</u></button></div>
+          <output id="mpx"></output>
+        </div>
+        <div class="ctls"><button class="btn" id="mreset">{{to_min}}</button></div>
         <p>{{min_p}}</p>
+        <p class="fine">{{screen_note}}</p>
       </div>
     </div>
   </div>
