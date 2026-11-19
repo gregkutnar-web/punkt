@@ -190,34 +190,66 @@ def page(t):
 
 
 def print_html(t):
-    """Pravila uporabe kot PDF (A4 ležeče)."""
+    """Pravila uporabe kot PDF (A4 ležeče): gradient naslovnica in zadnja stran, vmes svetle strani z glavo in nogo."""
+    import base64
+    bg = base64.b64encode((R / 'assets' / 'cgp-background.svg').read_bytes()).decode()
     logos = ''
     for o in 'hvs':
-        for c, bg in (('t', 'w'), ('k', 'w'), ('w', 'k')):
-            logos += (f'<div class="lc" style="background:{BG[bg]};color:{HEX[c]}">{svg(o)}</div>')
-    css = ('@page{size:A4 landscape;margin:0}*{box-sizing:border-box;margin:0;padding:0}body{font-family:"Helvetica Neue",Arial,sans-serif;color:#101415}'
-           '.pg{width:297mm;height:210mm;padding:16mm 18mm;page-break-after:always;position:relative;overflow:hidden}'
-           'h1{font-size:30pt;letter-spacing:.06em;margin-bottom:6mm}h2{font-size:11pt;letter-spacing:.2em;text-transform:uppercase;margin-bottom:5mm}'
-           'p{font-size:10.5pt;line-height:1.5;color:#4a5352;max-width:120mm;margin-top:4mm}'
-           '.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm}.lc{height:30mm;display:flex;align-items:center;justify-content:center;border:.3mm solid #ddd;border-radius:3mm}'
-           '.lc svg{height:60%;width:auto;max-width:80%}.two{display:flex;gap:8mm;align-items:center}.two svg{height:62mm;width:auto;color:#000}'
-           '.sw{display:flex;gap:6mm}.sc{width:50mm;height:50mm;border-radius:4mm;padding:4mm;display:flex;flex-direction:column;justify-content:flex-end;font-size:10pt;border:.3mm solid #ddd}'
-           '.mx{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;width:130mm;margin-top:6mm}.mxc{height:20mm;border-radius:3mm;display:flex;align-items:center;justify-content:center;position:relative;border:.3mm solid #ddd}'
+        for c, bgk in (('t', 'w'), ('k', 'w'), ('w', 'k')):
+            logos += f'<div class="lc" style="background:{BG[bgk]};color:{HEX[c]}">{svg(o)}</div>'
+    css = ('@page{size:A4 landscape;margin:0}*{box-sizing:border-box;margin:0;padding:0}'
+           'body{font-family:"Helvetica Neue",Arial,sans-serif;color:#101415;-webkit-print-color-adjust:exact;print-color-adjust:exact}'
+           '.pg{width:297mm;height:210mm;page-break-after:always;position:relative;overflow:hidden;background:#fff}'
+           '.pg:last-child{page-break-after:auto}'
+           '.gr{background:url(data:image/svg+xml;base64,' + bg + ') center/cover no-repeat,#071d22;color:#fff}'
+           '.cover{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}'
+           '.cover .big svg{display:block;width:210mm;height:auto;color:#f2f2f0}'
+           '.cover .sub{margin-top:14mm;font-size:13pt;letter-spacing:.42em;text-transform:uppercase;color:rgba(255,255,255,.9)}'
+           '.cover .ttl{margin-top:5mm;font-size:11pt;letter-spacing:.14em;color:rgba(255,255,255,.7)}'
+           '.hd{position:absolute;left:18mm;right:18mm;top:12mm;display:flex;justify-content:space-between;align-items:center}'
+           '.hd svg{height:7mm;width:auto;color:#00b1bc;display:block}.hd span{font-size:8.5pt;letter-spacing:.2em;text-transform:uppercase;color:#7b8483}'
+           '.ft{position:absolute;left:18mm;right:18mm;bottom:10mm;display:flex;justify-content:space-between;font-size:8.5pt;letter-spacing:.14em;color:#9aa3a2;border-top:.25mm solid #e3e6e6;padding-top:3mm}'
+           '.body{position:absolute;left:18mm;right:18mm;top:28mm;bottom:20mm}'
+           'h2{font-size:17pt;font-weight:800;margin-bottom:6mm;padding-left:4mm;border-left:1.4mm solid #00b1bc;line-height:1.1}'
+           'h3{font-size:9.5pt;letter-spacing:.2em;text-transform:uppercase;color:#4f7478;margin:6mm 0 3mm}'
+           'p{font-size:10.5pt;line-height:1.5;color:#4a5352;max-width:140mm;margin-top:3mm}'
+           '.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm}.lc{height:34mm;display:flex;align-items:center;justify-content:center;border:.3mm solid #dfe3e3;border-radius:4mm}'
+           '.lc svg{height:58%;width:auto;max-width:80%}.two{display:flex;flex-direction:column;gap:6mm;align-items:center;margin-top:2mm}.two svg{display:block;max-width:100%;height:auto;color:#000;width:118mm}.two svg.cv{width:auto;height:46mm}'
+           '.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12mm}.cols>div{min-width:0}.card{background:#f4f7f7;border-radius:5mm;padding:8mm}'
+           '.mm{display:flex;align-items:flex-end;gap:14mm;margin-top:6mm;height:46mm}.mm figure{display:flex;flex-direction:column;gap:2mm}'
+           '.mm svg{display:block;height:auto;color:#000}.mm .d{height:2.4mm;border-left:.25mm solid #e5007d;border-right:.25mm solid #e5007d;position:relative}'
+           '.mm .d::before{content:"";position:absolute;left:0;right:0;top:1.1mm;border-top:.25mm solid #e5007d}'
+           '.mm figcaption{font-size:9pt;font-weight:700;color:#e5007d}.mm .l{font-size:8.5pt;color:#4a5352;letter-spacing:.08em;text-transform:uppercase}'
+           '.sw{display:flex;gap:6mm}.sc{width:56mm;height:56mm;border-radius:5mm;padding:5mm;display:flex;flex-direction:column;justify-content:flex-end;font-size:10pt;line-height:1.5;border:.3mm solid #dfe3e3}'
+           '.sc b{font-size:12pt}'
+           '.mx{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;width:150mm}.mxc{height:20mm;border-radius:3mm;display:flex;align-items:center;justify-content:center;position:relative;border:.3mm solid #dfe3e3}'
            '.mxc svg{width:60%}.mxc u{position:absolute;right:2mm;bottom:1mm;text-decoration:none;font-weight:800}.mxc.ok u{color:#00b1bc}.mxc.on-t.ok u{color:#fff}.mxc.no svg{opacity:.18}.mxc.no u{color:#d33a2c}'
-           '.bans{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm}.ban{border:.3mm solid #ddd;border-radius:3mm;overflow:hidden}.ban .v{position:relative;height:36mm;display:flex;align-items:center;justify-content:center;color:#000}'
-           '.ban svg.lgm{width:100%;height:100%}.ban svg.x{position:absolute;right:2mm;top:2mm;width:7mm;height:7mm}.ban .c{padding:2.5mm 3mm;font-size:9pt;font-weight:600;border-top:.3mm solid #ddd}'
-           '.szl{font-size:10pt;margin-top:3mm}.warn{margin-top:5mm;max-width:150mm;padding:3mm 5mm;border:.6mm solid #d98a00;background:#fff4dc;border-radius:3mm;font-weight:700;font-size:11pt;color:#6b4300}')
+           '.bans{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm}.ban{border:.3mm solid #dfe3e3;border-radius:4mm;overflow:hidden}.ban .v{position:relative;height:38mm;display:flex;align-items:center;justify-content:center;color:#000}'
+           '.ban svg.lgm{width:100%;height:100%}.ban svg.x{position:absolute;right:2mm;top:2mm;width:7mm;height:7mm}.ban .c{padding:2.5mm 3mm;font-size:9pt;font-weight:600;border-top:.3mm solid #dfe3e3}'
+           '.warn{margin-top:6mm;max-width:170mm;padding:3.5mm 6mm;border:.6mm solid #e08a00;background:#fff3d6;border-radius:4mm;font-weight:800;font-size:11pt;color:#5f3b00}'
+           '.end{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}'
+           '.end .logo svg{display:block;width:120mm;height:auto;color:#f2f2f0}'
+           '.end .pm{margin-top:16mm;padding:6mm 12mm;border:.35mm dashed rgba(255,255,255,.6);border-radius:5mm;background:rgba(7,29,34,.25);max-width:150mm}'
+           '.end .pm b{display:block;font-size:10pt;letter-spacing:.22em;text-transform:uppercase;margin-bottom:2mm}.end .pm p{color:#fff;margin:0 auto;font-size:11pt}')
     cells = [(t['n_t'], '#00b1bc', '0 177 188', 'CMYK 75 / 5 / 28 / 0', '#fff'),
              (t['n_k'], '#000000', '0 0 0', '', '#fff'), (t['n_w'], '#ffffff', '255 255 255', '', '#000')]
     sw = ''.join(f'<div class="sc" style="background:{h};color:{fg}"><b>{n}</b>{h.upper()}<br>RGB {r}' + (f'<br>{cm}' if cm else '') + '</div>' for n, h, r, cm, fg in cells)
+    N = 6
+    hd = lambda title: f'<div class="hd">{svg("h")}<span>{title}</span></div>'
+    ft = lambda n: f'<div class="ft"><span>ODISEJA · {t["hero_p"]}</span><span>{n} / {N}</span></div>'
+    vbh = VIEW['h']; vbv = VIEW['v']
+    mh = f'<figure><div class="l">{t["min_h_l"]}</div>{svg("h", w=round(40 * 3.7795, 1))}<div class="d" style="width:40mm"></div><figcaption>40 mm</figcaption></figure>'
+    mv = f'<figure><div class="l">{t["min_v_l"]}</div>{svg("v", w=round(23 * 3.7795, 1))}<div class="d" style="width:23mm"></div><figcaption>23 mm</figcaption></figure>'
     return (f'<!doctype html><html lang="{t["lang"]}"><head><meta charset="utf-8"><title>{t["pdf_title"]}</title><style>{css}</style></head><body>'
             f'<svg width="0" height="0" style="position:absolute"><defs>{DEFS}</defs></svg>'
-            f'<div class="pg"><h1>ODISEJA</h1><h2>{t["logo_h"]}</h2><div class="g3">{logos}</div><p>{t["logo_note"]}</p><div class="warn">&#9888; {t["symbol_warn"]}</div></div>'
-            f'<div class="pg"><h2>{t["clear_h"]}</h2><div class="two">{clear_svg("h")}{clear_svg("v")}</div><p>{t["clear_p"]}</p>'
-            f'<h2 style="margin-top:10mm">{t["min_h"]}</h2><p style="margin-top:0">{t["min_p"]}</p></div>'
-            f'<div class="pg"><h2>{t["colors_h"]}</h2><div class="sw">{sw}</div><p>{t["colors_p"]}</p><h2 style="margin-top:8mm">{t["matrix_h"]}</h2><div class="mx">{matrix(t)}</div></div>'
-            f'<div class="pg"><h2>{t["dont_h"]}</h2><p style="margin:0 0 6mm">{t["dont_p"]}</p><div class="bans">{bans(t)}</div></div>'
-            f'<div class="pg"><h2>{t["perm_h"]}</h2><p>{t["perm"]}</p></div></body></html>')
+            f'<div class="pg gr cover"><div class="big">{svg("h")}</div><div class="sub">{t["hero_p"]}</div><div class="ttl">{t["pdf_title"]}</div></div>'
+            f'<div class="pg">{hd(t["logo_h"])}<div class="body"><h2>{t["logo_h"]}</h2><div class="g3">{logos}</div><p>{t["logo_note"]}</p><div class="warn">&#9888; {t["symbol_warn"]}</div></div>{ft(2)}</div>'
+            f'<div class="pg">{hd(t["rules_h"])}<div class="body"><div class="cols"><div><h2>{t["clear_h"]}</h2><div class="two">{clear_svg("h")}{clear_svg("v")}</div><p>{t["clear_p"]}</p></div>'
+            f'<div><h2>{t["min_h"]}</h2><div class="card"><div class="mm">{mh}{mv}</div></div><p>{t["min_p"]}</p></div></div></div>{ft(3)}</div>'
+            f'<div class="pg">{hd(t["colors_h"])}<div class="body"><h2>{t["colors_h"]}</h2><div class="sw">{sw}</div><p>{t["colors_p"]}</p><h3>{t["matrix_h"]}</h3><div class="mx">{matrix(t)}</div></div>{ft(4)}</div>'
+            f'<div class="pg">{hd(t["dont_h"])}<div class="body"><h2>{t["dont_h"]}</h2><p style="margin:0 0 6mm">{t["dont_p"]}</p><div class="bans">{bans(t)}</div></div>{ft(5)}</div>'
+            f'<div class="pg gr end"><div class="logo">{svg("h")}</div><div class="pm"><b>{t["perm_h"]}</b><p>{t["perm"]}</p></div></div>'
+            f'</body></html>')
 
 
 def colored_svg(o, c):
