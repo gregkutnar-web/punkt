@@ -25,7 +25,7 @@
   addEventListener('scroll', req, { passive: true }); addEventListener('resize', req); spy();
 
   /* ---------- logotip: usmeritev, ozadje, barva ---------- */
-  var HEXD = { t: '#00b1bc', k: '#000000', w: '#ffffff' }, HEXP = { t: '#00868f', k: '#000000', w: '#ffffff' };
+  var HEX = { t: '#00b1bc', k: '#000000', w: '#ffffff' };
   var VALID = { w: ['t', 'k'], k: ['t', 'w'], t: ['w'] };
   var plate = $('#plate'), seg = { o: $$('#oseg button'), bg: $$('#bseg button'), c: $$('#cseg button') };
   function sync() {
@@ -38,27 +38,20 @@
   seg.o.forEach(function (b) { b.addEventListener('click', function () { plate.dataset.o = b.dataset.o; sync() }) });
   seg.bg.forEach(function (b) { b.addEventListener('click', function () { plate.dataset.bg = b.dataset.bg; sync() }) });
   seg.c.forEach(function (b) { b.addEventListener('click', function () { if (!b.disabled) { plate.dataset.c = b.dataset.c; sync() } }) });
-  var pb = $$('#pseg button'), pn = $('#pnote');
-  pb.forEach(function (b) {
-    b.addEventListener('click', function () {
-      plate.dataset.p = b.dataset.p; pn.textContent = pn.dataset[b.dataset.p];
-      pb.forEach(function (x) { x.classList.toggle('on', x === b) });
-    });
-  });
   sync();
 
   function svgText() {
     var s = $('.lgx[data-o="' + plate.dataset.o + '"] svg', plate).cloneNode(true);
     s.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
     s.removeAttribute('class'); s.removeAttribute('aria-hidden');
-    var col = (plate.dataset.p === 'p' ? HEXP : HEXD)[plate.dataset.c];
+    var col = HEX[plate.dataset.c];
     $$('[fill="currentColor"]', s).forEach(function (p) { p.setAttribute('fill', col) });
     var vb = s.getAttribute('viewBox').split(' ').map(Number), w = 1200;
     s.setAttribute('width', w); s.setAttribute('height', Math.round(w * vb[3] / vb[2]));
     return { text: '<?xml version="1.0" encoding="UTF-8"?>\n' + new XMLSerializer().serializeToString(s), w: w, h: Math.round(w * vb[3] / vb[2]) };
   }
   function save(blob, name) { var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(a.href) }, 4000) }
-  function fname(ext) { return 'odiseja-' + plate.dataset.o + '-' + plate.dataset.c + '-' + (plate.dataset.p === 'p' ? 'print' : 'digital') + '.' + ext }
+  function fname(ext) { return 'odiseja-' + plate.dataset.o + '-' + plate.dataset.c + '.' + ext }
   $('#dlsvg').addEventListener('click', function () { save(new Blob([svgText().text], { type: 'image/svg+xml' }), fname('svg')) });
   $('#dlpng').addEventListener('click', function () {
     var s = svgText(), img = new Image(), k = 2;
@@ -93,7 +86,7 @@
   rng.addEventListener('input', size); addEventListener('resize', function () { limit(); size() }); limit(); size();
 
   /* ---------- kopiranje barv ---------- */
-  $$('.swc:not(.dual), .swc.dual button').forEach(function (b) {
+  $$('.swc').forEach(function (b) {
     b.addEventListener('click', function () {
       var t = b.dataset.hex, i = $('i', b);
       function done() { i.textContent = D.copied; setTimeout(function () { i.textContent = D.copy }, 1400) }

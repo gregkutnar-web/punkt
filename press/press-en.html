@@ -129,13 +129,13 @@ section{position:relative}
 }
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 /* ---- Odiseja medijski paket: nad landing.css ---- */
-:root{--teal:#00868f}
+:root{--teal:#00b1bc}
 #hero h1{font-size:0;line-height:0;margin:0;color:#f2f2f0}
 #hero h1 svg{display:block;width:min(78vw,1100px);height:auto;opacity:0;transform:translateY(40px);animation:rise 1.1s var(--ease) forwards}
-.osn.tp1{--bg:#f2f2f2;--ink:#101415;--mute:#7b8483;--acc:#00868f;--card:#fff;--line:rgba(0,0,0,.1)}
-.osn.tp2{--bg:#fff;--ink:#101415;--mute:#7b8483;--acc:#00868f;--card:#f2f2f2;--line:rgba(0,0,0,.1)}
-.osn.tp3{--bg:#dcecee;--ink:#0b3a3f;--mute:#4f7478;--acc:#00868f;--card:#fff;--line:rgba(0,0,0,.12)}
-.osn.tp4{--bg:#0d1112;--ink:#eef1f0;--mute:#8d9896;--acc:#00868f;--card:#1a2022;--line:rgba(255,255,255,.14)}
+.osn.tp1{--bg:#f2f2f2;--ink:#101415;--mute:#7b8483;--acc:#00b1bc;--card:#fff;--line:rgba(0,0,0,.1)}
+.osn.tp2{--bg:#fff;--ink:#101415;--mute:#7b8483;--acc:#00b1bc;--card:#f2f2f2;--line:rgba(0,0,0,.1)}
+.osn.tp3{--bg:#dcecee;--ink:#0b3a3f;--mute:#4f7478;--acc:#00b1bc;--card:#fff;--line:rgba(0,0,0,.12)}
+.osn.tp4{--bg:#0d1112;--ink:#eef1f0;--mute:#8d9896;--acc:#00b1bc;--card:#1a2022;--line:rgba(255,255,255,.14)}
 .isec{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3.4vh;padding:10vh 4vw 15vh;position:relative}
 .isec.wide{justify-content:center}
 .lead{max-width:560px;text-align:center;font-size:clamp(15px,1.5vw,19px);line-height:1.5;color:var(--mute)}
@@ -174,7 +174,7 @@ h3{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
 .szdemo figure{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0;flex:0 1 auto}
 .szdemo figcaption{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--mute);line-height:1.4}
 .szdemo figcaption em{font-style:normal;display:block}
-.szdemo figcaption em.ok{color:#00868f}.szdemo figcaption em.bad{color:#d33a2c}
+.szdemo figcaption em.ok{color:#00b1bc}.szdemo figcaption em.bad{color:#d33a2c}
 .sbox{color:#000;flex:none}.dm{flex:none}
 
 .sbox svg{display:block;color:#000;max-width:none}
@@ -197,7 +197,7 @@ h3{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
 .mxc{position:relative;aspect-ratio:16/10;border-radius:16px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 1px var(--line)}
 .mxc svg{width:68%;height:auto;display:block}
 .mxc u{position:absolute;right:8px;bottom:6px;font-size:15px;font-weight:800;text-decoration:none}
-.mxc.ok u{color:#00868f}.mxc.ok.on-t u{color:#fff}
+.mxc.ok u{color:#00b1bc}.mxc.ok.on-t u{color:#fff}
 .mxc.no svg{opacity:.18}.mxc.no u{color:#d33a2c}
 .mxc.no.on-t u{color:#fff}
 
@@ -239,20 +239,6 @@ h3{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
 #pravila .two svg.cv{max-height:270px}
 #pravila .szdemo{flex:1;min-height:200px}
 @media (max-width:900px){#pravila .card{min-height:0}#pravila .two svg{max-height:none;width:100%}#pravila .two svg.cv{width:auto;max-height:260px}}
-
-/* turkizna: digital + print */
-.swc.dual{padding:0;background:none;gap:0;border-radius:26px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.14)}
-.swc.dual button{position:relative;flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;text-align:left;padding:18px 22px;background:var(--c);color:var(--t);transition:filter .25s}
-.swc.dual button:hover{filter:brightness(1.07)}
-.swc.dual em{font-style:normal;font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;opacity:.85}
-.swc.dual b{font-size:18px}.swc.dual span{font-size:13px;letter-spacing:.04em}
-.swc.dual i{position:absolute;right:18px;top:16px;font-style:normal;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
-
-/* namen: digitalno / tisk */
-.pl3[data-p=p][data-c=t]{--pc:#00868f}.pl3[data-p=p][data-bg=t]{--pbg:#00868f}
-.seg.big button{padding:12px 26px;font-size:14px}
-#pnote{font-weight:600;color:var(--ink)}
-@media (max-width:520px){.seg.big{flex-wrap:nowrap}.seg.big button{padding:10px 11px;font-size:12px;white-space:nowrap}}
 #hero,#prenos{background:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgMTAwNC44OSAxMDAzLjg2Ij4KICA8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMzAuNi4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogMi4xLjQgQnVpbGQgMTA5KSAgLS0+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5zdDAgewogICAgICAgIGZpbGw6IHVybCgjbGluZWFyLWdyYWRpZW50KTsKICAgICAgfQogICAgPC9zdHlsZT4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0ibGluZWFyLWdyYWRpZW50IiB4MT0iMjI4LjU0IiB5MT0iMTE5Ny4yOCIgeDI9Ijc3Ni4yNSIgeTI9Ii0xOTMuMTYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIuMTQiIHN0b3AtY29sb3I9IiMwMGIxYmMiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuMjUiIHN0b3AtY29sb3I9IiMwMTkxOWIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuNDIiIHN0b3AtY29sb3I9IiMwMzY4NzAiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuNTgiIHN0b3AtY29sb3I9IiMwNDQ3NGUiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuNzQiIHN0b3AtY29sb3I9IiMwNjMwMzUiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuODgiIHN0b3AtY29sb3I9IiMwNjIxMjciLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDcxZDIyIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCBjbGFzcz0ic3QwIiB3aWR0aD0iMTAwNC44OSIgaGVpZ2h0PSIxMDAzLjg2Ii8+Cjwvc3ZnPg==) center/cover no-repeat,#071d22}#hero p{color:rgba(255,255,255,.82)}#hero .cue{background:linear-gradient(#fff,transparent)}#prenos{--ink:#fff;--bg:#071d22;--mute:rgba(255,255,255,.86);--line:rgba(255,255,255,.4)}#prenos .dlist li{color:#fff;background:rgba(7,29,34,.28);border-color:rgba(255,255,255,.45)}#prenos .btn.big{background:#fff;border-color:#fff;color:#071d22}#prenos .btn.big:hover{background:#fff;color:#071d22;filter:brightness(.94)}#prenos .perm{border:1px dashed rgba(255,255,255,.55);background:rgba(7,29,34,.22)}#prenos .perm b,#prenos .perm p{color:#fff}</style>
 </head>
 <body data-ok="Large enough" data-small="Too small" data-copied="Copied" data-copy="Copy" data-zip="odiseja-press-kit.zip">
@@ -277,8 +263,7 @@ h3{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
 <section id="logotip" class="osn tp2">
   <div class="isec">
     <div class="tag"><b>Logo</b></div>
-    <div class="seg big" id="pseg" aria-label="Purpose"><button class="on" data-p="d">Digital advertising</button><button data-p="p">Analogue advertising – print</button></div>
-    <div class="pl3" id="plate" data-p="d" data-o="h" data-bg="w" data-c="t">
+    <div class="pl3" id="plate" data-o="h" data-bg="w" data-c="t">
       <div class="lgw"><div class="lgx" data-o="h"><svg class="olg" viewBox="168.47 460.17 270.49 50.04" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Odiseja" style="aspect-ratio:270.49/50.04"><path d="M 184.593 495.917 L 186.402 494.109 L 186.402 476.949 L 184.593 475.144 L 177.234 475.144 L 175.425 476.949 L 175.425 494.109 L 177.234 495.917 Z M 168.472 496.503 L 168.472 474.558 L 173.078 469.953 L 188.75 469.953 L 193.355 474.558 L 193.355 496.503 L 188.75 501.109 L 173.078 501.109 Z M 168.472 496.503 " fill="currentColor"/><path d="M 216.660 495.917 L 218.464 494.109 L 218.464 476.949 L 216.660 475.144 L 207.898 475.144 L 207.898 495.917 Z M 200.941 469.953 L 220.812 469.953 L 225.417 474.558 L 225.417 496.503 L 220.812 501.109 L 200.941 501.109 Z M 200.941 469.953 " fill="currentColor"/><path d="M 231.742 496.277 L 237.023 496.277 L 237.023 474.785 L 231.742 474.785 L 231.742 469.949 L 249.261 469.949 L 249.261 474.785 L 243.980 474.785 L 243.980 496.277 L 249.261 496.277 L 249.261 501.109 L 231.742 501.109 Z M 231.742 496.277 " fill="currentColor"/><path d="M 255.136 496.910 L 255.136 491.851 L 262.089 491.851 L 262.089 494.699 L 263.398 496.007 L 271.167 496.007 L 272.476 494.652 L 272.476 489.187 L 271.484 488.152 L 259.019 488.152 L 255.269 484.449 L 255.269 474.285 L 259.648 469.949 L 275.140 469.949 L 279.339 474.152 L 279.339 479.164 L 272.386 479.164 L 272.386 476.363 L 271.078 475.054 L 263.578 475.054 L 262.226 476.363 L 262.226 481.648 L 263.218 482.640 L 275.726 482.640 L 279.429 486.390 L 279.429 496.777 L 275.093 501.109 L 259.378 501.109 Z M 255.136 496.910 " fill="currentColor"/><path d="M 286.613 469.949 L 307.203 469.949 L 307.203 475.281 L 293.566 475.281 L 293.566 482.640 L 305.984 482.640 L 305.984 487.968 L 293.566 487.968 L 293.566 495.781 L 307.292 495.781 L 307.292 501.109 L 286.613 501.109 Z M 286.613 469.949 " fill="currentColor"/><path d="M 312.398 495.691 L 319.171 495.691 L 321.023 493.886 L 321.023 469.949 L 327.976 469.949 L 327.976 496.503 L 323.328 501.113 L 312.398 501.113 Z M 312.398 495.691 " fill="currentColor"/><path d="M 342.472 488.828 L 350.015 488.828 L 346.265 473.835 Z M 341.390 469.949 L 351.593 469.949 L 360.222 501.109 L 353.085 501.109 L 351.324 494.113 L 341.164 494.113 L 339.402 501.109 L 332.765 501.109 Z M 341.390 469.949 " fill="currentColor"/><path d="M 408.460 489.144 C 405.582 490.355 402.269 488.996 401.062 486.117 C 399.851 483.238 401.207 479.921 404.089 478.714 C 406.968 477.507 410.281 478.863 411.488 481.746 C 412.699 484.625 411.343 487.937 408.460 489.144 M 402.910 462.804 L 406.656 469.843 L 404.324 471.187 L 400.101 464.425 Z M 398.593 477.906 L 391.554 474.156 L 393.175 471.351 L 399.941 475.570 Z M 393.175 499.125 L 391.554 496.316 L 398.593 492.570 L 399.941 494.902 Z M 389.019 483.617 L 396.988 483.890 L 396.988 486.585 L 389.019 486.859 Z M 395.460 460.167 C 384.324 460.167 375.296 469.195 375.296 480.332 C 375.296 491.468 384.324 500.5 395.460 500.5 C 406.597 500.5 415.628 491.468 415.628 480.332 C 415.628 469.195 406.597 460.167 395.460 460.167 " fill="currentColor"/><path d="M 406.656 500.632 L 404.324 499.285 L 400.101 506.050 L 402.906 507.671 Z M 406.656 500.632 " fill="currentColor"/><path d="M 412.640 468.238 L 415.335 468.238 L 415.609 460.269 L 412.367 460.269 Z M 412.640 468.238 " fill="currentColor"/><path d="M 415.335 502.238 L 412.640 502.238 L 412.367 510.207 L 415.609 510.207 Z M 415.335 502.238 " fill="currentColor"/><path d="M 421.324 469.843 L 423.656 471.187 L 427.878 464.425 L 425.070 462.804 Z M 421.324 469.843 " fill="currentColor"/><path d="M 423.656 499.285 L 421.324 500.632 L 425.070 507.671 L 427.878 506.050 Z M 423.656 499.285 " fill="currentColor"/><path d="M 428.039 475.570 L 429.382 477.902 L 436.421 474.156 L 434.800 471.351 Z M 428.039 475.570 " fill="currentColor"/><path d="M 429.382 492.570 L 428.039 494.902 L 434.800 499.125 L 436.421 496.320 Z M 429.382 492.570 " fill="currentColor"/><path d="M 430.988 483.890 L 430.988 486.585 L 438.957 486.859 L 438.957 483.617 Z M 430.988 483.890 " fill="currentColor"/></svg></div><div class="lgx" data-o="v"><svg class="olg" viewBox="168.47 0.00 191.75 141.38" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Odiseja" style="aspect-ratio:191.75/141.38"><g transform="translate(-522.230 -874.317) scale(1.9)"><path d="M 408.460 489.144 C 405.582 490.355 402.269 488.996 401.062 486.117 C 399.851 483.238 401.207 479.921 404.089 478.714 C 406.968 477.507 410.281 478.863 411.488 481.746 C 412.699 484.625 411.343 487.937 408.460 489.144 M 402.910 462.804 L 406.656 469.843 L 404.324 471.187 L 400.101 464.425 Z M 398.593 477.906 L 391.554 474.156 L 393.175 471.351 L 399.941 475.570 Z M 393.175 499.125 L 391.554 496.316 L 398.593 492.570 L 399.941 494.902 Z M 389.019 483.617 L 396.988 483.890 L 396.988 486.585 L 389.019 486.859 Z M 395.460 460.167 C 384.324 460.167 375.296 469.195 375.296 480.332 C 375.296 491.468 384.324 500.5 395.460 500.5 C 406.597 500.5 415.628 491.468 415.628 480.332 C 415.628 469.195 406.597 460.167 395.460 460.167 " fill="currentColor"/><path d="M 406.656 500.632 L 404.324 499.285 L 400.101 506.050 L 402.906 507.671 Z M 406.656 500.632 " fill="currentColor"/><path d="M 412.640 468.238 L 415.335 468.238 L 415.609 460.269 L 412.367 460.269 Z M 412.640 468.238 " fill="currentColor"/><path d="M 415.335 502.238 L 412.640 502.238 L 412.367 510.207 L 415.609 510.207 Z M 415.335 502.238 " fill="currentColor"/><path d="M 421.324 469.843 L 423.656 471.187 L 427.878 464.425 L 425.070 462.804 Z M 421.324 469.843 " fill="currentColor"/><path d="M 423.656 499.285 L 421.324 500.632 L 425.070 507.671 L 427.878 506.050 Z M 423.656 499.285 " fill="currentColor"/><path d="M 428.039 475.570 L 429.382 477.902 L 436.421 474.156 L 434.800 471.351 Z M 428.039 475.570 " fill="currentColor"/><path d="M 429.382 492.570 L 428.039 494.902 L 434.800 499.125 L 436.421 496.320 Z M 429.382 492.570 " fill="currentColor"/><path d="M 430.988 483.890 L 430.988 486.585 L 438.957 486.859 L 438.957 483.617 Z M 430.988 483.890 " fill="currentColor"/></g><g transform="translate(0 -359.730)"><path d="M 184.593 495.917 L 186.402 494.109 L 186.402 476.949 L 184.593 475.144 L 177.234 475.144 L 175.425 476.949 L 175.425 494.109 L 177.234 495.917 Z M 168.472 496.503 L 168.472 474.558 L 173.078 469.953 L 188.75 469.953 L 193.355 474.558 L 193.355 496.503 L 188.75 501.109 L 173.078 501.109 Z M 168.472 496.503 " fill="currentColor"/><path d="M 216.660 495.917 L 218.464 494.109 L 218.464 476.949 L 216.660 475.144 L 207.898 475.144 L 207.898 495.917 Z M 200.941 469.953 L 220.812 469.953 L 225.417 474.558 L 225.417 496.503 L 220.812 501.109 L 200.941 501.109 Z M 200.941 469.953 " fill="currentColor"/><path d="M 231.742 496.277 L 237.023 496.277 L 237.023 474.785 L 231.742 474.785 L 231.742 469.949 L 249.261 469.949 L 249.261 474.785 L 243.980 474.785 L 243.980 496.277 L 249.261 496.277 L 249.261 501.109 L 231.742 501.109 Z M 231.742 496.277 " fill="currentColor"/><path d="M 255.136 496.910 L 255.136 491.851 L 262.089 491.851 L 262.089 494.699 L 263.398 496.007 L 271.167 496.007 L 272.476 494.652 L 272.476 489.187 L 271.484 488.152 L 259.019 488.152 L 255.269 484.449 L 255.269 474.285 L 259.648 469.949 L 275.140 469.949 L 279.339 474.152 L 279.339 479.164 L 272.386 479.164 L 272.386 476.363 L 271.078 475.054 L 263.578 475.054 L 262.226 476.363 L 262.226 481.648 L 263.218 482.640 L 275.726 482.640 L 279.429 486.390 L 279.429 496.777 L 275.093 501.109 L 259.378 501.109 Z M 255.136 496.910 " fill="currentColor"/><path d="M 286.613 469.949 L 307.203 469.949 L 307.203 475.281 L 293.566 475.281 L 293.566 482.640 L 305.984 482.640 L 305.984 487.968 L 293.566 487.968 L 293.566 495.781 L 307.292 495.781 L 307.292 501.109 L 286.613 501.109 Z M 286.613 469.949 " fill="currentColor"/><path d="M 312.398 495.691 L 319.171 495.691 L 321.023 493.886 L 321.023 469.949 L 327.976 469.949 L 327.976 496.503 L 323.328 501.113 L 312.398 501.113 Z M 312.398 495.691 " fill="currentColor"/><path d="M 342.472 488.828 L 350.015 488.828 L 346.265 473.835 Z M 341.390 469.949 L 351.593 469.949 L 360.222 501.109 L 353.085 501.109 L 351.324 494.113 L 341.164 494.113 L 339.402 501.109 L 332.765 501.109 Z M 341.390 469.949 " fill="currentColor"/></g></svg></div><div class="lgx" data-o="s"><svg class="olg" viewBox="375.30 460.17 63.66 50.04" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Odiseja" style="aspect-ratio:63.66/50.04"><path d="M 408.460 489.144 C 405.582 490.355 402.269 488.996 401.062 486.117 C 399.851 483.238 401.207 479.921 404.089 478.714 C 406.968 477.507 410.281 478.863 411.488 481.746 C 412.699 484.625 411.343 487.937 408.460 489.144 M 402.910 462.804 L 406.656 469.843 L 404.324 471.187 L 400.101 464.425 Z M 398.593 477.906 L 391.554 474.156 L 393.175 471.351 L 399.941 475.570 Z M 393.175 499.125 L 391.554 496.316 L 398.593 492.570 L 399.941 494.902 Z M 389.019 483.617 L 396.988 483.890 L 396.988 486.585 L 389.019 486.859 Z M 395.460 460.167 C 384.324 460.167 375.296 469.195 375.296 480.332 C 375.296 491.468 384.324 500.5 395.460 500.5 C 406.597 500.5 415.628 491.468 415.628 480.332 C 415.628 469.195 406.597 460.167 395.460 460.167 " fill="currentColor"/><path d="M 406.656 500.632 L 404.324 499.285 L 400.101 506.050 L 402.906 507.671 Z M 406.656 500.632 " fill="currentColor"/><path d="M 412.640 468.238 L 415.335 468.238 L 415.609 460.269 L 412.367 460.269 Z M 412.640 468.238 " fill="currentColor"/><path d="M 415.335 502.238 L 412.640 502.238 L 412.367 510.207 L 415.609 510.207 Z M 415.335 502.238 " fill="currentColor"/><path d="M 421.324 469.843 L 423.656 471.187 L 427.878 464.425 L 425.070 462.804 Z M 421.324 469.843 " fill="currentColor"/><path d="M 423.656 499.285 L 421.324 500.632 L 425.070 507.671 L 427.878 506.050 Z M 423.656 499.285 " fill="currentColor"/><path d="M 428.039 475.570 L 429.382 477.902 L 436.421 474.156 L 434.800 471.351 Z M 428.039 475.570 " fill="currentColor"/><path d="M 429.382 492.570 L 428.039 494.902 L 434.800 499.125 L 436.421 496.320 Z M 429.382 492.570 " fill="currentColor"/><path d="M 430.988 483.890 L 430.988 486.585 L 438.957 486.859 L 438.957 483.617 Z M 430.988 483.890 " fill="currentColor"/></svg></div></div>
     </div>
     <div class="warn" id="symwarn" role="alert"><span class="wi">&#9888;</span><b>Use the symbol alone only as a decorative element.</b></div>
@@ -288,7 +273,6 @@ h3{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
       <div class="seg" id="cseg" aria-label="Colour"><button class="on" data-c="t">Turquoise</button><button data-c="k">Black</button><button data-c="w">White</button></div>
     </div>
     <div class="ctls"><button class="btn" id="dlsvg">Download SVG</button><button class="btn" id="dlpng">Download PNG</button></div>
-    <p class="note" id="pnote" data-d="Digital: turquoise #00B1BC. SVG and PNG files." data-p="Print: turquoise #00868F. SVG, PNG and PDF files (PDF is in the ZIP).">Digital: turquoise #00B1BC. SVG and PNG files.</p>
     <p class="note">The horizontal logo is the primary one. Use the vertical logo when the horizontal does not fit.</p>
   </div>
 </section>
@@ -318,9 +302,9 @@ h3{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
 <section id="barve" class="osn tp3">
   <div class="isec">
     <div class="tag"><b>Colours</b></div>
-    <p class="lead">The logo is turquoise, black or white. Turquoise has a digital and a print value. No other colours are used.</p>
+    <p class="lead">The logo is turquoise, black or white. No other colours are used.</p>
     <div class="sw">
-      <div class="swc dual"><button style="--c:#00b1bc;--t:#fff" data-hex="#00B1BC"><em>Digital</em><b>Turquoise</b><span>#00B1BC</span><span>RGB 0 177 188</span><span>CMYK 75 / 5 / 28 / 0</span><i>Copy</i></button><button style="--c:#00868f;--t:#fff" data-hex="#00868F"><em>Print</em><b>Turquoise</b><span>#00868F</span><span>RGB 0 134 143</span><i>Copy</i></button></div>
+      <button class="swc" style="--c:#00b1bc;--t:#fff" data-hex="#00B1BC"><b>Turquoise</b><span>#00B1BC</span><span>RGB 0 177 188</span><span>CMYK 75 / 5 / 28 / 0</span><i>Copy</i></button>
       <button class="swc" style="--c:#000;--t:#fff" data-hex="#000000"><b>Black</b><span>#000000</span><span>RGB 0 0 0</span><i>Copy</i></button>
       <button class="swc" style="--c:#fff;--t:#000" data-hex="#FFFFFF"><b>White</b><span>#FFFFFF</span><span>RGB 255 255 255</span><i>Copy</i></button>
     </div>
@@ -375,7 +359,7 @@ h3{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
   addEventListener('scroll', req, { passive: true }); addEventListener('resize', req); spy();
 
   /* ---------- logotip: usmeritev, ozadje, barva ---------- */
-  var HEXD = { t: '#00b1bc', k: '#000000', w: '#ffffff' }, HEXP = { t: '#00868f', k: '#000000', w: '#ffffff' };
+  var HEX = { t: '#00b1bc', k: '#000000', w: '#ffffff' };
   var VALID = { w: ['t', 'k'], k: ['t', 'w'], t: ['w'] };
   var plate = $('#plate'), seg = { o: $$('#oseg button'), bg: $$('#bseg button'), c: $$('#cseg button') };
   function sync() {
@@ -388,27 +372,20 @@ h3{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
   seg.o.forEach(function (b) { b.addEventListener('click', function () { plate.dataset.o = b.dataset.o; sync() }) });
   seg.bg.forEach(function (b) { b.addEventListener('click', function () { plate.dataset.bg = b.dataset.bg; sync() }) });
   seg.c.forEach(function (b) { b.addEventListener('click', function () { if (!b.disabled) { plate.dataset.c = b.dataset.c; sync() } }) });
-  var pb = $$('#pseg button'), pn = $('#pnote');
-  pb.forEach(function (b) {
-    b.addEventListener('click', function () {
-      plate.dataset.p = b.dataset.p; pn.textContent = pn.dataset[b.dataset.p];
-      pb.forEach(function (x) { x.classList.toggle('on', x === b) });
-    });
-  });
   sync();
 
   function svgText() {
     var s = $('.lgx[data-o="' + plate.dataset.o + '"] svg', plate).cloneNode(true);
     s.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
     s.removeAttribute('class'); s.removeAttribute('aria-hidden');
-    var col = (plate.dataset.p === 'p' ? HEXP : HEXD)[plate.dataset.c];
+    var col = HEX[plate.dataset.c];
     $$('[fill="currentColor"]', s).forEach(function (p) { p.setAttribute('fill', col) });
     var vb = s.getAttribute('viewBox').split(' ').map(Number), w = 1200;
     s.setAttribute('width', w); s.setAttribute('height', Math.round(w * vb[3] / vb[2]));
     return { text: '<?xml version="1.0" encoding="UTF-8"?>\n' + new XMLSerializer().serializeToString(s), w: w, h: Math.round(w * vb[3] / vb[2]) };
   }
   function save(blob, name) { var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(a.href) }, 4000) }
-  function fname(ext) { return 'odiseja-' + plate.dataset.o + '-' + plate.dataset.c + '-' + (plate.dataset.p === 'p' ? 'print' : 'digital') + '.' + ext }
+  function fname(ext) { return 'odiseja-' + plate.dataset.o + '-' + plate.dataset.c + '.' + ext }
   $('#dlsvg').addEventListener('click', function () { save(new Blob([svgText().text], { type: 'image/svg+xml' }), fname('svg')) });
   $('#dlpng').addEventListener('click', function () {
     var s = svgText(), img = new Image(), k = 2;
@@ -443,7 +420,7 @@ h3{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
   rng.addEventListener('input', size); addEventListener('resize', function () { limit(); size() }); limit(); size();
 
   /* ---------- kopiranje barv ---------- */
-  $$('.swc:not(.dual), .swc.dual button').forEach(function (b) {
+  $$('.swc').forEach(function (b) {
     b.addEventListener('click', function () {
       var t = b.dataset.hex, i = $('i', b);
       function done() { i.textContent = D.copied; setTimeout(function () { i.textContent = D.copy }, 1400) }

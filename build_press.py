@@ -12,10 +12,8 @@ S = R / 'src'
 OUT = R / 'press'
 D = json.loads((R / 'assets' / 'odiseja.json').read_text())
 LET, SUN = D['letters'], D['sun']
-HEX = {'t': '#00b1bc', 'k': '#000000', 'w': '#ffffff'}      # digitalno (zaslon, SVG, PNG)
-HEXP = {'t': '#00868f', 'k': '#000000', 'w': '#ffffff'}     # tisk (PDF)
+HEX = {'t': '#00b1bc', 'k': '#000000', 'w': '#ffffff'}      # ena sama turkizna
 BG = {'w': '#ffffff', 'k': '#000000', 't': '#00b1bc'}
-BGP = {'w': '#ffffff', 'k': '#000000', 't': '#00868f'}
 
 
 def bbox(ds):
@@ -155,9 +153,8 @@ def bans(t):
     return ''.join(f'<div class="ban">{it}<div class="c">{t[k]}</div></div>' for it, k in zip(items, keys))
 
 
-def matrix(t, hx=None, bgm=None):
-    hx = hx or HEX
-    bgm = bgm or BG
+def matrix(t):
+    hx, bgm = HEX, BG
     valid = {'w': 'tk', 'k': 'tw', 't': 'w'}
     out = ''
     for bg in 'wkt':
@@ -197,7 +194,7 @@ def print_html(t):
     logos = ''
     for o in 'hvs':
         for c, bg in (('t', 'w'), ('k', 'w'), ('w', 'k')):
-            logos += (f'<div class="lc" style="background:{BGP[bg]};color:{HEXP[c]}">{svg(o)}</div>')
+            logos += (f'<div class="lc" style="background:{BG[bg]};color:{HEX[c]}">{svg(o)}</div>')
     css = ('@page{size:A4 landscape;margin:0}*{box-sizing:border-box;margin:0;padding:0}body{font-family:"Helvetica Neue",Arial,sans-serif;color:#101415}'
            '.pg{width:297mm;height:210mm;padding:16mm 18mm;page-break-after:always;position:relative;overflow:hidden}'
            'h1{font-size:30pt;letter-spacing:.06em;margin-bottom:6mm}h2{font-size:11pt;letter-spacing:.2em;text-transform:uppercase;margin-bottom:5mm}'
@@ -206,11 +203,11 @@ def print_html(t):
            '.lc svg{height:60%;width:auto;max-width:80%}.two{display:flex;gap:8mm;align-items:center}.two svg{height:62mm;width:auto;color:#000}'
            '.sw{display:flex;gap:6mm}.sc{width:50mm;height:50mm;border-radius:4mm;padding:4mm;display:flex;flex-direction:column;justify-content:flex-end;font-size:10pt;border:.3mm solid #ddd}'
            '.mx{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;width:130mm;margin-top:6mm}.mxc{height:20mm;border-radius:3mm;display:flex;align-items:center;justify-content:center;position:relative;border:.3mm solid #ddd}'
-           '.mxc svg{width:60%}.mxc u{position:absolute;right:2mm;bottom:1mm;text-decoration:none;font-weight:800}.mxc.ok u{color:#00868f}.mxc.on-t.ok u{color:#fff}.mxc.no svg{opacity:.18}.mxc.no u{color:#d33a2c}'
+           '.mxc svg{width:60%}.mxc u{position:absolute;right:2mm;bottom:1mm;text-decoration:none;font-weight:800}.mxc.ok u{color:#00b1bc}.mxc.on-t.ok u{color:#fff}.mxc.no svg{opacity:.18}.mxc.no u{color:#d33a2c}'
            '.bans{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm}.ban{border:.3mm solid #ddd;border-radius:3mm;overflow:hidden}.ban .v{position:relative;height:36mm;display:flex;align-items:center;justify-content:center;color:#000}'
            '.ban svg.lgm{width:100%;height:100%}.ban svg.x{position:absolute;right:2mm;top:2mm;width:7mm;height:7mm}.ban .c{padding:2.5mm 3mm;font-size:9pt;font-weight:600;border-top:.3mm solid #ddd}'
            '.szl{font-size:10pt;margin-top:3mm}.warn{margin-top:5mm;max-width:150mm;padding:3mm 5mm;border:.6mm solid #d98a00;background:#fff4dc;border-radius:3mm;font-weight:700;font-size:11pt;color:#6b4300}')
-    cells = [(t['digital'] + ' · ' + t['n_t'], '#00b1bc', '0 177 188', 'CMYK 75 / 5 / 28 / 0', '#fff'), (t['print'] + ' · ' + t['n_t'], '#00868f', '0 134 143', '', '#fff'),
+    cells = [(t['n_t'], '#00b1bc', '0 177 188', 'CMYK 75 / 5 / 28 / 0', '#fff'),
              (t['n_k'], '#000000', '0 0 0', '', '#fff'), (t['n_w'], '#ffffff', '255 255 255', '', '#000')]
     sw = ''.join(f'<div class="sc" style="background:{h};color:{fg}"><b>{n}</b>{h.upper()}<br>RGB {r}' + (f'<br>{cm}' if cm else '') + '</div>' for n, h, r, cm, fg in cells)
     return (f'<!doctype html><html lang="{t["lang"]}"><head><meta charset="utf-8"><title>{t["pdf_title"]}</title><style>{css}</style></head><body>'
@@ -218,13 +215,13 @@ def print_html(t):
             f'<div class="pg"><h1>ODISEJA</h1><h2>{t["logo_h"]}</h2><div class="g3">{logos}</div><p>{t["logo_note"]}</p><div class="warn">&#9888; {t["symbol_warn"]}</div></div>'
             f'<div class="pg"><h2>{t["clear_h"]}</h2><div class="two">{clear_svg("h")}{clear_svg("v")}</div><p>{t["clear_p"]}</p>'
             f'<h2 style="margin-top:10mm">{t["min_h"]}</h2><p style="margin-top:0">{t["min_p"]}</p></div>'
-            f'<div class="pg"><h2>{t["colors_h"]}</h2><div class="sw">{sw}</div><p>{t["colors_p"]}</p><h2 style="margin-top:8mm">{t["matrix_h"]}</h2><div class="mx">{matrix(t, HEXP, BGP)}</div></div>'
+            f'<div class="pg"><h2>{t["colors_h"]}</h2><div class="sw">{sw}</div><p>{t["colors_p"]}</p><h2 style="margin-top:8mm">{t["matrix_h"]}</h2><div class="mx">{matrix(t)}</div></div>'
             f'<div class="pg"><h2>{t["dont_h"]}</h2><p style="margin:0 0 6mm">{t["dont_p"]}</p><div class="bans">{bans(t)}</div></div>'
             f'<div class="pg"><h2>{t["perm_h"]}</h2><p>{t["perm"]}</p></div></body></html>')
 
 
-def colored_svg(o, c, hx=None):
-    return '<?xml version="1.0" encoding="UTF-8"?>\n' + svg(o, (hx or HEX)[c], cls='odiseja', w=1200)
+def colored_svg(o, c):
+    return '<?xml version="1.0" encoding="UTF-8"?>\n' + svg(o, HEX[c], cls='odiseja', w=1200)
 
 
 def main():
@@ -242,8 +239,7 @@ def main():
                 for sub in ('svg', 'png', 'pdf'):
                     (d / sub).mkdir(parents=True, exist_ok=True)
                 (d / 'svg' / f'{base}.svg').write_text(colored_svg(o, c))
-                (work / f'p_{lg}_{base}.svg').write_text(colored_svg(o, c, HEXP))
-                jobs.append({'svg': str(d / 'svg' / f'{base}.svg'), 'pdfsvg': str(work / f'p_{lg}_{base}.svg'), 'png': [str(d / 'png' / f'{base}-1200px.png'), str(d / 'png' / f'{base}-3600px.png')], 'pdf': str(d / 'pdf' / f'{base}.pdf')})
+                jobs.append({'svg': str(d / 'svg' / f'{base}.svg'), 'png': [str(d / 'png' / f'{base}-1200px.png'), str(d / 'png' / f'{base}-3600px.png')], 'pdf': str(d / 'pdf' / f'{base}.pdf')})
         (root / t['colors_txt']).write_text(t['colors_txt_body'])
         (root / ('README.txt')).write_text(t['readme'])
         ph = work / f'print-{lg}.html'
