@@ -61,9 +61,16 @@ def logo(cx, cy, width, dark_bg, cid="Plesko-logo"):
 # ---------- QR ----------
 _q = (HERE / "plesko-qr-source.svg").read_text(encoding="utf-8")
 QR_BODY = _q[_q.index('<g fill="#000000"'):_q.index("<metadata")]
-def qr(x, y, size, dark_bg, cid="QR-koda"):
+def qr(x, y, size, dark_bg, cid="QR-koda-A"):
     tile = f'{rr(0, 0, 370, 370, 36)} fill="#ffffff"/>' if dark_bg else ""
     return f'<g id="{cid}" transform="translate({x} {y}) scale({size/370:.5f})">{tile}{QR_BODY}</g>'
+
+# ---------- kontakt ----------
+def contact(dark_bg):
+    c1, c2 = (WHT, "#8b8d90") if dark_bg else (BLK, "#8b8d90")
+    a = text("01/365-8010", "SemiBold", 3.5, 12, 79.6, c1, track=0.04, cid="Kontakt-telefon")[0]
+    b = text("info@plesko-cars.si", "Medium", 3.5, 12, 85.2, c2, track=0.04, cid="Kontakt-email")[0]
+    return f'<g id="Kontakt">{a}{b}</g>'
 
 # ---------- avtodom ----------
 def van_data():
@@ -104,7 +111,7 @@ def p1():
     body.append(text("VIKEND NAJEM", "SemiBold", 0.01, 0, 0, YEL)[0] if False else "")
     body.append(qr(12, 71, 18, True))
     a = card("A", BLK, "".join(body), "Stran-A")
-    b = card("B", BLK, logo(W/2, H/2, 112, True) + qr(W-12-18, H-12-18, 18, True), "Stran-B")
+    b = card("B", BLK, logo(W/2, H/2, 112, True) + contact(True) + qr(W-12-18, H-12-18, 18, True, "QR-koda-B"), "Stran-B")
     return doc("Plesko kupon - predlog 1 (crna)", a, b)
 
 # ---------- Predlog 2: bela, veliki napis zgoraj, avtodom spodaj ----------
@@ -118,7 +125,7 @@ def p2():
     body.append(van(96, 30, 102))
     body.append(qr(W-12-18, 8, 18, False))
     a = card("A", WHT, "".join(body), "Stran-A")
-    b = card("B", WHT, logo(W/2, H/2, 112, False) + qr(W-12-18, H-12-18, 18, False), "Stran-B")
+    b = card("B", WHT, logo(W/2, H/2, 112, False) + contact(False) + qr(W-12-18, H-12-18, 18, False, "QR-koda-B"), "Stran-B")
     return doc("Plesko kupon - predlog 2 (bela)", a, b)
 
 # ---------- Predlog 3: črna, centrirano, rumena črta ceste ----------
@@ -132,9 +139,27 @@ def p3():
     body.append(qr(W-12-18, 69, 18, True))
     a = card("A", BLK, "".join(body), "Stran-A")
     fr = f'{rr(6, 6, W-12, H-12, R-1.5)} fill="none" stroke="#3a3a3c" stroke-width="0.3" id="Okvir"/>'
-    b = card("B", BLK, fr + logo(W/2, H/2, 104, True) + qr(W-12-18, H-12-18, 18, True), "Stran-B")
+    b = card("B", BLK, fr + logo(W/2, H/2, 104, True) + contact(True) + qr(W-12-18, H-12-18, 18, True, "QR-koda-B"), "Stran-B")
     return doc("Plesko kupon - predlog 3 (crna, sredinska)", a, b)
 
-for i, f in enumerate((p1, p2, p3), 1):
-    (HERE / f"plesko-kupon-predlog-{i}.svg").write_text(f(), encoding="utf-8")
-print("ok")
+def inner(svg, n):
+    body = svg[svg.index("</defs>") + 7: svg.rindex("</svg>")]
+    ids = set(re.findall(r'id="([^"]+)"', body)) - {"glow", "fadeW"}
+    for k in sorted(ids, key=len, reverse=True):
+        body = body.replace(f'id="{k}"', f'id="P{n}-{k}"').replace(f"url(#{k})", f"url(#P{n}-{k})")
+    return body
+
+GX, TOP = 20, 14
+TW, TH = 3 * W + 2 * GX, TOP + 2 * H + GAP
+parts, labels = [], []
+for n, f in enumerate((p1, p2, p3), 1):
+    x = (n - 1) * (W + GX)
+    parts.append(f'<g id="Predlog-{n}" transform="translate({x} {TOP})">{inner(f(), n)}</g>')
+    labels.append(text(f"PREDLOG {n}", "SemiBold", 3.2, x, 8, "#8b8d90", track=0.2, cid=f"Oznaka-{n}")[0])
+defs = ('<defs><radialGradient id="glow"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>'
+        '<linearGradient id="fadeW" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".14"/></linearGradient></defs>')
+out = (f'<?xml version="1.0" encoding="UTF-8"?>\n<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+       f'width="{TW}mm" height="{TH}mm" viewBox="0 0 {TW} {TH}"><title>Plesko kuponi 210x99 mm - 3 predlogi</title>{defs}'
+       f'<g id="Oznake">{"".join(labels)}</g>{"".join(parts)}</svg>')
+(HERE / "plesko-kuponi.svg").write_text(out, encoding="utf-8")
+print("ok", len(out) // 1024, "KB")
