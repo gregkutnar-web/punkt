@@ -58,6 +58,13 @@ def logo(cx, cy, width, dark_bg, cid="Plesko-logo"):
     out.append("</g>")
     return "".join(out)
 
+# ---------- QR ----------
+_q = (HERE / "plesko-qr-source.svg").read_text(encoding="utf-8")
+QR_BODY = _q[_q.index('<g fill="#000000"'):_q.index("<metadata")]
+def qr(x, y, size, dark_bg, cid="QR-koda"):
+    tile = f'{rr(0, 0, 370, 370, 36)} fill="#ffffff"/>' if dark_bg else ""
+    return f'<g id="{cid}" transform="translate({x} {y}) scale({size/370:.5f})">{tile}{QR_BODY}</g>'
+
 # ---------- avtodom ----------
 def van_data():
     im = Image.open(VAN_SRC).convert("RGBA"); im = im.crop(im.split()[3].getbbox())
@@ -95,9 +102,9 @@ def p1():
     for i, (s, c) in enumerate(L):
         body.append(text(s, "Bold", 10.5, 13, y + i * 12.6, c, track=-0.025, cid=f"Naslov-{i+1}")[0])
     body.append(text("VIKEND NAJEM", "SemiBold", 0.01, 0, 0, YEL)[0] if False else "")
-    body.append(f'{rr(13, 83, 16, 1.1, 0.55)} fill="{YEL}"/>')
+    body.append(qr(12, 71, 18, True))
     a = card("A", BLK, "".join(body), "Stran-A")
-    b = card("B", BLK, logo(W/2, H/2, 112, True), "Stran-B")
+    b = card("B", BLK, logo(W/2, H/2, 112, True) + qr(W-12-18, H-12-18, 18, True), "Stran-B")
     return doc("Plesko kupon - predlog 1 (crna)", a, b)
 
 # ---------- Predlog 2: bela, veliki napis zgoraj, avtodom spodaj ----------
@@ -109,8 +116,9 @@ def p2():
     body.append(text("AHORN CAMP", "SemiBold", 4.1, 12, 59.5, "#8b8d90", track=0.3, cid="Naslov-3")[0])
     body.append(f'<rect x="12" y="89.6" width="{W-24}" height="0.25" fill="{BLK}"/>')
     body.append(van(96, 30, 102))
+    body.append(qr(W-12-18, 8, 18, False))
     a = card("A", WHT, "".join(body), "Stran-A")
-    b = card("B", WHT, logo(W/2, H/2, 112, False), "Stran-B")
+    b = card("B", WHT, logo(W/2, H/2, 112, False) + qr(W-12-18, H-12-18, 18, False), "Stran-B")
     return doc("Plesko kupon - predlog 2 (bela)", a, b)
 
 # ---------- Predlog 3: črna, centrirano, rumena črta ceste ----------
@@ -121,9 +129,10 @@ def p3():
     body.append(f'<ellipse cx="{W/2}" cy="86" rx="62" ry="7" fill="url(#glow)"/>')
     body.append(f'<rect x="12" y="89.2" width="{W-24}" height="0.5" fill="{YEL}"/>')
     body.append(van(W/2-47, 37, 94))
+    body.append(qr(W-12-18, 69, 18, True))
     a = card("A", BLK, "".join(body), "Stran-A")
     fr = f'{rr(6, 6, W-12, H-12, R-1.5)} fill="none" stroke="#3a3a3c" stroke-width="0.3" id="Okvir"/>'
-    b = card("B", BLK, fr + logo(W/2, H/2, 104, True), "Stran-B")
+    b = card("B", BLK, fr + logo(W/2, H/2, 104, True) + qr(W-12-18, H-12-18, 18, True), "Stran-B")
     return doc("Plesko kupon - predlog 3 (crna, sredinska)", a, b)
 
 for i, f in enumerate((p1, p2, p3), 1):
