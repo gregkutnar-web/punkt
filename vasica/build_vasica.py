@@ -140,6 +140,11 @@ svg=f'''<svg xmlns="http://www.w3.org/2000/svg" width="{TW}" height="{TH+50}" vi
 {story}
 </g></svg>'''
 import re
+svg=re.sub(r' filter="url\(#glow\)"','',svg)
+svg=re.sub(r' clip-path="url\(#[^"]+\)"','',svg)
+svg=re.sub(r'<clipPath .*?</clipPath>','',svg)
+svg=re.sub(r'<filter .*?</filter>','',svg,flags=re.S)
+svg=svg.replace(' version="1.1"','')
 def fixtext(m):
     t=m.group(0)
     w=re.search(r'font-weight="(\d+)"',t)
@@ -161,4 +166,10 @@ _miss=set(re.findall(r'url\(#([^)]+)\)',_s))-set(_ids)
 assert not _dup,f'podvojeni id: {_dup}'
 assert not _miss,f'manjkajoče reference: {_miss}'
 assert subprocess.run(['xmllint','--noout','/home/user/punkt/vasica/vasica-artboards.svg']).returncode==0,'xmllint'
+import xml.etree.ElementTree as ET
+OK_T={'svg','g','defs','title','rect','circle','ellipse','path','line','text','linearGradient','radialGradient','stop'}
+OK_A={'width','height','viewBox','xmlns','id','x','y','x1','y1','x2','y2','cx','cy','r','rx','ry','d','fill','stroke','stroke-width','stroke-linecap','stroke-opacity','fill-opacity','opacity','transform','offset','stop-color','stop-opacity','font-family','font-size','font-weight','letter-spacing','text-anchor'}
+for e in ET.fromstring(_s.encode('utf-8')).iter():
+    t=e.tag.split('}')[1];assert t in OK_T,f'tag {t}'
+    for a in e.attrib: assert a in OK_A,f'atribut {a} v <{t}>'
 print('VALIDACIJA OK: id-ji unikatni, reference obstajajo, XML veljaven')
