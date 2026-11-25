@@ -1,6 +1,6 @@
 import random
 random.seed(7)
-F="font-family=\"'Helvetica Neue',Inter,Helvetica,Arial,sans-serif\""
+F="font-family=\"'Inter','Helvetica Neue',Helvetica,Arial,sans-serif\""
 
 def stars(W,H):
     s=[]
@@ -80,17 +80,12 @@ def card(x,y,w,h,title,sub,icon):
 ico_foto='<g transform="translate(52,%s)" fill="#2a2160"><rect x="-14" y="-8" width="28" height="18" rx="4"/><circle cx="0" cy="1" r="6" fill="#ffc86b"/><rect x="-6" y="-13" width="12" height="6" rx="2"/></g>'
 ico_hisa='<g transform="translate(52,%s)" fill="#2a2160"><path d="M-15 0 L0 -14 L15 0 V13 H-15Z"/><rect x="-4" y="3" width="8" height="10" fill="#ffc86b"/></g>'
 
-def build(W,H,ty,sy,cy,name):
+def build(W,H,ty,sy,cy,name,ox):
     random.seed(7)
     ch=96; cw=(W-160-24)/2
     cards=card(80,cy,cw,ch,'Foto kotiček','Ujemi praznični trenutek',ico_foto%(ch/2))+card(80+cw+24,cy,cw,ch,'Babičina hiška','Vstopi v toplino praznikov',ico_hisa%(ch/2))
-    svg=f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">
-<title>Praznična vasica – Odiseja BTC City</title>
-<defs>
-<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f1233"/><stop offset=".55" stop-color="#2a2160"/><stop offset="1" stop-color="#7a3a62"/></linearGradient>
-<radialGradient id="moon"><stop offset="0" stop-color="#fff6d8" stop-opacity=".9"/><stop offset="1" stop-color="#fff6d8" stop-opacity="0"/></radialGradient>
-<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-</defs>
+    svg=f'''<g id="{name}" clip-path="url(#clip-{name})" transform="translate({ox},0)">
+<clipPath id="clip-{name}"><rect width="{W}" height="{H}"/></clipPath>
 <rect width="{W}" height="{H}" fill="url(#sky)"/>
 {stars(W,H)}
 <circle cx="{W-190}" cy="{ty+250}" r="170" fill="url(#moon)"/><circle cx="{W-190}" cy="{ty+250}" r="46" fill="#fff6d8"/>
@@ -112,8 +107,36 @@ def build(W,H,ty,sy,cy,name):
 {snow(W,H)}
 {cards}
 <text x="{W/2}" y="{cy+ch+54}" text-anchor="middle" {F} font-size="22" letter-spacing="3" fill="#2a2160" fill-opacity=".75">ODISEJA.SI</text>
-</svg>'''
-    open(f'/home/user/punkt/vasica/{name}','w').write(svg)
+</g>'''
+    return svg
 
-build(1080,1350,110,540,1130,'vasica-feed-1080x1350.svg')
-build(1080,1920,320,1010,1490,'vasica-story-1080x1920.svg')
+
+import base64,io
+from fontTools import subset
+from fontTools.ttLib import TTFont
+def font_face(file,weight):
+    opts=subset.Options();opts.flavor='woff2';opts.layout_features=['kern','liga']
+    f=TTFont('/usr/share/fonts/opentype/inter/'+file)
+    sub=subset.Subsetter(opts)
+    sub.populate(unicodes=list(range(0x20,0x7f))+[ord(c) for c in 'čšžČŠŽćđĆĐ·–—…'])
+    sub.subset(f);b=io.BytesIO();f.flavor='woff2';f.save(b)
+    return "@font-face{font-family:'Inter';font-weight:%d;src:url(data:font/woff2;base64,%s) format('woff2');}"%(weight,base64.b64encode(b.getvalue()).decode())
+css=''.join(font_face(a,b) for a,b in [('Inter-Regular.otf',400),('Inter-Bold.otf',700),('Inter-ExtraBold.otf',800)])
+GAP=120
+feed=build(1080,1350,110,540,1130,'artboard-feed-1080x1350',0)
+story=build(1080,1920,320,1010,1490,'artboard-story-1080x1920',1080+GAP)
+TW=1080*2+GAP;TH=1920
+lab=lambda x,y,t:f'<text x="{x}" y="{y}" font-family="\'Inter\',Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#666">{t}</text>'
+svg=f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -50 {TW} {TH+50}" width="{TW}" height="{TH+50}">
+<title>Praznična vasica – Odiseja BTC City</title>
+<defs><style>{css}</style>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f1233"/><stop offset=".55" stop-color="#2a2160"/><stop offset="1" stop-color="#7a3a62"/></linearGradient>
+<radialGradient id="moon"><stop offset="0" stop-color="#fff6d8" stop-opacity=".9"/><stop offset="1" stop-color="#fff6d8" stop-opacity="0"/></radialGradient>
+<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect x="0" y="-50" width="{TW}" height="{TH+50}" fill="#e9e9ee"/>
+{lab(0,-16,'Feed 1080×1350')}{lab(1080+GAP,-16,'Story 1080×1920')}
+{feed}
+{story}
+</svg>'''
+open('/home/user/punkt/vasica/vasica-artboards.svg','w').write(svg)
