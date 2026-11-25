@@ -89,10 +89,10 @@ def build(W,H,ty,sy,cy,name,ox):
 <rect width="{W}" height="{H}" fill="url(#sky)"/>
 {stars(W,H)}
 <circle cx="{W-190}" cy="{ty+250}" r="170" fill="url(#moon)"/><circle cx="{W-190}" cy="{ty+250}" r="46" fill="#fff6d8"/>
-<g {F} text-anchor="middle" fill="#fff">
-<text x="{W/2}" y="{ty}" font-size="26" letter-spacing="8" fill-opacity=".8">ODISEJA · BTC CITY LJUBLJANA</text>
-<text x="{W/2}" y="{ty+135}" font-size="132" font-weight="800" letter-spacing="-3">Praznična</text>
-<text x="{W/2}" y="{ty+255}" font-size="132" font-weight="800" letter-spacing="-3" fill="#ffc86b">vasica</text></g>
+<g fill="#fff">
+<text x="{W/2}" y="{ty}" text-anchor="middle" font-size="26" letter-spacing="8" fill-opacity=".8">ODISEJA · BTC CITY LJUBLJANA</text>
+<text x="{W/2}" y="{ty+135}" text-anchor="middle" font-weight="800" font-size="132" letter-spacing="-3">Praznična</text>
+<text x="{W/2}" y="{ty+255}" text-anchor="middle" font-weight="800" font-size="132" letter-spacing="-3" fill="#ffc86b">vasica</text></g>
 <g transform="translate({W/2-250},{ty+300})"><rect width="500" height="64" rx="32" fill="#ffc86b"/>
 <text x="250" y="43" text-anchor="middle" {F} font-size="32" font-weight="700" fill="#2a2160">29. 11. – 30. 12. 2026</text></g>
 <g transform="translate(0,{sy})">
@@ -121,22 +121,34 @@ def font_face(file,weight):
     sub.populate(unicodes=list(range(0x20,0x7f))+[ord(c) for c in 'čšžČŠŽćđĆĐ·–—…'])
     sub.subset(f);b=io.BytesIO();f.flavor='woff2';f.save(b)
     return "@font-face{font-family:'Inter';font-weight:%d;src:url(data:font/woff2;base64,%s) format('woff2');}"%(weight,base64.b64encode(b.getvalue()).decode())
-css=''.join(font_face(a,b) for a,b in [('Inter-Regular.otf',400),('Inter-Bold.otf',700),('Inter-ExtraBold.otf',800)])
+# css=''.join(font_face(a,b) for a,b in [('Inter-Regular.otf',400),('Inter-Bold.otf',700),('Inter-ExtraBold.otf',800)])
 GAP=120
+clips=''.join(f'<clipPath id="clip-{n}"><rect width="1080" height="{h}"/></clipPath>' for n,h in [('artboard-feed-1080x1350',1350),('artboard-story-1080x1920',1920)])
 feed=build(1080,1350,110,540,1130,'artboard-feed-1080x1350',0)
 story=build(1080,1920,320,1010,1490,'artboard-story-1080x1920',1080+GAP)
 TW=1080*2+GAP;TH=1920
 lab=lambda x,y,t:f'<text x="{x}" y="{y}" font-family="\'Inter\',Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#666">{t}</text>'
-svg=f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -50 {TW} {TH+50}" width="{TW}" height="{TH+50}">
+svg=f'''<svg xmlns="http://www.w3.org/2000/svg" width="{TW}" height="{TH+50}" viewBox="0 0 {TW} {TH+50}" version="1.1">
 <title>Praznična vasica – Odiseja BTC City</title>
-<defs><style>{css}</style>
+<defs>{clips}
 <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f1233"/><stop offset=".55" stop-color="#2a2160"/><stop offset="1" stop-color="#7a3a62"/></linearGradient>
 <radialGradient id="moon"><stop offset="0" stop-color="#fff6d8" stop-opacity=".9"/><stop offset="1" stop-color="#fff6d8" stop-opacity="0"/></radialGradient>
 <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 </defs>
-<rect x="0" y="-50" width="{TW}" height="{TH+50}" fill="#e9e9ee"/>
+<rect x="0" y="0" width="{TW}" height="{TH+50}" fill="#e9e9ee"/><g transform="translate(0,50)">
 {lab(0,-16,'Feed 1080×1350')}{lab(1080+GAP,-16,'Story 1080×1920')}
 {feed}
 {story}
-</svg>'''
-open('/home/user/punkt/vasica/vasica-artboards.svg','w').write(svg)
+</g></svg>'''
+import re
+def fixtext(m):
+    t=m.group(0)
+    w=re.search(r'font-weight="(\d+)"',t)
+    ps={'800':'Inter-ExtraBold','700':'Inter-Bold'}.get(w.group(1) if w else '', 'Inter-Regular')
+    t=re.sub(r' font-family="[^"]*"','',t)
+    return t.replace('<text ','<text font-family="%s, Inter, Helvetica, Arial, sans-serif" '%ps,1)
+svg=re.sub(r'<text [^>]*>',fixtext,svg)
+svg=re.sub(r'="\.(\d)',r'="0.\1',svg)
+svg=svg.replace('<g fill="#fff">','<g fill="#fff">')
+svg='<?xml version="1.0" encoding="UTF-8"?>\n'+svg
+open('/home/user/punkt/vasica/vasica-artboards.svg','w',encoding='utf-8').write(svg)
