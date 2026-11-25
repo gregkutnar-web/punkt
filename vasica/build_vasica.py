@@ -85,7 +85,6 @@ def build(W,H,ty,sy,cy,name,ox):
     ch=96; cw=(W-160-24)/2
     cards=card(80,cy,cw,ch,'Foto kotiček','Ujemi praznični trenutek',ico_foto%(ch/2))+card(80+cw+24,cy,cw,ch,'Babičina hiška','Vstopi v toplino praznikov',ico_hisa%(ch/2))
     svg=f'''<g id="{name}" clip-path="url(#clip-{name})" transform="translate({ox},0)">
-<clipPath id="clip-{name}"><rect width="{W}" height="{H}"/></clipPath>
 <rect width="{W}" height="{H}" fill="url(#sky)"/>
 {stars(W,H)}
 <circle cx="{W-190}" cy="{ty+250}" r="170" fill="url(#moon)"/><circle cx="{W-190}" cy="{ty+250}" r="46" fill="#fff6d8"/>
@@ -152,3 +151,14 @@ svg=re.sub(r'="\.(\d)',r'="0.\1',svg)
 svg=svg.replace('<g fill="#fff">','<g fill="#fff">')
 svg='<?xml version="1.0" encoding="UTF-8"?>\n'+svg
 open('/home/user/punkt/vasica/vasica-artboards.svg','w',encoding='utf-8').write(svg)
+
+# --- validacija ---
+import collections,subprocess,sys
+_s=open('/home/user/punkt/vasica/vasica-artboards.svg',encoding='utf-8').read()
+_ids=re.findall(r'\bid="([^"]+)"',_s)
+_dup=[i for i,c in collections.Counter(_ids).items() if c>1]
+_miss=set(re.findall(r'url\(#([^)]+)\)',_s))-set(_ids)
+assert not _dup,f'podvojeni id: {_dup}'
+assert not _miss,f'manjkajoče reference: {_miss}'
+assert subprocess.run(['xmllint','--noout','/home/user/punkt/vasica/vasica-artboards.svg']).returncode==0,'xmllint'
+print('VALIDACIJA OK: id-ji unikatni, reference obstajajo, XML veljaven')
